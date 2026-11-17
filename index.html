@@ -970,10 +970,130 @@
   .dash-table tbody tr { cursor: pointer; }
   .dash-table tbody tr:hover td { background: var(--court-soft); }
   @media (max-width: 600px) { .dash-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .dash-bar { grid-template-columns: minmax(5rem, 7.5rem) 1fr auto; } }
+
+  /* ---------- potje plannen als peiling ---------- */
+  .pn-card { padding-top: 0.9rem; }
+  .pn-step { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; margin: 1rem 0 0.45rem; }
+  .pn-step:first-child { margin-top: 0; }
+  .pn-num { width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--court); color: #fff; font-size: 0.78rem; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .pn-days { display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 0.15rem; -webkit-overflow-scrolling: touch; }
+  .pn-days::-webkit-scrollbar { display: none; }
+  .pn-day { flex: none; width: 3.6rem; display: flex; flex-direction: column; align-items: center; gap: 0.05rem; padding: 0.45rem 0.2rem; font: inherit; cursor: pointer;
+    background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; }
+  .pn-day-w { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); white-space: nowrap; }
+  .pn-day-n { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.35rem; line-height: 1.05; }
+  .pn-day-m { font-size: 0.7rem; color: var(--muted); }
+  .pn-day.on { background: var(--court); border-color: var(--court); color: #fff; }
+  .pn-day.on .pn-day-w, .pn-day.on .pn-day-m { color: rgba(255,255,255,0.85); }
+  .pp-sec { font-weight: 800; font-size: 0.92rem; margin: 0.2rem 0 0.45rem; }
+  .pp-sec ~ .pp-sec { margin-top: 0.9rem; }
+  .pd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(2.9rem, 1fr)); gap: 0.35rem; }
+  .pd { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0.4rem 0.1rem; border: 1px solid var(--line); border-radius: 11px;
+    background: var(--paper); color: var(--ink); font: inherit; cursor: pointer; }
+  .pd-w { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; color: var(--muted); }
+  .pd-n { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; line-height: 1.05; }
+  .pd-m { font-size: 0.66rem; color: var(--muted); }
+  .pd-c { position: absolute; top: -0.4rem; right: -0.3rem; min-width: 1.15rem; height: 1.15rem; padding: 0 0.25rem; border-radius: 999px;
+    background: var(--ball); color: var(--ball-ink); font-size: 0.66rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .pd.on { background: var(--court); border-color: var(--court); color: #fff; }
+  .pd.on .pd-w, .pd.on .pd-m { color: rgba(255,255,255,0.85); }
+  .pd.best { box-shadow: 0 0 0 2px var(--ball); }
+  .pd-grid.sm { grid-template-columns: repeat(auto-fill, minmax(2.6rem, 1fr)); }
+  .pp-inline .tq { padding: 0.45rem 0.55rem; }
+  .pp-inline .tq-t { font-size: 1.05rem; }
+  .pc-list { display: flex; flex-direction: column; gap: 0.35rem; }
+  .pc { display: flex; align-items: center; gap: 0.6rem; width: 100%; text-align: left; padding: 0.6rem 0.75rem; border: 1px solid var(--line); border-radius: 12px;
+    background: var(--paper); color: var(--ink); font: inherit; cursor: pointer; }
+  .pc-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .pc-sub { font-size: 0.75rem; color: var(--muted); }
+  .pc.on { border-color: var(--court); background: var(--court-soft); }
+  .pc.on .pp-check { background: var(--court); border-color: var(--court); color: #fff; }
+  .court-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .ps { display: flex; flex-direction: column; }
+  .ps-head { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 0.6rem; }
+  .ps-count { font-size: 0.78rem; font-weight: 800; color: var(--court-strong); background: var(--court-soft); padding: 0.15rem 0.55rem; border-radius: 999px; }
+  .ps-step { position: relative; display: flex; gap: 0.7rem; padding: 0 0 0.85rem; }
+  .ps-step::before { content: ''; position: absolute; left: calc(0.95rem - 1px); top: 1.9rem; bottom: 0; width: 2px; background: var(--line); }
+  .ps-step.ps-done::before { background: var(--court); }
+  .ps-step.ps-last::before { display: none; }
+  .ps-dot { flex: none; position: relative; z-index: 1; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center;
+    font-weight: 800; font-size: 0.85rem; background: var(--paper); border: 2px solid var(--line); color: var(--muted); }
+  .ps-done .ps-dot { background: var(--court); border-color: var(--court); color: #fff; }
+  .ps-active .ps-dot { background: var(--ball); border-color: var(--ball); color: var(--ball-ink); box-shadow: 0 0 0 4px var(--court-soft); }
+  .ps-main { flex: 1; min-width: 0; padding-top: 0.28rem; }
+  .ps-title { font-weight: 800; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.5rem; line-height: 1.25; }
+  .ps-sub { font-weight: 600; font-size: 0.8rem; color: var(--muted); }
+  .ps-todo .ps-title, .ps-skip .ps-title { color: var(--muted); font-weight: 700; }
+  .ps-skip .ps-title { text-decoration: line-through; }
+  .ps-body { margin-top: 0.5rem; padding: 0.75rem; border-radius: 14px; background: var(--court-soft); border: 1px solid var(--court); }
+  .ps-done .ps-body { margin-top: 0.15rem; padding: 0; background: none; border: none; }
+  .ps-best { display: flex; flex-direction: column; gap: 0.1rem; }
+  .ps-best strong { font-size: 1.1rem; }
+  .ps-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+  .ps-actions .btn { margin: 0; }
+  .ps-body .court-chip { background: var(--paper); color: var(--ink); border: 1px solid var(--court); }
+  .ps-slot { margin: -0.5rem 0 0.85rem calc(0.95rem - 1px); padding: 0 0 0 1.6rem; border-left: 2px solid var(--line); }
+  .ps-slot .pp-card { margin: 0; }
+  .ps-sheet-courts .court-chip { background: var(--paper); color: var(--ink); border: 1px solid var(--court); }
+  .ps-mini .court-chip { min-width: 2.1rem; height: 2.1rem; font-size: 1rem; }
+  .linkbtn { border: none; background: none; padding: 0; font: inherit; font-size: 0.82rem; font-weight: 700; color: var(--court-strong); text-decoration: underline; cursor: pointer; }
+  .court-chip { min-width: 2.6rem; height: 2.6rem; border-radius: 10px; border: none; background: rgba(255,255,255,0.18); color: #fff;
+    font: inherit; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.2rem; cursor: pointer; }
+  .court-chip:hover { background: var(--ball); color: var(--ball-ink); }
+  .tq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; }
+  .tq { position: relative; display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 0.75rem; border: 1px solid var(--line); border-radius: 12px;
+    background: var(--paper); font: inherit; color: var(--ink); cursor: pointer; text-align: left; }
+  .tq-ic { font-size: 1.4rem; line-height: 1; }
+  .tq-t { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.3rem; line-height: 1.05; }
+  .tq-l { display: block; font-size: 0.75rem; color: var(--muted); }
+  .tq-check { position: absolute; top: 0.35rem; right: 0.5rem; font-size: 0.8rem; font-weight: 900; display: none; }
+  .tq.on { background: var(--court); border-color: var(--court); color: #fff; }
+  .tq.on .tq-l { color: rgba(255,255,255,0.85); }
+  .tq.on .tq-check { display: block; }
+  .tq-step { display: flex; align-items: center; gap: 0.45rem; margin-top: 0.6rem; flex-wrap: wrap; }
+  .tq-step .stp { width: 2.4rem; height: 2.4rem; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--court-strong);
+    font: inherit; font-size: 1.3rem; font-weight: 800; cursor: pointer; line-height: 1; }
+  .tq-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.45rem; min-width: 3.3rem; text-align: center; }
+  .pn-times { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.35rem; }
+  .pn-time { font: inherit; font-weight: 700; font-size: 0.9rem; padding: 0.55rem 0; border-radius: 10px; cursor: pointer; background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
+  .pn-time.on { background: var(--court); border-color: var(--court); color: #fff; }
+  .pn-preview { margin-top: 0.7rem; padding: 0.6rem 0.7rem; background: var(--paper); border-radius: 12px; border: 1px dashed var(--line); }
+  .pn-prev-head { display: flex; justify-content: space-between; gap: 0.5rem; align-items: baseline; flex-wrap: wrap; font-size: 0.88rem; }
+  .pn-warn { font-size: 0.78rem; font-weight: 700; color: var(--danger); }
+  .pp-card { padding: 0.9rem; }
+  .pp-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.2rem; flex-wrap: wrap; }
+  .pp-opt { display: flex; align-items: flex-start; gap: 0.6rem; width: 100%; text-align: left; font: inherit; color: var(--ink); cursor: pointer;
+    background: none; border: none; border-bottom: 1px solid var(--line); padding: 0.6rem 0.1rem; }
+  .pp-opt:last-of-type { border-bottom: none; }
+  .pp-check { flex: none; width: 1.45rem; height: 1.45rem; border-radius: 50%; border: 2px solid var(--line); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 900; margin-top: 0.05rem; background: var(--card); }
+  .pp-opt.on .pp-check { background: var(--court); border-color: var(--court); color: #fff; }
+  .pp-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+  .pp-top { display: flex; justify-content: space-between; gap: 0.5rem; align-items: baseline; }
+  .pp-label { font-weight: 700; font-size: 0.95rem; }
+  .pp-n { font-weight: 800; color: var(--court-strong); }
+  .pp-bar { display: block; height: 0.42rem; border-radius: 999px; background: var(--paper); overflow: hidden; }
+  .pp-bar span { display: block; height: 100%; background: var(--court); border-radius: 999px; transition: width 0.2s ease; }
+  .pp-who { display: flex; gap: 0.2rem; flex-wrap: wrap; }
+  .pp-av { width: 1.45rem; height: 1.45rem; border-radius: 50%; background: var(--court-soft); color: var(--court-strong); font-size: 0.62rem; font-weight: 800;
+    display: inline-flex; align-items: center; justify-content: center; }
+  .pp-more { font-size: 0.72rem; color: var(--muted); align-self: center; }
+  .pp-tag { font-size: 0.7rem; font-weight: 800; border-radius: 999px; padding: 0.05rem 0.4rem; background: var(--ball); color: var(--ball-ink); vertical-align: middle; }
+  .pp-tag.ok { background: var(--court-soft); color: var(--court-strong); }
+  .pp-opt.chosen .pp-bar span { background: var(--ball); }
+  .pp-foot { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.6rem; }
+  .pp-foot .chip.on { background: var(--danger-soft); border-color: var(--danger-soft); color: var(--danger); }
+  .pp-org { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; padding: 0.75rem 0.9rem; }
+  .pp-org-l { flex: 1; min-width: 9rem; display: flex; flex-direction: column; }
+  .pp-org .btn { margin: 0; }
+  .pp-moreopts { display: block; font-size: 0.82rem; font-weight: 700; margin-top: 0.3rem; }
+  .pp-inline .pp-opt { padding: 0.45rem 0; }
+  .pp-inline .pp-label { font-size: 0.86rem; }
+  .ppi .plan-invite-btn { margin-top: 0.5rem; }
 </style>
 
 <div id="app">
-  <div class="loading">Padel Maatjes wordt geladen…</div>
+  <div class="loading">Smash wordt geladen…</div>
 </div>
 
 <!-- Losse website (Render): database via Supabase. Binnen Claude doet db.js niets. -->
@@ -1229,20 +1349,33 @@
   // niet altijd tussen bezoeken bewaard. Werkt alleen als de "user"-capability beschikbaar is
   // (je moet bij dezelfde Claude-organisatie horen als de eigenaar); anders valt de app terug
   // op alleen localStorage, zoals voorheen.
-  async function loadSyncedSessionEmail() {
-    if (!S.userCap || window.SMASH_STANDALONE) return null;
+  // Het eigen, privé-vakje van deze Claude-gebruiker: data/users/<id>/session. Het id MOET het
+  // echte id uit user.id() zijn — een letterlijk "me" in het pad werkt in de pagina niet (daardoor
+  // werd de inlog eerder nooit echt opgeslagen en moest je steeds opnieuw inloggen).
+  async function syncedSessionPath() {
+    if (!S.userCap || typeof S.userCap.id !== 'function' || window.SMASH_STANDALONE) return null;
     try {
-      var doc = await S.db.doc('data/users/me/session').get();
+      var uid = await S.userCap.id();
+      return uid ? 'data/users/' + uid + '/session' : null;
+    } catch (e) { return null; }
+  }
+  async function loadSyncedSessionEmail() {
+    var path = await syncedSessionPath();
+    if (!path) return null;
+    try {
+      var doc = await S.db.doc(path).get();
       return doc.exists ? (doc.data().email || null) : null;
     } catch (e) { return null; }
   }
   function saveSyncedSession(email) {
-    if (!S.userCap || window.SMASH_STANDALONE) return;
-    S.db.doc('data/users/me/session').set({ email: email, savedAt: new Date().toISOString() }).catch(function () {});
+    syncedSessionPath().then(function (path) {
+      if (path) return S.db.doc(path).set({ email: email, savedAt: new Date().toISOString() });
+    }).catch(function (e) { console.error('Inlog onthouden mislukt', e); });
   }
   function clearSyncedSession() {
-    if (!S.userCap || window.SMASH_STANDALONE) return;
-    S.db.doc('data/users/me/session').delete().catch(function () {});
+    syncedSessionPath().then(function (path) {
+      if (path) return S.db.doc(path).delete();
+    }).catch(function () {});
   }
 
   async function loadClubs() {
@@ -1974,7 +2107,7 @@
       '<span class="muted small">' + timeAgo(p.createdAt) + '</span></div>' +
       (isMatch ? matchScoreCardHtml(p) : '') +
       (!isMatch && p.caption ? '<p style="margin-top:0.6rem;">' + esc(p.caption) + '</p>' : '') +
-      (p.planCode ? '<a class="btn small" href="#/plan/' + esc(p.planCode) + '" style="margin-top:0.4rem;">📅 Doe mee — vul in wanneer je kunt</a>' : '') +
+      (p.planCode ? '<div class="ppi" data-plancode="' + esc(p.planCode) + '"><a class="btn small plan-invite-btn" href="#/plan/' + esc(p.planCode) + '" style="margin-top:0.4rem;">📅 Doe mee — vul in wanneer je kunt</a></div>' : '') +
       (!isMatch && p.imageDataUrl ? '<img src="' + p.imageDataUrl + '" style="max-width:100%; border-radius:10px; margin-top:0.6rem; display:block;" alt="">' : '') +
       (!isMatch && p.videoUrl ? '<p class="small" style="margin-top:0.6rem;">🎬 <a href="' + esc(p.videoUrl) + '" target="_blank" rel="noopener">Video bekijken</a> <span class="muted">(testversie — externe link, nog geen video-upload)</span></p>' : '') +
       reactionsHtml(p) +
@@ -2151,7 +2284,7 @@
           ? '<p style="margin:0 0 0.4rem;">🎬 <a href="' + esc(m.videoUrl) + '" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Video bekijken</a></p>'
           : '<p style="margin:0 0 0.4rem;">🎬 Video</p>') : '') +
         (m.text ? '<div>' + esc(m.text) + '</div>' : '') +
-        (m.planCode ? '<a class="plan-invite-btn" href="#/plan/' + esc(m.planCode) + '">📅 Beschikbaarheid invullen</a>' : '') +
+        (m.planCode ? '<div class="ppi" data-plancode="' + esc(m.planCode) + '"><a class="plan-invite-btn" href="#/plan/' + esc(m.planCode) + '">📅 Beschikbaarheid invullen</a></div>' : '') +
         (m.availRequest ? availRequestActionsHtml(m, mine, opts.availState || {}) : '');
     }
     // Ook een al "verwijderd voor iedereen"-bericht (tombstone) blijft ingedrukt-houdbaar: je
@@ -2433,7 +2566,7 @@
   }
   function bookingLinkHtml(club, extraClass, label, style) {
     if (!club) return '';
-    return '<a class="btn small' + (extraClass ? ' ' + extraClass : '') + '" href="' + esc(bookingUrl(club)) + '" target="_blank" rel="noopener"' +
+    return '<a class="btn small' + (extraClass ? ' ' + extraClass : '') + '" href="' + esc(bookingUrl(club)) + '" target="_blank" rel="noopener" data-book-club="' + esc(club.id) + '"' +
       (style ? ' style="' + style + '"' : '') + '>' + esc(label || 'Baan reserveren') + ' ↗</a>';
   }
 
@@ -2515,7 +2648,7 @@
       '<span class="muted">' + (opts.external ? '↗' : (opts.selected === c.id ? '✓' : '›')) + '</span>';
     var search = esc((c.name + ' ' + c.city).toLowerCase());
     if (opts.external) {
-      return '<a class="club-row" href="' + esc(bookingUrl(c)) + '" target="_blank" rel="noopener" data-search="' + search + '">' + inner + '</a>';
+      return '<a class="club-row" href="' + esc(bookingUrl(c)) + '" target="_blank" rel="noopener" data-book-club="' + esc(c.id) + '" data-search="' + search + '">' + inner + '</a>';
     }
     return '<button type="button" class="club-row' + (opts.selected === c.id ? ' sel' : '') + '" data-pick-club="' + esc(c.id) + '" data-search="' + search + '">' + inner + '</button>';
   }
@@ -3309,6 +3442,7 @@
         'Tik per set bij elke speler "Team 1" of "Team 2" aan en tik daarna de score aan.',
         'Van partner gewisseld? Pas de teams gewoon aan bij de volgende set. Met "+ Set toevoegen" kun je tot 10 sets invullen.',
         'Tik op "Uitslag doorgeven". Medespelers met een account bevestigen de uitslag nog.',
+        'Gespeeld via "Potje plannen"? Na de afgesproken tijd staat er op Home, bij de planning en in de chat "Hoe ging het? Uitslag invullen" — club, datum en spelers staan dan al klaar.',
         'Steeds dezelfde teams telt als één partij; bij wisselende partners telt elke gewonnen set als persoonlijke winst.'
       ] },
     { key: 'bevestigen', title: 'Uitslag bevestigen', href: '#/te-bevestigen',
@@ -3330,10 +3464,12 @@
       keys: 'potje plannen planning afspreken uitnodigen whatsapp code wanneer kan iedereen datum',
       steps: [
         'Ga naar Spelen en tik op "Potje plannen".',
-        'Kies een naam, startdatum, periode en het aantal spelers.',
-        'Kies clubs en nodig spelers of een hele vriendengroep uit in de app; delen via WhatsApp kan ook.',
-        'Iedereen tikt in het raster aan wanneer hij of zij kan.',
-        'Smash laat zien welke dag, tijd en club het beste past; de organisator tikt op "Vastzetten".'
+        'Tik de dagen aan die mogen (tot 2 weken vooruit) en een paar tijden: Ochtend, Middag, Na het werk of Avond. Andere tijd? Gebruik − en + en tik op Toevoegen.',
+        'Tik een club en het aantal spelers aan, en kies wie je uitnodigt (ook een hele vriendengroep). Typen hoeft niet.',
+        'Tik op "Peiling versturen": de peiling staat meteen in hun chat, of deel hem via WhatsApp.',
+        'Iedereen tikt los aan welke dagen en welke tijden hij of zij kan — ook direct in de chat.',
+        'Kies je meerdere clubs, dan stemt iedereen ook mee over de club. Smash rekent het beste moment én de best passende club uit (🏆); de organisator tikt op "Vastzetten".',
+        'Daarna: boek de baan via "Baan boeken" (het systeem van de club) en tik welke baan je kreeg — dan ziet iedereen het.'
       ] },
     { key: 'groep', title: 'Vriendengroep en groepschat', href: '#/ranglijst?tab=vrienden',
       keys: 'vriendengroep groep vrienden groepschat peiling poll stemmen tussenstand naam wijzigen leden toevoegen',
@@ -3563,6 +3699,7 @@
       '<div class="home-hello"><div><span class="eyebrow">Smash</span><h1>Hoi ' + esc((S.player.name || '').split(' ')[0] || S.player.username || '') + ' 👋</h1></div></div>' +
       pendingBanner(pending) +
       consentBannerHtml() +
+      '<div id="homeLogPrompt"></div>' +
       (openPlanInvites.length === 1
         ? '<div class="banner warn">📅 <strong>' + esc(openPlanInvites[0].organizerName) + '</strong> nodigt je uit voor "' + esc(openPlanInvites[0].title) + '". <a href="#/plan/' + esc(openPlanInvites[0].code) + '">Vul in wanneer je kunt →</a></div>'
         : openPlanInvites.length > 1
@@ -3589,6 +3726,7 @@
 
     renderShell('algemeen', body, 'home');
     wireConsentBanner(body);
+    fillHomeLogPrompt(body);
 
     var input = document.getElementById('homeSearch');
     var askBox = document.getElementById('homeAsk');
@@ -4518,7 +4656,7 @@
     return ids.slice(0, 12);
   }
 
-  async function viewMatchNew(preselect) {
+  async function viewMatchNew(preselect, planCode) {
     var homeIds = (S.player.homeClubIds || []).filter(function (id) { return S.clubsById[id]; });
     var st = {
       step: 0,
@@ -4532,12 +4670,35 @@
       done: null
     };
     var suggestions = await mlSuggestions();
+    var fromPlan = null;
+    if (planCode) {
+      try {
+        var plSnap = await S.db.doc('plannen/' + planCode).get();
+        if (plSnap.exists && plSnap.data().chosen) {
+          fromPlan = plSnap.data();
+          if (fromPlan.chosen.clubId && S.clubsById[fromPlan.chosen.clubId]) st.clubId = fromPlan.chosen.clubId;
+          var fp = await playersFromPlan(fromPlan);
+          var cap = Math.min(ML_MAX_PLAYERS, Math.max(2, fromPlan.needed || 4));
+          fp.ids.forEach(function (id) { if (st.players.length < cap && st.players.indexOf(id) === -1) st.players.push(id); });
+          fp.guests.forEach(function (nmG) {
+            if (st.players.length >= cap) return;
+            st.guestSeq++; var gidP = 'gast:' + st.guestSeq; st.guestNames[gidP] = nmG; st.players.push(gidP);
+          });
+          st.step = st.clubId ? (st.players.length >= 2 ? 2 : 1) : 0;
+        }
+      } catch (e) { fromPlan = null; }
+    }
     var body = el('<div class="stack"></div>');
     body.innerHTML = '<div><span class="eyebrow">Uitslag doorgeven</span><h1>Partij loggen</h1>' +
       '<p class="muted small" style="margin:0.2rem 0 0;">Alles gaat met tikken. Spelers met een Smash-account bevestigen de uitslag daarna nog.</p></div>' +
       '<div class="card" id="mlCard"></div>';
     renderShell(preselect && S.clubsById[preselect] && homeIds.indexOf(preselect) !== -1 ? preselect : 'algemeen', body, 'spelen');
     var card = body.querySelector('#mlCard');
+    if (fromPlan) {
+      card.insertAdjacentHTML('beforebegin', '<div class="banner warn" style="margin:0;">📅 Uit de planning <strong>' + esc(fromPlan.title) + '</strong>: ' +
+        esc(fmtPlanDay(fromPlan.chosen.date, true) + ' · ' + fromPlan.chosen.time + (st.clubId ? ' · ' + S.clubsById[st.clubId].name : '') + (fromPlan.chosen.court ? ' · ' + fromPlan.chosen.court : '')) +
+        '. Club en spelers staan al klaar — tik alleen nog de teams en de score aan.' + (fromPlan.matchId ? '<br><strong>Let op:</strong> voor deze afspraak is al een uitslag doorgegeven.' : '') + '</div>');
+    }
 
     function nm(id) { return id === S.playerId ? 'Jij' : matchName(st, id); }
     function others() { return st.players.filter(function (id) { return id !== S.playerId; }); }
@@ -4706,11 +4867,16 @@
         clubId: st.clubId, score: sets.map(function (s) { return s.scoreA + '-' + s.scoreB; }).join(', '),
         winnerSide: winnerSide, rotating: rotating, sets: sets, guestNames: guestNames,
         submittedBy: S.playerId, status: allConfirmed ? 'confirmed' : 'pending', participants: participants,
-        playedAt: new Date().toISOString(), period: PERIOD_NOW, createdAt: new Date().toISOString()
+        playedAt: fromPlan && planMatchStart(fromPlan) ? planMatchStart(fromPlan).toISOString() : new Date().toISOString(), period: PERIOD_NOW, createdAt: new Date().toISOString(),
+        planCode: fromPlan ? fromPlan.code : null
       };
       var btn = card.querySelector('[data-act=submit]'); if (btn) btn.disabled = true;
       try {
         var matchRef = await S.db.collection('matches').add(doc);
+        if (fromPlan) {
+          try { await S.db.doc('plannen/' + fromPlan.code).update({ matchId: matchRef.id, matchScore: doc.score, matchConfirmed: doc.status === 'confirmed' }); } catch (e) {}
+          await notifyResultToConfirm(fromPlan, doc, participants);
+        }
         var registered = played.filter(function (id) { return !isGuestId(id); });
         if (registered.length > 2) await ensureGroupChatForMatch(matchRef.id, st.clubId, registered);
         if (allConfirmed) {
@@ -4824,6 +4990,7 @@
           m.participants = m.participants.map(function (p) { return p.playerId === S.playerId ? Object.assign({}, p, { confirmed: true }) : p; });
           var allConfirmed = m.participants.every(function (p) { return p.confirmed; });
           await doc.update({ participants: m.participants, status: allConfirmed ? 'confirmed' : 'pending' });
+          if (allConfirmed && m.planCode) { try { await S.db.doc('plannen/' + m.planCode).update({ matchConfirmed: true }); } catch (e) {} }
           if (allConfirmed) {
             await createPost({
               authorId: m.submittedBy, type: 'matchResult', clubId: m.clubId,
@@ -5220,13 +5387,14 @@
       '<div class="card" style="border:2px solid var(--court);">' +
         '<h2>Reserveer bij ' + esc(club.name) + '</h2>' +
         '<p class="muted small">Je reserveert in het eigen systeem van de club. Daar zie je precies welke banen en tijden nog vrij zijn, dus je boekt nooit iets dat al bezet is.</p>' +
-        bookingLinkHtml(club, '', 'Naar reserveren', 'margin-top:0.4rem; font-size:1rem; padding:0.7rem 1.3rem;') +
-        (host ? '<p class="small muted" style="margin:0.7rem 0 0;">Opent ' + esc(host) + ' in een nieuw tabblad.</p>' : '') +
+        '<button class="btn" type="button" id="bkOpen" style="margin-top:0.4rem; font-size:1rem; padding:0.7rem 1.3rem;">🎾 Baan huren</button>' +
+        (host ? '<p class="small muted" style="margin:0.7rem 0 0;">Reserveren gaat via ' + esc(host) + ' — al geboekt? Tik dan meteen op Geboekt.</p>' : '') +
         '<p class="small" style="margin:0.7rem 0 0;"><a href="#/baan-huren">Bij een andere club huren →</a></p>' +
       '</div>' +
       '<div class="card"><h2>Samen spelen?</h2><p class="muted small">Plan eerst met je vrienden wanneer iedereen kan, en reserveer daarna de baan.</p>' +
         '<a class="btn secondary small" href="#/plan/nieuw">Potje plannen</a></div>';
     renderShell(clubId, body, 'spelen');
+    body.querySelector('#bkOpen').addEventListener('click', function () { openBookSheet(club); });
   }
 
   // ---------- webshop-view ----------
@@ -6105,6 +6273,10 @@
     for (var i = 0; i < (plan.days || 7); i++) out.push(localDateStr(new Date(d.getFullYear(), d.getMonth(), d.getDate() + i)));
     return out;
   }
+  // Een planning (en dus de code) is geldig t/m de laatste dag van de gekozen periode;
+  // daarna verloopt de code en kan niemand meer invullen.
+  function planLastDay(plan) { var ds = planDates(plan); return ds[ds.length - 1]; }
+  function planExpired(plan) { return planLastDay(plan) < localDateStr(new Date()); }
   function fmtPlanDay(s, long) {
     var d = parseLocalDate(s);
     return (long ? DAY_LONG : DAY_SHORT)[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()];
@@ -6178,10 +6350,11 @@
   }
 
   function inviteText(plan) {
+    if (plan.mode === 'poll') return pollInviteText(plan);
     return '🎾 ' + plan.title + '\n' +
       'Geef even aan wanneer, hoe laat en waar je kunt — dan zoekt Smash de beste dag, tijd en club voor ons:\n' +
       planLink(plan.code) + '\n\n' +
-      'Werkt de link niet? Open Smash en vul code ' + plan.code + ' in.';
+      'Werkt de link niet? Open Smash en vul code ' + plan.code + ' in. De code is geldig t/m ' + fmtPlanDay(planLastDay(plan), true) + '.';
   }
   function resultText(plan, o) {
     var who = o.ok.map(function (r) { return r.name; }).join(', ');
@@ -6318,7 +6491,9 @@
     var already = plan.invitedIds || [];
     var fresh = ids.filter(function (id) { return already.indexOf(id) === -1 && id !== S.playerId; });
     var me = S.player.name || S.player.username || 'Iemand';
-    var text = '🎾 ' + me + ' nodigt je uit voor "' + plan.title + '" (' + fmtPlanDay(plan.startDate) + ' e.v.). Geef even aan wanneer en waar je kunt!';
+    var text = plan.mode === 'poll'
+      ? '🎾 ' + me + ': "' + plan.title + '" — wanneer kun jij? Tik je opties aan 👇'
+      : '🎾 ' + me + ' nodigt je uit voor "' + plan.title + '" (' + fmtPlanDay(plan.startDate) + ' e.v.). Geef even aan wanneer en waar je kunt!';
     for (var i = 0; i < fresh.length; i++) {
       await S.db.collection('messages').add({
         conversationId: convId(S.playerId, fresh[i]), senderId: S.playerId, recipientId: fresh[i],
@@ -6331,7 +6506,7 @@
       var ref = await S.db.collection('posts').add({
         authorId: S.playerId, createdAt: new Date().toISOString(), type: 'planInvite', planCode: plan.code,
         clubId: (plan.clubIds && plan.clubIds[0]) || null,
-        caption: '📅 ' + plan.title + ' — ' + fmtPlanDay(plan.startDate) + ' t/m ' + fmtPlanDay(planDates(plan)[planDates(plan).length - 1]) +
+        caption: plan.mode === 'poll' ? '📅 ' + plan.title + ' — we zoeken nog spelers (' + plan.needed + ' totaal). Tik aan wanneer je kunt!' : '📅 ' + plan.title + ' — ' + fmtPlanDay(plan.startDate) + ' t/m ' + fmtPlanDay(planDates(plan)[planDates(plan).length - 1]) +
           '. We zoeken nog spelers (' + plan.needed + ' totaal). Doe mee en geef aan wanneer je kunt!'
       });
       patch.feedPostId = ref.id;
@@ -6371,76 +6546,339 @@
 
   // ----- nieuwe planning maken -----
 
+  // ---------- potje plannen als peiling (zoals een WhatsApp-poll: alleen tikken) ----------
+  // De organisator tikt een paar dagen en tijden aan; dat worden de opties. Iedereen stemt met
+  // één tik per optie (meerdere keuzes mogelijk) — direct opgeslagen, geen formulier, geen
+  // opslaan-knop. De optie met de meeste stemmen wint; de organisator zet hem vast.
+
+  var POLL_MAX_OPTIONS = 12;
+  var POLL_PARTS = [
+    { key: 'ochtend', label: 'Ochtend', from: 6, to: 11 },
+    { key: 'middag', label: 'Middag', from: 12, to: 16 },
+    { key: 'avond', label: 'Avond', from: 17, to: 23 },
+    { key: 'nacht', label: 'Nacht', from: 0, to: 5 }
+  ];
+  function pollPartTimes(key) {
+    var p = POLL_PARTS.filter(function (x) { return x.key === key; })[0] || POLL_PARTS[2];
+    var out = [];
+    for (var h = p.from; h <= p.to; h++) { out.push(pad2(h) + ':00'); out.push(pad2(h) + ':30'); }
+    return out;
+  }
+  function pollPartOf(t) {
+    var h = Number(String(t).slice(0, 2));
+    for (var i = 0; i < POLL_PARTS.length; i++) if (h >= POLL_PARTS[i].from && h <= POLL_PARTS[i].to) return POLL_PARTS[i].key;
+    return 'avond';
+  }
+  // Tijd kiezen zonder gedoe: vier grote tegels met de meest gekozen tijden, en voor iets anders
+  // een simpele −/+ teller (stappen van een half uur) — geen lange lijsten met tijden.
+  var POLL_QUICK_TIMES = [
+    { t: '10:00', icon: '☀️', label: 'Ochtend' },
+    { t: '14:00', icon: '🌤️', label: 'Middag' },
+    { t: '18:30', icon: '🌆', label: 'Na het werk' },
+    { t: '20:00', icon: '🌙', label: 'Avond' }
+  ];
+  function shiftTime(t, mins) { return minToTime((timeToMin(t) + mins + 1440) % 1440); }
+  function pollTimeHtml(selected, custom, addLabel) {
+    var quick = POLL_QUICK_TIMES.map(function (q) { return q.t; });
+    var extra = selected.filter(function (t) { return quick.indexOf(t) === -1; }).sort();
+    return '<div class="tq-grid">' + POLL_QUICK_TIMES.map(function (q) {
+        var on = selected.indexOf(q.t) !== -1;
+        return '<button type="button" class="tq' + (on ? ' on' : '') + '" data-time="' + q.t + '"><span class="tq-ic" aria-hidden="true">' + q.icon + '</span>' +
+          '<span><span class="tq-t">' + q.t + '</span><span class="tq-l">' + q.label + '</span></span><span class="tq-check" aria-hidden="true">✓</span></button>';
+      }).join('') + '</div>' +
+      (extra.length ? '<div class="chip-row" style="margin-top:0.45rem;">' + extra.map(function (t) {
+        return '<button type="button" class="chip on" data-time="' + t + '">' + t + ' ✕</button>';
+      }).join('') + '</div>' : '') +
+      '<div class="tq-step"><span class="small muted" style="font-weight:700;">Andere tijd:</span>' +
+        '<button type="button" class="stp" data-step="-30" aria-label="Half uur eerder">−</button>' +
+        '<span class="tq-val tnum">' + custom + '</span>' +
+        '<button type="button" class="stp" data-step="30" aria-label="Half uur later">+</button>' +
+        '<button type="button" class="chip add" data-addtime>' + (addLabel || '+ Toevoegen') + '</button></div>';
+  }
+
+  function pollDayLabel(ds) {
+    var today = localDateStr(new Date());
+    var t = new Date(); t.setDate(t.getDate() + 1);
+    if (ds === today) return 'Vandaag';
+    if (ds === localDateStr(t)) return 'Morgen';
+    return fmtPlanDay(ds);
+  }
+  function pollOptLabel(o) { return fmtPlanDay(o.date) + ' · ' + o.time + (o.clubId && o.key && o.key.split('|').length > 2 && S.clubsById[o.clubId] ? ' · ' + S.clubsById[o.clubId].name : ''); }
+  function clubShort(cid) { return S.clubsById[cid] ? S.clubsById[cid].name : 'Club'; }
+  // Nieuwe peilingen ("split"): vrienden tikken los aan welke DAGEN en welke TIJDEN ze kunnen.
+  // Smash combineert dat per persoon en rekent zelf het beste moment uit — zo blijft de peiling
+  // kort, ook als je 2 weken vooruit plant (14 dagen + een paar tijden i.p.v. tientallen opties).
+  function pollIsSplit(plan) { return !!(plan && plan.dayOpts); }
+  // Meerdere clubs in de peiling? Dan stemt iedereen ook mee over de club (3e vraag).
+  function pollClubQ(plan) { return pollIsSplit(plan) && (plan.clubOpts || []).length > 1; }
+  function crossKeys(days, times, clubs) {
+    var out = [];
+    (days || []).slice().sort().forEach(function (d) { (times || []).slice().sort().forEach(function (t) {
+      if (clubs && clubs.length) clubs.forEach(function (c) { out.push(d + '|' + t + '|' + c); });
+      else out.push(d + '|' + t);
+    }); });
+    return out;
+  }
+  function respClubs(plan, r) {
+    var c = (r.clubs || []).filter(function (x) { return plan.clubOpts.indexOf(x) !== -1; });
+    return c.length ? c : plan.clubOpts.slice(); // geen club aangetikt = maakt niet uit
+  }
+  function respSlots(plan, r) {
+    if (!pollIsSplit(plan)) return r.slots || [];
+    return crossKeys((r.days || []).filter(function (d) { return plan.dayOpts.indexOf(d) !== -1; }), (r.times || []).filter(function (t) { return plan.timeOpts.indexOf(t) !== -1; }),
+      pollClubQ(plan) ? respClubs(plan, r) : null);
+  }
+  function pollOptions(plan) {
+    if (pollIsSplit(plan)) return crossKeys(plan.dayOpts, plan.timeOpts, pollClubQ(plan) ? plan.clubOpts : null).map(function (k) {
+      var p = k.split('|'); return { key: k, date: p[0], time: p[1], clubId: p[2] || plan.clubId || null };
+    });
+    return (plan.options || []).slice().sort(function (a, b) { return a.key < b.key ? -1 : 1; });
+  }
+  function timeIcon(t) {
+    var q = POLL_QUICK_TIMES.filter(function (x) { return x.t === t; })[0]; if (q) return q.icon;
+    var h = Number(String(t).slice(0, 2));
+    return h < 12 ? '☀️' : h < 17 ? '🌤️' : h < 19 ? '🌆' : '🌙';
+  }
+  // Twee korte vragen: welke dagen + hoe laat. Tikken = stemmen.
+  function pollSplitHtml(plan, list, myId, compact) {
+    var mine = list.filter(function (x) { return x.id === myId; })[0] || {};
+    var T = pollTally(plan, list);
+    var bestDay = T.best ? T.best.date : null, bestTime = T.best ? T.best.time : null, bestClub = T.best ? T.best.clubId : null;
+    function cnt(field, v) { return list.filter(function (x) { return (x[field] || []).indexOf(v) !== -1; }).length; }
+    return '<div class="pp-sec">📅 Welke dagen kun je?</div><div class="pd-grid' + (compact ? ' sm' : '') + '">' +
+      plan.dayOpts.slice().sort().map(function (d) {
+        var dd = parseLocalDate(d), on = (mine.days || []).indexOf(d) !== -1, n = cnt('days', d);
+        return '<button type="button" class="pd' + (on ? ' on' : '') + (d === bestDay ? ' best' : '') + '" data-pday="' + d + '">' +
+          '<span class="pd-w">' + DAY_SHORT[dd.getDay()] + '</span><span class="pd-n">' + dd.getDate() + '</span><span class="pd-m">' + MONTHS[dd.getMonth()] + '</span>' +
+          (n ? '<span class="pd-c tnum">' + n + '</span>' : '') + '</button>';
+      }).join('') + '</div>' +
+      '<div class="pp-sec">⏰ Hoe laat kun je?</div><div class="tq-grid">' +
+      plan.timeOpts.slice().sort().map(function (t) {
+        var on = (mine.times || []).indexOf(t) !== -1, n = cnt('times', t);
+        return '<button type="button" class="tq' + (on ? ' on' : '') + '" data-ptime="' + t + '"><span class="tq-ic" aria-hidden="true">' + timeIcon(t) + '</span>' +
+          '<span><span class="tq-t">' + t + '</span><span class="tq-l">' + (n ? n + (n === 1 ? ' kan' : ' kunnen') : 'nog niemand') + (t === bestTime ? ' · 🏆' : '') + '</span></span>' +
+          '<span class="tq-check" aria-hidden="true">✓</span></button>';
+      }).join('') + '</div>' +
+      (pollClubQ(plan) ? '<div class="pp-sec">📍 Waar wil je spelen? <span class="muted small" style="font-weight:500;">(niks aantikken = maakt niet uit)</span></div><div class="pc-list">' +
+        plan.clubOpts.map(function (cid) {
+          var on = (mine.clubs || []).indexOf(cid) !== -1, n = cnt('clubs', cid), c = S.clubsById[cid] || {};
+          return '<button type="button" class="pc' + (on ? ' on' : '') + '" data-pclub="' + esc(cid) + '"><span class="pc-main"><strong>' + esc(c.name || 'Club') + '</strong>' +
+            '<span class="pc-sub">' + esc(c.city || '') + (n ? ' · ' + n + (n === 1 ? ' wil hier' : ' willen hier') : '') + (cid === bestClub ? ' · 🏆' : '') + '</span></span>' +
+            '<span class="pp-check" aria-hidden="true">' + (on ? '✓' : '') + '</span></button>';
+        }).join('') + '</div>' : '');
+  }
+  // Stemmen per optie + de "beste" optie (meeste stemmen, bij gelijkspel de vroegste).
+  function pollTally(plan, responses) {
+    var opts = pollOptions(plan);
+    var rows = opts.map(function (o) {
+      var ok = responses.filter(function (r) { return respSlots(plan, r).indexOf(o.key) !== -1; });
+      return { key: o.key, date: o.date, time: o.time, clubId: o.clubId || plan.clubId || null, ok: ok };
+    });
+    // Beste = meeste spelers. Gelijkspel tussen clubs: de club die de meeste spelers expliciet kozen,
+    // daarna de club die voor de meesten een thuisclub is.
+    function clubScore(cid) {
+      if (!cid) return 0;
+      var picked = responses.filter(function (r) { return (r.clubs || []).indexOf(cid) !== -1; }).length;
+      var home = responses.filter(function (r) { var pl = r.playerId && S.playersById[r.playerId]; return pl && (pl.homeClubIds || []).indexOf(cid) !== -1; }).length;
+      return picked * 100 + home;
+    }
+    var best = null;
+    rows.forEach(function (r) {
+      if (!r.ok.length) return;
+      if (!best || r.ok.length > best.ok.length || (r.ok.length === best.ok.length && r.date === best.date && r.time === best.time && clubScore(r.clubId) > clubScore(best.clubId))) best = r;
+    });
+    var voters = responses.filter(function (r) { return (r.slots || []).length || (r.days || []).length || (r.times || []).length || (r.clubs || []).length || r.none; });
+    return { rows: rows, best: best, voters: voters };
+  }
+  function pollInviteText(plan) {
+    if (pollIsSplit(plan)) {
+      return '🎾 ' + plan.title + (plan.clubId ? ' · ' + clubLabel(plan.clubId) : '') + '\n' +
+        'Tik even aan welke dagen en hoe laat je kunt — Smash zoekt het beste moment:\n' +
+        '📅 ' + plan.dayOpts.slice().sort().map(function (d) { return fmtPlanDay(d); }).join(', ') + '\n' +
+        '⏰ ' + plan.timeOpts.slice().sort().join(', ') + '\n' +
+        (pollClubQ(plan) ? '📍 ' + plan.clubOpts.map(clubShort).join(', ') + '\n' : '') + '\n' + planLink(plan.code) + '\n(code ' + plan.code + ')';
+    }
+    var opts = pollOptions(plan);
+    return '🎾 ' + plan.title + (plan.clubId ? ' · ' + clubLabel(plan.clubId) : '') + '\n' +
+      'Wanneer kun jij? Tik je opties aan (meerdere mag):\n' +
+      opts.slice(0, 8).map(function (o) { return '• ' + fmtPlanDay(o.date, true) + ' ' + o.time; }).join('\n') + (opts.length > 8 ? '\n• …' : '') + '\n\n' +
+      planLink(plan.code) + '\n(code ' + plan.code + ')';
+  }
+  function pollGuestName() { try { return localStorage.getItem('smash_guest_name') || ''; } catch (e) { return ''; } }
+  function setPollGuestName(n) { try { localStorage.setItem('smash_guest_name', n); } catch (e) {} }
+
+  async function savePollVote(plan, respId, name, slots, none, extra) {
+    await S.db.doc('plannen/' + plan.code + '/reacties/' + respId).set(Object.assign({
+      name: name, playerId: S.player ? S.playerId : null, slots: slots, none: !!none,
+      clubIds: plan.clubId ? [plan.clubId] : [], anyClub: !plan.clubId, updatedAt: new Date().toISOString()
+    }, extra || {}));
+  }
+  var POLL_MAX_TIMES = 6;
+
+  // ----- nieuwe peiling maken: dagen + tijden aantikken -----
   async function viewPlanNew(params) {
-    var tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
     var homeIds = (S.player.homeClubIds || []).filter(function (id) { return S.clubsById[id]; });
+    var st = {
+      days: {}, times: {}, custom: '19:00',
+      clubs: homeIds.length ? [homeIds[0]] : [], extraClubs: [], clubsTouched: false, inviteIds: [], needed: 4, title: ''
+    };
+    var dayList = [];
+    for (var i = 0; i < 14; i++) { var d = new Date(); d.setDate(d.getDate() + i); dayList.push(localDateStr(d)); }
+
     var body = el('<div class="stack"></div>');
     body.innerHTML =
       pageHeadHtml('<span class="eyebrow">Samen plannen</span><h1>Potje plannen</h1>' +
-        '<p class="muted small" style="margin:0.2rem 0 0;">Smash rekent uit welke dag, tijd en club het beste past.</p>') +
-      '<div class="card"><form id="planNewForm">' +
-        '<label for="pn_title">Naam</label>' +
-        '<input type="text" id="pn_title" name="title" value="Padellen deze week" maxlength="60" required>' +
-        '<div class="grid-2 keep2" style="gap:0.7rem;">' +
-          '<div><label for="pn_start">Vanaf</label><input type="date" id="pn_start" name="start" value="' + localDateStr(tomorrow) + '" min="' + localDateStr(new Date()) + '" required class="date-input"></div>' +
-          '<div><label for="pn_days">Periode</label><select id="pn_days" name="days">' +
-            [3, 5, 7, 10, 14].map(function (n) { return '<option value="' + n + '"' + (n === 7 ? ' selected' : '') + '>' + n + ' dagen</option>'; }).join('') + '</select></div>' +
-        '</div>' +
-        '<label for="pn_needed">Spelers</label><select id="pn_needed" name="needed">' +
-          [2, 4, 6, 8].map(function (n) { return '<option value="' + n + '"' + (n === 4 ? ' selected' : '') + '>' + n + ' spelers' + (n === 4 ? ' (dubbel)' : n === 2 ? ' (single)' : '') + '</option>'; }).join('') + '</select>' +
-        '<details class="acc" style="margin-top:0.9rem;"><summary>📍 Clubs <span class="acc-meta" id="pn_clubMeta">' + homeIds.length + ' gekozen</span></summary><div class="acc-body">' +
-          '<div class="hint" style="margin:0 0 0.4rem;">Je vrienden kunnen zelf ook nog een club voorstellen.</div>' +
-          '<div class="check-grid" id="pn_clubs">' + homeIds.map(function (id) {
-            return '<label><input type="checkbox" name="club" value="' + esc(id) + '" checked> ' + esc(clubLabel(id)) + '</label>';
-          }).join('') + '</div>' +
-          '<select id="pn_addclub" style="margin-top:0.6rem;"><option value="">+ Andere club toevoegen…</option>' +
-            sortedClubs().filter(function (c) { return homeIds.indexOf(c.id) === -1; }).map(function (c) {
-              return '<option value="' + esc(c.id) + '">' + esc(c.name) + ' (' + esc(c.city) + ')</option>';
-            }).join('') + '</select></div></details>' +
-        '<details class="acc" style="margin-top:0.6rem;" id="pn_inviteAcc"><summary>👥 Uitnodigen in de app <span class="acc-meta" id="pn_invMeta">niemand</span></summary><div class="acc-body">' +
-          '<div class="hint" style="margin:0 0 0.4rem;">Ze krijgen een berichtje in hun Smash-chat. Een WhatsApp-link kun je daarna ook nog delen.</div>' +
-          '<div id="pn_invite"><p class="muted small">Laden…</p></div></div></details>' +
+        '<p class="muted small" style="margin:0.2rem 0 0;">Tik dagen en tijden aan — je vrienden stemmen met één tik, net als een WhatsApp-poll.</p>') +
+      '<div class="card pn-card">' +
+        '<div class="pn-step"><span class="pn-num">1</span>Welke dagen?</div>' +
+        '<div class="pn-days" id="pnDays"></div>' +
+        '<div class="pn-step"><span class="pn-num">2</span>Hoe laat?</div>' +
+        '<div id="pnTimes"></div>' +
+        '<div class="pn-preview" id="pnPreview"></div>' +
+        '<div class="pn-step"><span class="pn-num">3</span>Waar en met hoeveel?</div>' +
+        '<p class="small muted" style="margin:0 0 0.2rem;">Tik 1 club, of meerdere: dan stemmen je vrienden mee en kiest Smash de best passende.</p>' +
+        '<div class="chip-row" id="pnClubs"></div>' +
+        '<div class="chip-row" id="pnNeeded" style="margin-top:0.5rem;"></div>' +
+        '<details class="acc" style="margin-top:0.9rem;" id="pn_inviteAcc"><summary>👥 Wie nodig je uit? <span class="acc-meta" id="pn_invMeta">niemand</span></summary><div class="acc-body">' +
+          '<div id="pn_invite"><p class="muted small">Laden…</p></div><div id="pnGroupChat"></div></div></details>' +
+        '<details class="acc" style="margin-top:0.6rem;"><summary>✏️ Naam <span class="acc-meta" id="pnTitleMeta"></span></summary><div class="acc-body">' +
+          '<input type="text" id="pn_title" maxlength="60" placeholder="Wordt automatisch ingevuld"></div></details>' +
         '<div id="pn_err"></div>' +
-        '<button class="btn" type="submit" style="width:100%;justify-content:center;">Planning maken</button>' +
-      '</form></div>';
+        '<button class="btn" type="button" id="pnSend" style="width:100%;justify-content:center;margin-top:1rem;">Peiling versturen</button>' +
+      '</div>';
     renderShell('algemeen', body, 'spelen');
 
-    function updateClubMeta() {
-      var n = body.querySelectorAll('#pn_clubs input:checked').length;
-      document.getElementById('pn_clubMeta').textContent = n ? n + ' gekozen' : 'geen — vrienden kiezen zelf';
+    function selDays() { return dayList.filter(function (x) { return st.days[x]; }); }
+    function selTimes() { return Object.keys(st.times).filter(function (t) { return st.times[t]; }).sort(); }
+    function autoTitle() {
+      var ds = dayList.filter(function (x) { return st.days[x]; });
+      if (ds.length === 1) return 'Padellen ' + pollDayLabel(ds[0]).toLowerCase().replace(/^(vandaag|morgen)$/, '$1');
+      var weekEnd = new Date(); weekEnd.setDate(weekEnd.getDate() + (7 - weekEnd.getDay()) % 7);
+      if (ds.length && ds[ds.length - 1] <= localDateStr(weekEnd)) return 'Padellen deze week';
+      return 'Padellen 🎾';
     }
-    updateClubMeta();
-    document.getElementById('pn_clubs').addEventListener('change', updateClubMeta);
-    var addSel = document.getElementById('pn_addclub');
-    addSel.addEventListener('change', function () {
-      var id = addSel.value; if (!id) return;
-      var wrap = document.getElementById('pn_clubs');
-      if (!wrap.querySelector('input[value="' + CSS.escape(id) + '"]')) {
-        wrap.appendChild(el('<label><input type="checkbox" name="club" value="' + esc(id) + '" checked> ' + esc(clubLabel(id)) + '</label>'));
-      }
-      addSel.querySelector('option[value="' + CSS.escape(id) + '"]').remove();
-      addSel.value = '';
-      updateClubMeta();
-    });
+    function titleNow() { var v = body.querySelector('#pn_title').value.trim(); return (v || autoTitle()).slice(0, 60); }
 
-    var preGroup = params && params.get('groep');
-    var preselect = [];
-    if (preGroup) {
-      try { var gd = await S.db.doc('friendGroups/' + preGroup).get(); if (gd.exists) preselect = gd.data().memberIds || []; } catch (e) {}
-      var acc = document.getElementById('pn_inviteAcc'); if (acc) acc.open = true;
+    function renderDays() {
+      body.querySelector('#pnDays').innerHTML = dayList.map(function (ds) {
+        var dd = parseLocalDate(ds);
+        var lbl = pollDayLabel(ds);
+        var top = lbl === 'Vandaag' || lbl === 'Morgen' ? lbl : DAY_SHORT[dd.getDay()];
+        return '<button type="button" class="pn-day' + (st.days[ds] ? ' on' : '') + '" data-day="' + ds + '">' +
+          '<span class="pn-day-w">' + esc(top) + '</span><span class="pn-day-n">' + dd.getDate() + '</span><span class="pn-day-m">' + MONTHS[dd.getMonth()] + '</span></button>';
+      }).join('');
     }
-    var picker = await mountInvitePicker(document.getElementById('pn_invite'), {
+    function renderParts() {
+      var sel = Object.keys(st.times).filter(function (t) { return st.times[t]; });
+      body.querySelector('#pnTimes').innerHTML = pollTimeHtml(sel, st.custom);
+    }
+    function renderPreview() {
+      var box = body.querySelector('#pnPreview');
+      var nDays = selDays().length, nTimes = selTimes().length;
+      var over = nTimes > POLL_MAX_TIMES;
+      if (!nDays || !nTimes) {
+        box.innerHTML = '<p class="small muted" style="margin:0;">' + (!nDays && !nTimes ? 'Tik minstens één dag en één tijd aan.' : !nDays ? 'Tik nog een dag aan.' : 'Tik nog een tijd aan.') + '</p>';
+      } else {
+        box.innerHTML = '<p class="small" style="margin:0;"><strong>📅 ' + nDays + ' dag' + (nDays === 1 ? '' : 'en') + ' · ⏰ ' + nTimes + ' tijd' + (nTimes === 1 ? '' : 'en') + '</strong></p>' +
+          (over ? '<p class="pn-warn" style="margin:0.2rem 0 0;">Kies maximaal ' + POLL_MAX_TIMES + ' tijden.</p>'
+            : '<p class="small muted" style="margin:0.2rem 0 0;">Je vrienden tikken aan welke dagen en tijden ze kunnen. Smash rekent zelf het beste moment uit.</p>');
+      }
+      var ok = nDays && nTimes && !over;
+      var btn = body.querySelector('#pnSend');
+      btn.disabled = !ok;
+      btn.textContent = 'Peiling versturen';
+      body.querySelector('#pnTitleMeta').textContent = titleNow();
+    }
+    // Club-suggesties: jouw thuisclubs + de thuisclubs van wie je uitnodigt (meest gedeelde eerst).
+    function clubSuggestions() {
+      var count = {};
+      [S.playerId].concat(st.inviteIds).forEach(function (pid) {
+        var pl = pid === S.playerId ? S.player : S.playersById[pid];
+        ((pl && pl.homeClubIds) || []).forEach(function (cid) { if (S.clubsById[cid]) count[cid] = (count[cid] || 0) + 1; });
+      });
+      var ids = Object.keys(count).sort(function (a, b) { return count[b] - count[a] || (homeIds.indexOf(a) === -1) - (homeIds.indexOf(b) === -1); }).slice(0, 5);
+      st.extraClubs.concat(st.clubs).forEach(function (c) { if (ids.indexOf(c) === -1) ids.push(c); });
+      return { ids: ids, count: count };
+    }
+    function renderClubs() {
+      var sg = clubSuggestions();
+      if (!st.clubsTouched && sg.ids.length && st.inviteIds.length) st.clubs = [sg.ids[0]];
+      var n = st.inviteIds.length + 1;
+      body.querySelector('#pnClubs').innerHTML = sg.ids.map(function (cid) {
+        var c = sg.count[cid] || 0;
+        return '<button type="button" class="chip' + (st.clubs.indexOf(cid) !== -1 ? ' on' : '') + '" data-club="' + esc(cid) + '">📍 ' + esc(S.clubsById[cid].name) +
+          (st.inviteIds.length && c ? ' <span style="opacity:0.75;font-weight:500;">· thuisclub van ' + c + '/' + n + '</span>' : '') + '</button>';
+      }).join('') +
+        '<button type="button" class="chip' + (!st.clubs.length ? ' on' : '') + '" data-club="">Maakt niet uit</button>' +
+        '<button type="button" class="chip add" data-club="__other">+ Andere club</button>';
+    }
+    function renderNeeded() {
+      body.querySelector('#pnNeeded').innerHTML = [2, 4, 6, 8].map(function (n) {
+        return '<button type="button" class="chip' + (st.needed === n ? ' on' : '') + '" data-needed="' + n + '">' + n + ' spelers' + (n === 4 ? ' · dubbel' : n === 2 ? ' · single' : '') + '</button>';
+      }).join('');
+    }
+    function renderAll() { renderDays(); renderParts(); renderPreview(); renderClubs(); renderNeeded(); }
+    renderAll();
+
+    body.querySelector('#pnDays').addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-day]'); if (!b) return;
+      var ds = b.getAttribute('data-day'); st.days[ds] = !st.days[ds];
+      b.classList.toggle('on', !!st.days[ds]);
+      renderPreview();
+    });
+    body.querySelector('#pnTimes').addEventListener('click', function (ev) {
+      var b;
+      if ((b = ev.target.closest('[data-time]'))) { var t = b.getAttribute('data-time'); st.times[t] = !st.times[t]; }
+      else if ((b = ev.target.closest('[data-step]'))) { st.custom = shiftTime(st.custom, Number(b.getAttribute('data-step'))); }
+      else if (ev.target.closest('[data-addtime]')) { st.times[st.custom] = true; }
+      else return;
+      renderParts(); renderPreview();
+    });
+    body.querySelector('#pnClubs').addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-club]'); if (!b) return;
+      var v = b.getAttribute('data-club');
+      if (v === '__other') {
+        openClubPickSheet('Kies een club', {}, function (id) {
+          if (st.extraClubs.indexOf(id) === -1) st.extraClubs.push(id);
+          if (st.clubs.indexOf(id) === -1) st.clubs.push(id);
+          st.clubsTouched = true; renderClubs();
+        });
+        return;
+      }
+      st.clubsTouched = true;
+      if (!v) st.clubs = [];
+      else { var i = st.clubs.indexOf(v); if (i === -1) st.clubs.push(v); else st.clubs.splice(i, 1); }
+      renderClubs();
+    });
+    body.querySelector('#pnNeeded').addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-needed]'); if (!b) return;
+      st.needed = Number(b.getAttribute('data-needed')); renderNeeded();
+    });
+    body.querySelector('#pn_title').addEventListener('input', function () { body.querySelector('#pnTitleMeta').textContent = titleNow(); });
+
+    // uitnodigen (in één tik een hele vriendengroep), optioneel ook in de groepschat zetten
+    var preGroup = params && params.get('groep');
+    var preselect = [], groupName = '';
+    if (preGroup) {
+      try { var gd = await S.db.doc('friendGroups/' + preGroup).get(); if (gd.exists) { preselect = gd.data().memberIds || []; groupName = gd.data().name || 'de groep'; } } catch (e) {}
+      var acc = document.getElementById('pn_inviteAcc'); if (acc) acc.open = true;
+      document.getElementById('pnGroupChat').innerHTML = '<label class="consent-row" style="margin-top:0.8rem !important;"><input type="checkbox" id="pnToGroup" checked> <span>Zet de peiling in de groepschat van <strong>' + esc(groupName) + '</strong></span></label>';
+    }
+    var picker = null;
+    var pickerReady = mountInvitePicker(document.getElementById('pn_invite'), {
       preselect: preselect, allowFeed: true, feedChecked: false,
       onChange: function (ids) {
         var m = document.getElementById('pn_invMeta');
         if (m) m.textContent = ids.length ? ids.length + ' gekozen' : 'niemand';
+        st.inviteIds = ids.slice(); renderClubs();
       }
-    });
+    }).then(function (pk) { picker = pk; });
 
-    document.getElementById('planNewForm').addEventListener('submit', async function (ev) {
-      ev.preventDefault();
-      var btn = ev.target.querySelector('button[type=submit]'); btn.disabled = true;
-      var f = new FormData(ev.target);
+    body.querySelector('#pnSend').addEventListener('click', async function () {
+      var btn = this;
+      var days = selDays(), times = selTimes();
+      if (!days.length || !times.length || times.length > POLL_MAX_TIMES) return;
+      btn.disabled = true;
       try {
         var code = null;
         for (var i = 0; i < 5 && !code; i++) {
@@ -6449,21 +6887,33 @@
           if (!ex.exists) code = c;
         }
         if (!code) throw new Error('Kon geen code aanmaken, probeer het nog eens.');
+        var first = days[0], last = days[days.length - 1];
+        var span = Math.round((parseLocalDate(last) - parseLocalDate(first)) / 86400000) + 1;
         var plan = {
-          code: code,
-          title: String(f.get('title') || 'Padellen').trim().slice(0, 60) || 'Padellen',
-          organizerId: S.playerId,
-          organizerName: S.player.name || S.player.username || 'Een speler',
-          startDate: f.get('start'),
-          days: Number(f.get('days')) || 7,
-          needed: Number(f.get('needed')) || 4,
-          clubIds: f.getAll('club'),
-          chosen: null,
-          invitedIds: [],
-          createdAt: new Date().toISOString()
+          code: code, mode: 'poll', title: titleNow(),
+          organizerId: S.playerId, organizerName: S.player.name || S.player.username || 'Een speler',
+          startDate: first, days: span, needed: st.needed,
+          clubId: st.clubs.length === 1 ? st.clubs[0] : null, clubIds: st.clubs.slice(), clubOpts: st.clubs.slice(),
+          dayOpts: days, timeOpts: times,
+          chosen: null, invitedIds: [], createdAt: new Date().toISOString()
         };
         await S.db.doc('plannen/' + code).set(plan);
-        await sendPlanInvites(plan, picker.getSelected(), picker.toFeed());
+        await pickerReady;
+        var ids = picker ? picker.getSelected() : preselect.filter(function (id) { return id !== S.playerId; });
+        var toGroupEl = document.getElementById('pnToGroup');
+        var toGroup = !!(preGroup && toGroupEl && toGroupEl.checked);
+        var groupIds = toGroup ? preselect : [];
+        await sendPlanInvites(plan, ids.filter(function (id) { return groupIds.indexOf(id) === -1; }), picker ? picker.toFeed() : false);
+        if (toGroup) {
+          try { var fgd = await S.db.doc('friendGroups/' + preGroup).get(); if (fgd.exists) await ensureFriendGroupChat(Object.assign({ id: preGroup }, fgd.data())); } catch (e) {}
+          await S.db.collection('groupMessages').add({
+            groupId: friendChatId(preGroup), senderId: S.playerId, text: 'Wanneer kunnen jullie? Tik je dagen en tijden aan 👇',
+            imageDataUrl: null, videoUrl: null, planCode: code, createdAt: new Date().toISOString()
+          });
+          var inv = (plan.invitedIds || []).slice();
+          ids.forEach(function (id) { if (groupIds.indexOf(id) !== -1 && inv.indexOf(id) === -1 && id !== S.playerId) inv.push(id); });
+          if (inv.length !== (plan.invitedIds || []).length) { await S.db.doc('plannen/' + code).update({ invitedIds: inv }); plan.invitedIds = inv; }
+        }
         location.hash = '#/plan/' + code + '?nieuw=1';
       } catch (e) {
         document.getElementById('pn_err').innerHTML = '<p class="banner error" style="margin-top:1rem;">' + esc(e.message || 'Er ging iets mis.') + '</p>';
@@ -6472,6 +6922,624 @@
     });
   }
 
+  // ----- peiling bekijken + stemmen -----
+  function pollRowsHtml(plan, T, myId, opts) {
+    opts = opts || {};
+    var max = Math.max(plan.needed || 4, T.voters.length, 1);
+    var rows = T.rows;
+    var limit = opts.limit || rows.length;
+    return rows.slice(0, limit).map(function (r) {
+      var on = r.ok.some(function (x) { return x.id === myId; });
+      var n = r.ok.length;
+      var isBest = T.best && T.best.key === r.key;
+      var isChosen = plan.chosen && plan.chosen.date + '|' + plan.chosen.time === r.key;
+      var full = n >= (plan.needed || 4);
+      return '<button type="button" class="pp-opt' + (on ? ' on' : '') + (isChosen ? ' chosen' : '') + '" data-pkey="' + esc(r.key) + '" data-pcode="' + esc(plan.code) + '">' +
+        '<span class="pp-check" aria-hidden="true">' + (on ? '✓' : '') + '</span>' +
+        '<span class="pp-main"><span class="pp-top"><span class="pp-label">' + esc(pollOptLabel(r)) +
+          (isChosen ? ' <span class="pp-tag ok">✓ gekozen</span>' : isBest ? ' <span class="pp-tag">🏆</span>' : '') +
+          (full && !isChosen ? ' <span class="pp-tag ok">vol</span>' : '') + '</span>' +
+          '<span class="pp-n tnum">' + n + '</span></span>' +
+          '<span class="pp-bar"><span style="width:' + Math.round(n / max * 100) + '%"></span></span>' +
+          (n ? '<span class="pp-who">' + r.ok.slice(0, 6).map(function (x) {
+            return '<span class="pp-av" title="' + esc(x.name) + '">' + esc(initialsOf(x.name || '?')) + '</span>';
+          }).join('') + (n > 6 ? '<span class="pp-more">+' + (n - 6) + '</span>' : '') + '</span>' : '') +
+        '</span></button>';
+    }).join('') + (rows.length > limit ? '<a class="pp-moreopts" href="#/plan/' + esc(plan.code) + '">+' + (rows.length - limit) + ' andere opties →</a>' : '');
+  }
+
+  async function viewPlanPoll(plan, code, params) {
+    var myId = getPlanRespId(code);
+    var isOrganizer = !!S.playerId && plan.organizerId === S.playerId;
+    var justCreated = params && params.get('nieuw') === '1';
+    var responses = [];
+    var mySlots = null, myNone = false, myDays = [], myTimes = [], myClubs = [];
+    var split = pollIsSplit(plan);
+    var guestName = S.player ? '' : pollGuestName();
+
+    var body = el('<div class="stack"></div>');
+    body.innerHTML =
+      pageHeadHtml('<span class="eyebrow">Peiling van ' + esc(plan.organizerName) + '</span><h1>' + esc(plan.title) + '</h1>' +
+        '<p class="muted small" style="margin:0.2rem 0 0;">' + (plan.clubId ? '📍 ' + esc(clubLabel(plan.clubId)) + ' · ' : pollClubQ(plan) ? '📍 ' + plan.clubOpts.length + ' clubs · ' : '') + (plan.needed || 4) + ' spelers · code <strong>' + esc(code) + '</strong></p>') +
+      (justCreated ? '<div class="banner warn" style="margin:0;">Peiling verstuurd!' + ((plan.invitedIds || []).length ? ' ' + plan.invitedIds.length + ' speler(s) kregen hem in hun chat.' : '') + ' Tik zelf ook je opties aan.</div>' : '') +
+      '<div class="ps"><div class="ps-head"><strong>Zo gaat het</strong><span class="ps-count" id="psCount"></span></div>' +
+      '<div id="ppChosen"></div>' +
+      '<div class="ps-slot" id="ppSlot"><div id="ppGuest"></div>' +
+      '<div class="card pp-card">' + (split ? '' : '<div class="pp-head"><strong>Wanneer kun je?</strong><span class="muted small">Tik er één of meer aan</span></div>') +
+        '<div id="ppRows"></div>' +
+        '<div class="pp-foot"><button type="button" class="chip ghost" id="ppNone">🙅 Kan geen van deze</button>' +
+          (isOrganizer ? '<button type="button" class="chip add" id="ppAdd">' + (split ? '+ Dag of tijd' : '+ Optie') + '</button>' : '') + '</div>' +
+        '<p class="small muted" id="ppStatus" style="margin:0.5rem 0 0;"></p>' +
+      '</div></div>' +
+      '<div id="ppResult"></div></div>' +
+      '<div class="plan-topactions">' +
+        (S.player ? '<button type="button" class="btn secondary small" id="ppInvite">👥 Uitnodigen</button>' : '') +
+        '<a class="btn whatsapp small" href="' + esc(waHref(pollInviteText(plan))) + '" target="_blank" rel="noopener">Deel in WhatsApp</a>' +
+      '</div>' +
+      (!S.player ? '<p class="small muted" style="margin:0;">Zelf ook Smash gebruiken? <a href="#/registreren">Maak een account</a> of <a href="#/inloggen">log in</a>.</p>' : '');
+    renderShell(S.player ? 'algemeen' : null, body, 'spelen');
+
+    function myName() { return S.player ? (S.player.name || S.player.username || 'Speler') : guestName; }
+
+    function renderGuest() {
+      var box = body.querySelector('#ppGuest');
+      if (S.player) { box.innerHTML = ''; return; }
+      if (guestName) {
+        box.innerHTML = '<p class="small muted" style="margin:0;">Je stemt als <strong>' + esc(guestName) + '</strong> · <a href="#" id="ppRename">wijzig</a></p>';
+        box.querySelector('#ppRename').addEventListener('click', function (ev) { ev.preventDefault(); guestName = ''; renderGuest(); });
+        return;
+      }
+      box.innerHTML = '<div class="card"><form id="ppNameForm" class="plan-codeform" style="margin:0;"><input type="text" id="ppName" maxlength="40" placeholder="Je naam" aria-label="Je naam" autocomplete="given-name">' +
+        '<button class="btn small" type="submit">OK</button></form><p class="hint" style="margin:0.4rem 0 0;">Eenmalig, zodat de anderen zien wie er kan.</p></div>';
+      box.querySelector('#ppNameForm').addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var v = box.querySelector('#ppName').value.trim(); if (!v) return;
+        guestName = v.slice(0, 40); setPollGuestName(guestName); renderGuest();
+        if (pendingFn) { var f = pendingFn; pendingFn = null; f(); }
+      });
+    }
+    var pendingFn = null;
+    function needName(fn) {
+      if (S.player || guestName) return false;
+      pendingFn = fn;
+      var inp = body.querySelector('#ppName'); if (inp) inp.focus();
+      return true;
+    }
+
+    async function persist() {
+      try { await savePollVote(plan, myId, myName(), mySlots || [], myNone, split ? { days: myDays, times: myTimes, clubs: myClubs } : null); }
+      catch (e) { body.querySelector('#ppStatus').textContent = 'Opslaan lukte niet — probeer het nog eens.'; }
+    }
+    function toggleSplit(field, v) {
+      if (needName(function () { toggleSplit(field, v); })) return;
+      var arr = (field === 'days' ? myDays : field === 'times' ? myTimes : myClubs).slice();
+      var i = arr.indexOf(v); if (i === -1) arr.push(v); else arr.splice(i, 1);
+      if (field === 'days') myDays = arr; else if (field === 'times') myTimes = arr; else myClubs = arr;
+      mySlots = respSlots(plan, { days: myDays, times: myTimes, clubs: myClubs }); myNone = false;
+      applyLocal(); persist();
+    }
+    function toggle(key) {
+      if (needName(function () { toggle(key); })) return;
+      var s = (mySlots || []).slice();
+      var i = s.indexOf(key);
+      if (i === -1) s.push(key); else s.splice(i, 1);
+      mySlots = s; myNone = false;
+      applyLocal(); persist();
+    }
+    // Meteen tonen (optimistisch), de live update bevestigt het daarna.
+    function applyLocal() {
+      var other = responses.filter(function (r) { return r.id !== myId; });
+      if ((mySlots && mySlots.length) || myNone || myDays.length || myTimes.length || myClubs.length) other.push({ id: myId, name: myName(), playerId: S.player ? S.playerId : null, slots: mySlots || [], none: myNone, days: myDays, times: myTimes, clubs: myClubs });
+      render(other);
+    }
+
+    function render(list) {
+      list = list || responses;
+      var T = pollTally(plan, list);
+      body.querySelector('#ppRows').innerHTML = split ? pollSplitHtml(plan, list, myId) : pollRowsHtml(plan, T, myId);
+      var noneB = body.querySelector('#ppNone'); noneB.classList.toggle('on', !!myNone);
+      var slot = body.querySelector('#ppSlot'); if (slot) slot.style.display = plan.chosen ? 'none' : '';
+      var votedNames = T.voters.map(function (r) { return r.id === myId ? 'jij' : r.name; });
+      var invitedOpen = (plan.invitedIds || []).filter(function (id) {
+        return S.playersById[id] && !list.some(function (r) { return r.playerId === id || r.id === 'p-' + id.replace(/[^a-z0-9]/gi, '_'); });
+      });
+      body.querySelector('#ppStatus').innerHTML = (T.voters.length ? T.voters.length + ' gestemd: ' + esc(votedNames.join(', ')) : 'Nog niemand gestemd.') +
+        (invitedOpen.length ? '<br>Nog niet: ' + esc(invitedOpen.map(function (id) { return nameOf(id).split(' ')[0]; }).join(', ')) : '');
+      renderResult(T);
+    }
+
+    var matchDoc = null, matchSubId = null;
+    function watchMatch() {
+      if (!plan.matchId || matchSubId === plan.matchId || !S.planUnsubs) return;
+      matchSubId = plan.matchId;
+      S.planUnsubs.push(S.db.doc('matches/' + plan.matchId).onSnapshot(function (ds) { matchDoc = ds.exists ? ds.data() : null; render(); }, function () {}));
+    }
+    function stepHtml(n, state, title, sub, inner, last) {
+      return '<div class="ps-step ps-' + state + (last ? ' ps-last' : '') + '"><span class="ps-dot">' + (state === 'done' ? '✓' : state === 'skip' ? '–' : n) + '</span>' +
+        '<div class="ps-main"><div class="ps-title">' + title + (sub ? '<span class="ps-sub">' + sub + '</span>' : '') + '</div>' +
+        (inner ? '<div class="ps-body">' + inner + '</div>' : '') + '</div></div>';
+    }
+    function renderResult(T) {
+      var ch = plan.chosen, over = !!(ch && planMatchOver(plan));
+      var clubId = ch ? (ch.clubId || plan.clubId || null) : null;
+      var club = clubId ? S.clubsById[clubId] : null;
+      var m = plan.matchId ? matchDoc : null;
+      var disputed = !!(m && m.status === 'disputed');
+      var confirmed = !!((m && m.status === 'confirmed') || plan.matchConfirmed);
+      var org = esc((plan.organizerName || 'De organisator').split(' ')[0]);
+      var row = null;
+      if (ch) {
+        var key = ch.date + '|' + ch.time + (pollClubQ(plan) && ch.clubId ? '|' + ch.clubId : '');
+        row = T.rows.filter(function (r) { return r.key === key; })[0] || { date: ch.date, time: ch.time, key: key, ok: [] };
+        row.clubId = clubId;
+      }
+      var whenTxt = ch ? esc(fmtPlanDay(ch.date, true) + ' · ' + ch.time + '–' + planEndTime(ch.time)) : '';
+      var steps = [], active = 0;
+      function add(state, title, sub, inner) { steps.push([state, title, sub, inner]); if (state === 'active' && !active) active = steps.length; }
+
+      // 1 · peiling
+      add('done', 'Peiling verstuurd', 'door ' + org + ((plan.invitedIds || []).length ? ' · ' + plan.invitedIds.length + ' uitgenodigd' : ''), '');
+      // 2 · stemmen
+      var iVoted = T.voters.some(function (r) { return r.id === myId; });
+      if (ch) add('done', 'Iedereen tikt aan wanneer hij kan', T.voters.length + ' gestemd', '');
+      else add('active', 'Iedereen tikt aan wanneer hij kan', T.voters.length + ' gestemd',
+        '<p class="small" style="margin:0;font-weight:700;">' + (iVoted || myNone ? '✓ Jij hebt gestemd — aanpassen kan hieronder.' : '👇 Tik hieronder aan wanneer jij kunt.') + '</p>');
+      // 3 · vastzetten
+      if (ch) {
+        add('done', 'Moment vastgezet', whenTxt + (clubId ? ' · ' + esc(clubLabel(clubId)) : ''),
+          isOrganizer && !plan.matchId ? '<button class="linkbtn" type="button" data-act="unchoose">Wijzigen</button>' : '');
+      } else if (T.best) {
+        var b = T.best;
+        add('active', 'Moment vastzetten', '',
+          '<div class="ps-best"><span class="small muted">🏆 Beste moment tot nu toe</span><strong>' + esc(fmtPlanDay(b.date, true) + ' · ' + b.time) + '</strong>' +
+          (b.clubId ? '<span class="small" style="font-weight:700;">📍 ' + esc(clubLabel(b.clubId)) + '</span>' : '') +
+          '<span class="small muted">' + b.ok.length + ' van ' + (plan.needed || 4) + ' kunnen: ' + esc(b.ok.map(function (x) { return x.id === myId ? 'jij' : x.name; }).join(', ')) + '</span></div>' +
+          (isOrganizer ? '<div class="ps-actions"><button class="btn small" type="button" data-act="choose" data-key="' + esc(b.key) + '">Vastzetten</button>' +
+            (T.rows.filter(function (r) { return r.ok.length; }).length > 1 ? '<button class="btn secondary small" type="button" data-act="pick">Ander moment</button>' : '') + '</div>'
+            : '<p class="small muted" style="margin:0.4rem 0 0;">' + org + ' zet het moment vast zodra genoeg mensen kunnen.</p>'));
+      } else add('todo', 'Moment vastzetten', 'zodra er gestemd is', '');
+      // 4 · baan
+      if (!ch) add('todo', 'Baan boeken', '', '');
+      else if (!club) add('skip', 'Baan boeken', 'geen club gekozen', '');
+      else if (ch.court || ch.booked) add('done', 'Baan geboekt', ch.court ? '🎾 ' + esc(ch.court) : 'baannummer volgt bij de club', isOrganizer && !plan.matchId ? (!ch.court && !over ? '<div class="court-row ps-mini" style="margin:0.35rem 0;">' + courtsForClub(club).map(function (c) { return '<button type="button" class="court-chip" data-court="' + esc(c) + '">' + esc(c.replace('Baan ', '')) + '</button>'; }).join('') + '</div>' : '') +
+          '<button class="linkbtn" type="button" data-act="nocourt">' + (ch.court ? 'Andere baan' : 'Toch niet geboekt') + '</button>' : '');
+      else if (over) add('skip', 'Baan boeken', 'geen baan ingevuld', '');
+      else if (isOrganizer) {
+        var courts = courtsForClub(club);
+        add('active', 'Baan boeken', esc(club.name),
+          '<div class="ps-actions" style="margin:0 0 0.7rem;"><button class="btn small" type="button" data-act="bookopen">🎾 Baan huren</button>' +
+            '<button class="btn secondary small" type="button" data-act="booked">✓ Al geboekt</button></div>' +
+          '<p class="small" style="margin:0 0 0.45rem;font-weight:700;">Welke baan kreeg je? <span class="muted" style="font-weight:600;">(mag ook later)</span></p>' +
+          '<div class="court-row">' + courts.map(function (c) { return '<button type="button" class="court-chip" data-court="' + esc(c) + '">' + esc(c.replace('Baan ', '')) + '</button>'; }).join('') + '</div>');
+      } else add('active', 'Baan boeken', '', '<p class="small" style="margin:0;">' + org + ' boekt de baan — je ziet hier zo welke baan het is.</p>');
+      // 5 · spelen
+      if (!ch) add('todo', 'Spelen', '', '');
+      else if (over) add('done', 'Gespeeld', whenTxt, '');
+      else if (ch.court || ch.booked || !club) {
+        var shareTxt = resultText(plan, row) + (ch.court ? '\n🎾 ' + ch.court : '');
+        add('active', 'Spelen', '',
+          '<strong style="display:block;font-size:1.05rem;">' + whenTxt + '</strong>' +
+          (clubId ? '<span class="small">📍 ' + esc(clubLabel(clubId)) + (ch.court ? ' · 🎾 ' + esc(ch.court) : '') + '</span>' : '') +
+          (row.ok.length ? '<p class="small muted" style="margin:0.3rem 0 0;">Met ' + esc(row.ok.map(function (x) { return x.id === myId ? 'jij' : x.name; }).join(', ')) + '</p>' : '') +
+          '<div class="ps-actions"><a class="btn whatsapp small" href="' + esc(waHref(shareTxt)) + '" target="_blank" rel="noopener">Deel in WhatsApp</a></div>' +
+          '<p class="small muted" style="margin:0.45rem 0 0;">Na afloop vul je hier met één tik de uitslag in.</p>');
+      } else add('todo', 'Spelen', whenTxt, '');
+      // 6 · uitslag
+      if (plan.matchId && !disputed) add('done', 'Uitslag ingevuld', plan.matchScore ? esc(plan.matchScore) : '', '');
+      else if (over) add('active', 'Uitslag invullen', '',
+        (disputed ? '<p class="small" style="margin:0 0 0.45rem;font-weight:700;">De uitslag werd afgewezen — vul hem opnieuw in.</p>' : '') +
+        (S.player ? '<a class="btn small" href="' + planResultHref(plan) + '" style="margin:0;">🎾 Hoe ging het? Uitslag invullen</a>'
+          : '<p class="small" style="margin:0;">Iemand met een Smash-account vult de uitslag in.</p>'));
+      else add('todo', 'Uitslag invullen', 'na afloop', '');
+      // 7 · bevestigen
+      if (confirmed) add('done', 'Bevestigd', 'telt mee voor de ranglijst 🏆', '');
+      else if (plan.matchId && !disputed) {
+        var parts = (m && m.participants) || [];
+        var meOpen = parts.some(function (p) { return p.playerId === S.playerId && !p.confirmed; });
+        var openN = parts.filter(function (p) { return !p.confirmed; }).map(function (p) { return nameOf(p.playerId).split(' ')[0]; });
+        add('active', 'Medespelers bevestigen', '',
+          meOpen ? '<a class="btn small" href="#/te-bevestigen" style="margin:0;">✅ Bevestig de uitslag</a>'
+            : '<p class="small" style="margin:0;">Wachten op ' + esc(openN.length ? openN.join(', ') : 'de medespelers') + '. Daarna telt hij mee voor de ranglijst.</p>');
+      } else add('todo', 'Medespelers bevestigen', '', '');
+
+      var html = steps.map(function (s, i) { return stepHtml(i + 1, s[0], s[1], s[2], s[3], i === steps.length - 1); });
+      body.querySelector('#ppChosen').innerHTML = html.slice(0, 2).join('');
+      body.querySelector('#ppResult').innerHTML = html.slice(2).join('');
+      body.querySelector('#psCount').textContent = active ? 'Stap ' + active + ' van ' + steps.length : 'Klaar ✓';
+      var box = body.querySelector('.ps');
+      box.querySelectorAll('[data-act=choose]').forEach(function (btn) {
+        btn.addEventListener('click', function () { choose(btn.getAttribute('data-key'), btn); });
+      });
+      var pk = box.querySelector('[data-act=pick]');
+      if (pk) pk.addEventListener('click', function () {
+        openMenu('Welk moment vastzetten?', T.rows.filter(function (r) { return r.ok.length; }).sort(function (a, b) { return b.ok.length - a.ok.length || (a.key < b.key ? -1 : 1); }).slice(0, 8).map(function (r) {
+          return { icon: '📅', label: pollOptLabel(r), sub: r.ok.length + ' kunnen: ' + r.ok.map(function (x) { return x.name; }).join(', '), onClick: function () { closeSheet(); choose(r.key); } };
+        }));
+      });
+      box.querySelectorAll('[data-court]').forEach(function (cb) {
+        cb.addEventListener('click', async function () {
+          cb.disabled = true;
+          var c = Object.assign({}, plan.chosen, { court: cb.getAttribute('data-court') });
+          try { await S.db.doc('plannen/' + code).update({ chosen: c }); } catch (e) { cb.disabled = false; }
+        });
+      });
+      var bk = box.querySelector('[data-act=booked]');
+      if (bk) bk.addEventListener('click', async function () {
+        bk.disabled = true;
+        try { await S.db.doc('plannen/' + code).update({ chosen: Object.assign({}, plan.chosen, { booked: true }) }); } catch (e) { bk.disabled = false; }
+      });
+      var bo = box.querySelector('[data-act=bookopen]');
+      if (bo) bo.addEventListener('click', function () {
+        var ch2 = plan.chosen, cl = S.clubsById[ch2.clubId || plan.clubId];
+        var sb = openSheet('Baan huren',
+          '<p style="margin:0 0 0.8rem;"><strong>' + esc(fmtPlanDay(ch2.date, true) + ' · ' + ch2.time + '–' + planEndTime(ch2.time)) + '</strong><br><span class="small muted">📍 ' + esc(cl ? cl.name : '') + ' · ' + (plan.needed || 4) + ' spelers</span></p>' +
+          '<button class="btn" type="button" id="bsBooked" style="width:100%;justify-content:center;">✓ Geboekt — door naar de volgende stap</button>' +
+          '<span class="field-label">Welke baan? <span class="muted" style="font-weight:600;">(mag ook later)</span></span>' +
+          '<div class="court-row ps-sheet-courts">' + courtsForClub(cl).map(function (c) { return '<button type="button" class="court-chip" data-bcourt="' + esc(c) + '">' + esc(c.replace('Baan ', '')) + '</button>'; }).join('') + '</div>' +
+          '<hr class="court-rule" style="margin:1rem 0;">' +
+          '<p class="small muted" style="margin:0 0 0.45rem;">Nog niet geboekt? Reserveer bij de club en tik daarna hierboven op Geboekt.</p>' +
+          bookingLinkHtml(cl, 'secondary', 'Naar de reserveringssite', 'width:100%;justify-content:center;margin:0;'));
+        async function done(court) {
+          var c = Object.assign({}, plan.chosen, { booked: true }); if (court) c.court = court;
+          try { await S.db.doc('plannen/' + code).update({ chosen: c }); closeSheet(); } catch (e) {}
+        }
+        sb.querySelector('#bsBooked').addEventListener('click', function () { this.disabled = true; done(null); });
+        sb.querySelectorAll('[data-bcourt]').forEach(function (cb) { cb.addEventListener('click', function () { cb.disabled = true; done(cb.getAttribute('data-bcourt')); }); });
+      });
+      var nc = box.querySelector('[data-act=nocourt]');
+      if (nc) nc.addEventListener('click', async function () {
+        var c = Object.assign({}, plan.chosen); delete c.court; delete c.booked;
+        try { await S.db.doc('plannen/' + code).update({ chosen: c }); } catch (e) {}
+      });
+      var un = box.querySelector('[data-act=unchoose]');
+      if (un) un.addEventListener('click', async function () {
+        un.disabled = true;
+        try { await S.db.doc('plannen/' + code).update({ chosen: null }); } catch (e) { un.disabled = false; }
+      });
+    }
+    async function choose(key, btn) {
+      var o = pollOptions(plan).filter(function (x) { return x.key === key; })[0]; if (!o) return;
+      if (btn) btn.disabled = true;
+      try { await S.db.doc('plannen/' + code).update({ chosen: { date: o.date, time: o.time, clubId: o.clubId || plan.clubId || null } }); }
+      catch (e) { if (btn) btn.disabled = false; }
+    }
+
+    body.querySelector('#ppRows').addEventListener('click', function (ev) {
+      var b;
+      if ((b = ev.target.closest('[data-pday]'))) return toggleSplit('days', b.getAttribute('data-pday'));
+      if ((b = ev.target.closest('[data-ptime]'))) return toggleSplit('times', b.getAttribute('data-ptime'));
+      if ((b = ev.target.closest('[data-pclub]'))) return toggleSplit('clubs', b.getAttribute('data-pclub'));
+      b = ev.target.closest('[data-pkey]'); if (!b) return;
+      toggle(b.getAttribute('data-pkey'));
+    });
+    body.querySelector('#ppNone').addEventListener('click', function () {
+      if (needName(function () {})) return;
+      myNone = !myNone; if (myNone) { mySlots = []; myDays = []; myTimes = []; myClubs = []; }
+      applyLocal(); persist();
+    });
+    var addB = body.querySelector('#ppAdd');
+    if (addB) addB.addEventListener('click', function () { if (split) openAddSplitSheet(); else openAddOptionSheet(); });
+
+    // Organisator: later nog een dag of tijd toevoegen (bestaande blijven staan, stemmen blijven geldig).
+    function openAddSplitSheet() {
+      var add = { days: {}, times: {}, custom: '19:00' };
+      var days = [];
+      for (var i = 0; i < 14; i++) { var d = new Date(); d.setDate(d.getDate() + i); days.push(localDateStr(d)); }
+      var sb = openSheet('Dag of tijd toevoegen',
+        '<span class="field-label" style="margin-top:0;">Dagen</span><div class="pn-days" id="asDays"></div><span class="field-label">Tijden</span><div id="asTimes"></div>' +
+        '<button class="btn" type="button" id="asSave" style="width:100%;justify-content:center;margin-top:0.9rem;">Opslaan</button>');
+      function curDays() { return plan.dayOpts.concat(Object.keys(add.days).filter(function (k) { return add.days[k]; })); }
+      function curTimes() { return plan.timeOpts.concat(Object.keys(add.times).filter(function (k) { return add.times[k]; })); }
+      function draw() {
+        var cd = curDays();
+        sb.querySelector('#asDays').innerHTML = days.map(function (ds) {
+          var dd = parseLocalDate(ds), lbl = pollDayLabel(ds);
+          return '<button type="button" class="pn-day' + (cd.indexOf(ds) !== -1 ? ' on' : '') + '" data-day="' + ds + '"><span class="pn-day-w">' + esc(lbl === 'Vandaag' || lbl === 'Morgen' ? lbl : DAY_SHORT[dd.getDay()]) +
+            '</span><span class="pn-day-n">' + dd.getDate() + '</span><span class="pn-day-m">' + MONTHS[dd.getMonth()] + '</span></button>';
+        }).join('');
+        sb.querySelector('#asTimes').innerHTML = pollTimeHtml(curTimes(), add.custom);
+      }
+      draw();
+      sb.addEventListener('click', async function (ev) {
+        var b;
+        if ((b = ev.target.closest('[data-day]'))) { var ds = b.getAttribute('data-day'); if (plan.dayOpts.indexOf(ds) === -1) add.days[ds] = !add.days[ds]; draw(); }
+        else if ((b = ev.target.closest('[data-time]'))) { var t = b.getAttribute('data-time'); if (plan.timeOpts.indexOf(t) === -1) add.times[t] = !add.times[t]; draw(); }
+        else if ((b = ev.target.closest('[data-step]'))) { add.custom = shiftTime(add.custom, Number(b.getAttribute('data-step'))); draw(); }
+        else if (ev.target.closest('[data-addtime]')) { if (plan.timeOpts.indexOf(add.custom) === -1) add.times[add.custom] = true; draw(); }
+        else if (ev.target.id === 'asSave') {
+          ev.target.disabled = true;
+          var nd = curDays().filter(function (x, i, a) { return a.indexOf(x) === i; }).sort();
+          var nt = curTimes().filter(function (x, i, a) { return a.indexOf(x) === i; }).sort();
+          var span = Math.round((parseLocalDate(nd[nd.length - 1]) - parseLocalDate(nd[0])) / 86400000) + 1;
+          try { await S.db.doc('plannen/' + code).update({ dayOpts: nd, timeOpts: nt, startDate: nd[0], days: span }); closeSheet(); }
+          catch (e) { ev.target.disabled = false; }
+        }
+      });
+    }
+
+    function openAddOptionSheet() {
+      var sel = { day: null, time: null, custom: '19:00' };
+      var days = [];
+      for (var i = 0; i < 14; i++) { var d = new Date(); d.setDate(d.getDate() + i); days.push(localDateStr(d)); }
+      var sb = openSheet('Optie toevoegen',
+        '<span class="field-label" style="margin-top:0;">Welke dag?</span><div class="pn-days" id="aoDays"></div><span class="field-label">Hoe laat?</span><div id="aoTimes"></div>' +
+        '<button class="btn" type="button" id="aoAdd" style="width:100%;justify-content:center;margin-top:0.9rem;" disabled>Toevoegen</button>');
+      function draw() {
+        sb.querySelector('#aoDays').innerHTML = days.map(function (ds) {
+          var dd = parseLocalDate(ds), lbl = pollDayLabel(ds);
+          return '<button type="button" class="pn-day' + (sel.day === ds ? ' on' : '') + '" data-day="' + ds + '"><span class="pn-day-w">' + esc(lbl === 'Vandaag' || lbl === 'Morgen' ? lbl : DAY_SHORT[dd.getDay()]) +
+            '</span><span class="pn-day-n">' + dd.getDate() + '</span><span class="pn-day-m">' + MONTHS[dd.getMonth()] + '</span></button>';
+        }).join('');
+        sb.querySelector('#aoTimes').innerHTML = pollTimeHtml(sel.time ? [sel.time] : [], sel.custom, 'Kies ' + sel.custom);
+        var exists = sel.day && sel.time && pollOptions(plan).some(function (o) { return o.key === sel.day + '|' + sel.time; });
+        var btn = sb.querySelector('#aoAdd');
+        btn.disabled = !(sel.day && sel.time) || exists;
+        btn.textContent = exists ? 'Staat er al in' : sel.day && sel.time ? 'Toevoegen: ' + fmtPlanDay(sel.day) + ' · ' + sel.time : 'Tik een dag en tijd aan';
+      }
+      draw();
+      sb.addEventListener('click', async function (ev) {
+        var b;
+        if ((b = ev.target.closest('[data-day]'))) { sel.day = b.getAttribute('data-day'); draw(); }
+        else if ((b = ev.target.closest('[data-time]'))) { var tt = b.getAttribute('data-time'); sel.time = sel.time === tt ? null : tt; draw(); }
+        else if ((b = ev.target.closest('[data-step]'))) { sel.custom = shiftTime(sel.custom, Number(b.getAttribute('data-step'))); draw(); }
+        else if (ev.target.closest('[data-addtime]')) { sel.time = sel.custom; draw(); }
+        else if (ev.target.id === 'aoAdd' && !ev.target.disabled) {
+          ev.target.disabled = true;
+          var opts = pollOptions(plan).concat([{ key: sel.day + '|' + sel.time, date: sel.day, time: sel.time }]);
+          var first = opts[0].date, last = opts[0].date;
+          opts.forEach(function (o) { if (o.date < first) first = o.date; if (o.date > last) last = o.date; });
+          var span = Math.round((parseLocalDate(last) - parseLocalDate(first)) / 86400000) + 1;
+          try { await S.db.doc('plannen/' + code).update({ options: opts, startDate: first, days: span }); closeSheet(); }
+          catch (e) { ev.target.disabled = false; }
+        }
+      });
+    }
+
+    var invB = body.querySelector('#ppInvite');
+    if (invB) invB.addEventListener('click', function () {
+      var sb = openSheet('Uitnodigen',
+        '<p class="muted small" style="margin:0 0 0.4rem;">Ze krijgen de peiling in hun Smash-chat en kunnen daar meteen tikken.</p>' +
+        '<div id="sheetPicker"><p class="muted small">Laden…</p></div><div id="sheetInviteMsg"></div>' +
+        '<button class="btn small" type="button" id="sheetInviteSend" style="margin-top:0.8rem;">Versturen</button>' +
+        '<hr class="court-rule" style="margin:1.1rem 0;">' +
+        '<div class="plan-share-actions" style="margin-top:0;"><a class="btn whatsapp small" href="' + esc(waHref(pollInviteText(plan))) + '" target="_blank" rel="noopener">WhatsApp</a>' +
+        '<button class="btn secondary small" type="button" data-act="copy">Kopieer link</button></div>' +
+        '<p class="small" data-role="copied" style="margin:0.4rem 0 0; color:var(--court-strong); font-weight:700;" hidden></p>');
+      sb.querySelector('[data-act=copy]').addEventListener('click', async function () {
+        var ok = await copyText(pollInviteText(plan));
+        var m = sb.querySelector('[data-role=copied]'); m.hidden = false; m.textContent = ok ? 'Gekopieerd ✓' : 'Kopiëren lukte niet';
+      });
+      mountInvitePicker(sb.querySelector('#sheetPicker'), {
+        excludeIds: (plan.invitedIds || []).concat([plan.organizerId]), allowFeed: !plan.feedPostId, feedChecked: false
+      }).then(function (pk) {
+        sb.querySelector('#sheetInviteSend').addEventListener('click', async function () {
+          var msgBox = sb.querySelector('#sheetInviteMsg');
+          var ids = pk.getSelected(), toFeed = pk.toFeed();
+          if (!ids.length && !toFeed) { msgBox.innerHTML = '<p class="banner error" style="margin:0.8rem 0 0;">Kies eerst minstens één speler.</p>'; return; }
+          this.disabled = true;
+          try {
+            var n = await sendPlanInvites(plan, ids, toFeed);
+            msgBox.innerHTML = '<p class="small" style="margin:0.8rem 0 0;color:var(--court-strong);font-weight:700;">✓ ' + (n ? n + ' verstuurd' : 'Verstuurd') + '</p>';
+            pk.clear(); render();
+          } catch (e) { msgBox.innerHTML = '<p class="banner error" style="margin:0.8rem 0 0;">Versturen lukte niet.</p>'; }
+          this.disabled = false;
+        });
+      });
+    });
+
+    renderGuest();
+    render();
+
+    stopPlanSubscriptions();
+    var unsubs = [];
+    unsubs.push(S.db.collection('plannen/' + code + '/reacties').onSnapshot(function (qs) {
+      responses = qs.docs.map(function (d) { return Object.assign({ id: d.id }, d.data()); })
+        .sort(function (a, b) { return String(a.updatedAt || '').localeCompare(String(b.updatedAt || '')); });
+      var mine = responses.filter(function (r) { return r.id === myId; })[0];
+      if (mine && mySlots === null) { mySlots = (mine.slots || []).slice(); myNone = !!mine.none; myDays = (mine.days || []).slice(); myTimes = (mine.times || []).slice(); myClubs = (mine.clubs || []).slice(); if (!S.player && !guestName && mine.name) { guestName = mine.name; renderGuest(); } }
+      render();
+    }, function () {}));
+    unsubs.push(S.db.doc('plannen/' + code).onSnapshot(function (ds) {
+      if (!ds.exists) return;
+      plan = ds.data();
+      split = pollIsSplit(plan);
+      watchMatch();
+      render();
+    }, function () {}));
+    S.planUnsubs = unsubs;
+    watchMatch();
+  }
+
+  // ----- peiling direct in de chat (privé- en groepschat): tikken = stemmen -----
+  async function hydratePlanPoll(node) {
+    if (!S.db || node.getAttribute('data-h')) return;
+    node.setAttribute('data-h', '1');
+    var code = node.getAttribute('data-plancode');
+    try {
+      var snap = await S.db.doc('plannen/' + code).get();
+      if (!snap.exists) return;
+      var plan = snap.data();
+      if (plan.mode !== 'poll') return;
+      var rs = await S.db.collection('plannen/' + code + '/reacties').get();
+      var responses = rs.docs.map(function (d) { return Object.assign({ id: d.id }, d.data()); });
+      drawInlinePoll(node, plan, responses);
+    } catch (e) {}
+  }
+  function drawInlinePoll(node, plan, responses) {
+    var bubble = node.closest('.chatbubble'); if (bubble) bubble.classList.add('pollb');
+    var row = node.closest('.chatbubble-row'); if (row) row.classList.add('pollrow');
+    var expired = planExpired(plan);
+    var T = pollTally(plan, responses);
+    var myId = S.player ? getPlanRespId(plan.code) : null;
+    node._plan = plan; node._responses = responses;
+    node.innerHTML = '<div class="poll-q" style="margin-top:0.4rem;">📅 ' + esc(plan.title) + '</div>' +
+      (plan.clubId ? '<div class="small muted">📍 ' + esc(S.clubsById[plan.clubId] ? S.clubsById[plan.clubId].name : '') + '</div>' : '') +
+      (plan.chosen ? '<div class="pp-tag ok" style="display:inline-block;margin-top:0.3rem;">✓ Afgesproken: ' + esc(fmtPlanDay(plan.chosen.date) + ' · ' + plan.chosen.time + (plan.chosen.clubId ? ' · ' + clubShort(plan.chosen.clubId) : '') + (plan.chosen.court ? ' · ' + plan.chosen.court : '')) + '</div>' : '') +
+      (plan.chosen ? planInlineResultHtml(node, plan)
+        : expired ? '<div class="small muted" style="margin-top:0.3rem;">Deze peiling is afgelopen.</div>'
+        : '<div class="pp-inline">' + (pollIsSplit(plan) ? pollSplitHtml(plan, responses, myId, true) : pollRowsHtml(plan, T, myId, { limit: 6 })) + '</div>' +
+          (pollIsSplit(plan) && T.best && !plan.chosen ? '<div class="small" style="margin-top:0.4rem;font-weight:700;">🏆 Beste: ' + esc(fmtPlanDay(T.best.date) + ' · ' + T.best.time + (T.best.clubId ? ' · ' + clubShort(T.best.clubId) : '')) + ' (' + T.best.ok.length + ' kunnen)</div>' : '') +
+          '<div class="small muted" style="margin-top:0.3rem;">' + T.voters.length + ' gestemd · tik om te stemmen · <a href="#/plan/' + esc(plan.code) + '">openen</a></div>');
+  }
+  function planInlineResultHtml(node, plan) {
+    if (plan.matchId) {
+      // bevestigen-knop alleen als ik nog moet bevestigen (match wordt los opgehaald)
+      if (!node._matchChecked) {
+        node._matchChecked = true;
+        S.db.doc('matches/' + plan.matchId).get().then(function (ms) {
+          if (!ms.exists) return;
+          var m = ms.data(); var meP = (m.participants || []).filter(function (p) { return p.playerId === S.playerId; })[0];
+          var slot = node.querySelector('.ppr-confirm');
+          if (slot && meP && !meP.confirmed && m.status === 'pending') slot.innerHTML = '<a class="plan-invite-btn" href="#/te-bevestigen">✅ Bevestigen</a>';
+          else if (slot && m.status === 'confirmed') slot.innerHTML = '<div class="small muted" style="margin-top:0.3rem;">Bevestigd door iedereen · telt mee voor de ranglijst</div>';
+        }).catch(function () {});
+      }
+      return '<div class="small" style="margin-top:0.4rem;font-weight:700;">🎾 Uitslag: ' + esc(plan.matchScore || '') + '</div><div class="ppr-confirm"></div>';
+    }
+    if (planNeedsResult(plan)) return '<a class="plan-invite-btn" href="' + planResultHref(plan) + '">🎾 Hoe ging het? Uitslag invullen</a>';
+    return '<div class="small muted" style="margin-top:0.3rem;"><a href="#/plan/' + esc(plan.code) + '">Bekijk de afspraak</a></div>';
+  }
+  document.addEventListener('click', async function (ev) {
+    var b = ev.target.closest && ev.target.closest('.pp-inline [data-pkey], .pp-inline [data-pday], .pp-inline [data-ptime], .pp-inline [data-pclub]'); if (!b) return;
+    ev.preventDefault(); ev.stopPropagation();
+    var node = b.closest('.ppi'); if (!node || !node._plan || !S.player) return;
+    var plan = node._plan;
+    var myId = getPlanRespId(plan.code);
+    var mine = node._responses.filter(function (r) { return r.id === myId; })[0] || {};
+    var me = { id: myId, name: S.player.name || S.player.username || 'Speler', playerId: S.playerId, none: false,
+      slots: (mine.slots || []).slice(), days: (mine.days || []).slice(), times: (mine.times || []).slice(), clubs: (mine.clubs || []).slice() };
+    function flip(arr, v) { var i = arr.indexOf(v); if (i === -1) arr.push(v); else arr.splice(i, 1); }
+    if (b.hasAttribute('data-pday')) flip(me.days, b.getAttribute('data-pday'));
+    else if (b.hasAttribute('data-ptime')) flip(me.times, b.getAttribute('data-ptime'));
+    else if (b.hasAttribute('data-pclub')) flip(me.clubs, b.getAttribute('data-pclub'));
+    else flip(me.slots, b.getAttribute('data-pkey'));
+    if (pollIsSplit(plan)) me.slots = respSlots(plan, me);
+    var others = node._responses.filter(function (r) { return r.id !== myId; });
+    drawInlinePoll(node, plan, others.concat([me]));
+    try { await savePollVote(plan, myId, me.name, me.slots, false, pollIsSplit(plan) ? { days: me.days, times: me.times, clubs: me.clubs } : null); } catch (e) {}
+  }, true);
+  (function () {
+    var queued = false;
+    function scan() { queued = false; document.querySelectorAll('.ppi:not([data-h])').forEach(hydratePlanPoll); }
+    new MutationObserver(function () { if (!queued) { queued = true; setTimeout(scan, 30); } }).observe(document.documentElement, { childList: true, subtree: true });
+  })();
+
+
+  // ---------- van planning naar uitslag ----------
+  // Na de afgesproken tijd verschijnt overal (planning, Home, chat) "Hoe ging het? Uitslag invullen".
+  // Club, datum, tijd en spelers komen uit de planning — je tikt alleen nog teams en score aan.
+  function planMatchStart(plan) {
+    var c = plan && plan.chosen; if (!c || !c.date || !c.time) return null;
+    var d = parseLocalDate(c.date); var p = c.time.split(':'); d.setHours(+p[0], +p[1], 0, 0); return d;
+  }
+  function planMatchOver(plan) { var s = planMatchStart(plan); return !!s && Date.now() > s.getTime() + 60 * 60000; }
+  function planNeedsResult(plan) { return !!(plan && plan.chosen && !plan.matchId && planMatchOver(plan)); }
+  function planResultHref(plan) { return '#/partij/nieuw?plan=' + encodeURIComponent(plan.code); }
+  function planResultBlockHtml(plan, dark) {
+    if (!plan.chosen || !S.player) return '';
+    if (plan.matchId) return '<p class="small" style="margin:0.7rem 0 0;font-weight:700;">✅ Uitslag doorgegeven' + (plan.matchScore ? ': ' + esc(plan.matchScore) : '') + '</p>';
+    if (planNeedsResult(plan)) return '<div style="margin-top:0.8rem;"><a class="btn' + (dark ? '' : ' small') + '" href="' + planResultHref(plan) + '" style="margin:0;">🎾 Hoe ging het? Uitslag invullen</a></div>';
+    return '<p class="small" style="margin:0.7rem 0 0;opacity:0.85;">Na afloop kun je hier met één tik de uitslag invullen.</p>';
+  }
+  // Baan huren (ook buiten een planning): eerst in de app "Geboekt" kunnen tikken, de site van de club is optioneel.
+  async function loadPlansToBook(clubId) {
+    if (!S.playerId) return [];
+    var all = {};
+    try { (await S.db.collection('plannen').where('organizerId', '==', S.playerId).get()).docs.forEach(function (d) { all[d.id] = d.data(); }); } catch (e) {}
+    return Object.keys(all).map(function (k) { return all[k]; }).filter(function (p) {
+      var ch = p.chosen; if (!ch || ch.court || ch.booked || planMatchOver(p)) return false;
+      var cid = ch.clubId || p.clubId || null;
+      return !cid || cid === clubId;
+    }).sort(function (a, b) { return planMatchStart(a) - planMatchStart(b); });
+  }
+  // Elke "Baan huren"-knop in de app (buiten een paneel) opent eerst dit paneel.
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('a[data-book-club]'); if (!a || a.closest('.sheet') || !S.player) return;
+    var c = S.clubsById[a.getAttribute('data-book-club')]; if (!c) return;
+    ev.preventDefault(); openBookSheet(c);
+  }, true);
+  function openBookSheet(club) {
+    var sb = openSheet('Baan huren',
+      '<div id="bkStart"><p style="margin:0 0 0.8rem;"><strong>' + esc(club.name) + '</strong><br><span class="small muted">Al geregeld? Tik op Geboekt. Nog niet? Reserveer eerst bij de club.</span></p>' +
+      '<button class="btn" type="button" id="bkDone" style="width:100%;justify-content:center;">✓ Geboekt — volgende stap</button>' +
+      '<div style="margin-top:0.55rem;">' + bookingLinkHtml(club, 'secondary', 'Naar de reserveringssite', 'width:100%;justify-content:center;margin:0;') + '</div></div>' +
+      '<div id="bkNext"></div>');
+    async function markBooked(pl) {
+      try { await S.db.doc('plannen/' + pl.code).update({ chosen: Object.assign({}, pl.chosen, { booked: true, clubId: pl.chosen.clubId || club.id }) }); } catch (e) {}
+      closeSheet(); location.hash = '#/plan/' + pl.code;
+    }
+    sb.querySelector('#bkDone').addEventListener('click', async function () {
+      this.disabled = true;
+      var plans = await loadPlansToBook(club.id);
+      if (plans.length === 1) return markBooked(plans[0]);
+      sb.querySelector('#bkStart').hidden = true;
+      var nx = sb.querySelector('#bkNext');
+      if (plans.length > 1) {
+        nx.innerHTML = '<p style="margin:0 0 0.6rem;font-weight:800;">✓ Geboekt! Voor welk potje?</p><div class="pc-list">' + plans.map(function (pl, i) {
+          return '<button type="button" class="pc" data-bkplan="' + i + '"><span class="pc-main"><strong>' + esc(pl.title) + '</strong><span class="pc-sub">' + esc(fmtPlanDay(pl.chosen.date, true) + ' · ' + pl.chosen.time) + '</span></span><span>›</span></button>';
+        }).join('') + '</div>';
+        nx.querySelectorAll('[data-bkplan]').forEach(function (b) { b.addEventListener('click', function () { markBooked(plans[Number(b.getAttribute('data-bkplan'))]); }); });
+      } else {
+        nx.innerHTML = '<p style="margin:0 0 0.3rem;font-size:1.1rem;font-weight:800;">✓ Baan geboekt bij ' + esc(club.name) + '</p>' +
+          '<p class="small muted" style="margin:0 0 0.8rem;">Volgende stap: laat je medespelers weten wanneer jullie spelen.</p>' +
+          '<a class="btn" href="#/plan/nieuw" id="bkPlan" style="width:100%;justify-content:center;margin:0;">📅 Medespelers uitnodigen</a>' +
+          '<button class="btn secondary" type="button" id="bkClose" style="width:100%;justify-content:center;margin-top:0.5rem;">Klaar</button>';
+        nx.querySelector('#bkPlan').addEventListener('click', function () { closeSheet(); });
+        nx.querySelector('#bkClose').addEventListener('click', function () { closeSheet(); });
+      }
+    });
+  }
+  async function loadPlansToLog() {
+    if (!S.playerId) return [];
+    var all = {};
+    try { (await S.db.collection('plannen').where('organizerId', '==', S.playerId).get()).docs.forEach(function (d) { all[d.id] = d.data(); }); } catch (e) {}
+    try { (await S.db.collection('plannen').where('invitedIds', 'array-contains', S.playerId).get()).docs.forEach(function (d) { all[d.id] = d.data(); }); } catch (e) {}
+    var weekAgo = Date.now() - 7 * 86400000;
+    return Object.keys(all).map(function (k) { return all[k]; }).filter(function (p) {
+      return planNeedsResult(p) && planMatchStart(p).getTime() > weekAgo;
+    }).sort(function (a, b) { return planMatchStart(b) - planMatchStart(a); });
+  }
+  async function fillHomeLogPrompt(body) {
+    var box = body.querySelector('#homeLogPrompt'); if (!box) return;
+    var list = await loadPlansToLog();
+    if (!list.length) return;
+    box.innerHTML = list.slice(0, 2).map(function (p) {
+      return '<div class="banner warn" style="margin:0 0 0.6rem;">🎾 Hoe ging <strong>' + esc(p.title) + '</strong> (' + esc(fmtPlanDay(p.chosen.date)) + ')? ' +
+        '<a href="' + planResultHref(p) + '" style="font-weight:800;">Uitslag invullen →</a></div>';
+    }).join('');
+  }
+  // Spelers uit de planning halen: wie bij het gekozen moment "kan" zei (+ de organisator).
+  async function playersFromPlan(pl) {
+    var rs = await S.db.collection('plannen/' + pl.code + '/reacties').get();
+    var resps = rs.docs.map(function (d) { return Object.assign({ id: d.id }, d.data()); });
+    var list = resps;
+    if (pl.mode === 'poll') {
+      var T = pollTally(pl, resps);
+      var key = pl.chosen.date + '|' + pl.chosen.time + (pollClubQ(pl) && pl.chosen.clubId ? '|' + pl.chosen.clubId : '');
+      var row = T.rows.filter(function (r) { return r.key === key; })[0];
+      if (row && row.ok.length) list = row.ok;
+    }
+    var ids = [pl.organizerId], guests = [];
+    list.forEach(function (r) {
+      if (r.playerId && S.playersById[r.playerId]) { if (ids.indexOf(r.playerId) === -1) ids.push(r.playerId); }
+      else if (!r.playerId && r.name) guests.push(r.name);
+    });
+    if (ids.length + guests.length < 2) (pl.invitedIds || []).forEach(function (id) { if (ids.indexOf(id) === -1 && S.playersById[id]) ids.push(id); });
+    return { ids: ids.filter(function (id) { return id && id !== S.playerId; }), guests: guests };
+  }
+  async function notifyResultToConfirm(plan, doc, participants) {
+    var me = S.player.name || S.player.username || 'Iemand';
+    var waiting = participants.filter(function (p) { return !p.confirmed && !isGuestId(p.playerId); });
+    for (var i = 0; i < waiting.length; i++) {
+      try {
+        await S.db.collection('messages').add({
+          conversationId: convId(S.playerId, waiting[i].playerId), senderId: S.playerId, recipientId: waiting[i].playerId,
+          text: '✍️ ' + me + ' heeft de uitslag van "' + plan.title + '" doorgegeven: ' + doc.score + '. Klopt het? Tik hieronder op Bevestigen.',
+          imageDataUrl: null, videoUrl: null, planCode: plan.code, createdAt: new Date().toISOString()
+        });
+      } catch (e) {}
+    }
+  }
   // ----- planning bekijken + beschikbaarheid invullen -----
 
   async function viewPlan(code, params) {
@@ -6486,6 +7554,22 @@
       return;
     }
     var plan = snap.data();
+    if (planExpired(plan) && !(plan.mode === 'poll' && plan.chosen)) {
+      var ex = el('<div class="stack"></div>');
+      ex.innerHTML = '<div><span class="eyebrow">Code ' + esc(code) + '</span><h1>Deze planning is afgelopen</h1></div>' +
+        '<div class="card"><p style="margin-top:0;"><strong>' + esc(plan.title) + '</strong> liep van ' + esc(fmtPlanDay(planDates(plan)[0])) +
+        ' t/m ' + esc(fmtPlanDay(planLastDay(plan))) + '. Na die periode verloopt de code en kun je niet meer invullen.</p>' +
+        (plan.chosen ? '<p class="muted small">Afgesproken was: ' + esc(fmtPlanDay(plan.chosen.date, true)) + ' om ' + esc(plan.chosen.time) +
+          (plan.chosen.clubId ? ' bij ' + esc(clubLabel(plan.chosen.clubId)) : '') + '.</p>' : '') +
+        (S.player ? '<a class="btn small" href="#/plan/nieuw">Nieuw potje plannen</a>'
+          : '<p class="muted small">Vraag degene die je uitnodigde om een nieuwe planning te maken.</p>') +
+        '<hr class="court-rule" style="margin:1.1rem 0;"><p class="small muted" style="margin:0;">Andere code invoeren:</p>' +
+        planCodeFormHtml('planCodeExpired') + '</div>';
+      renderShell(S.player ? 'algemeen' : null, ex, 'spelen');
+      wirePlanCodeForm('planCodeExpired');
+      return;
+    }
+    if (plan.mode === 'poll') return viewPlanPoll(plan, code, params);
     var dates = planDates(plan);
     var myId = getPlanRespId(code);
     var isOrganizer = !!S.playerId && plan.organizerId === S.playerId;
@@ -6506,7 +7590,7 @@
     body.innerHTML =
       pageHeadHtml('<span class="eyebrow">Uitnodiging van ' + esc(plan.organizerName) + '</span><h1>' + esc(plan.title) + '</h1>' +
         '<p class="muted small" style="margin:0.2rem 0 0;">' + esc(fmtPlanDay(dates[0])) + ' t/m ' + esc(fmtPlanDay(dates[dates.length - 1])) +
-        ' · ' + plan.needed + ' spelers · code <strong>' + esc(code) + '</strong></p>') +
+        ' · ' + plan.needed + ' spelers · code <strong>' + esc(code) + '</strong> (geldig t/m ' + esc(fmtPlanDay(dates[dates.length - 1])) + ')</p>') +
       (justCreated ? '<div class="banner warn" style="margin:0;">Planning gemaakt!' + ((plan.invitedIds || []).length ? ' ' + plan.invitedIds.length + ' speler(s) hebben een uitnodiging in hun Smash-chat gekregen.' : '') + ' Vul nu zelf in wanneer je kunt.</div>' : '') +
       '<div class="plan-topactions">' +
         '<button type="button" class="btn small" id="planInviteBtn">👥 Uitnodigen</button>' +
@@ -7721,7 +8805,7 @@
     if (path === '/clubkaart') return viewClubsKaart();
     if (path.indexOf('/clubs/') === 0) return viewClubPublic(path.slice(7));
     if (path === '/zoeken') return viewSearch(params);
-    if (path === '/partij/nieuw') return viewMatchNew(params.get('club'));
+    if (path === '/partij/nieuw') return viewMatchNew(params.get('club'), params.get('plan'));
     if (path === '/te-bevestigen') return viewPending();
     if (path === '/profiel') return viewProfile();
     if (path === '/shop') return viewShop();
@@ -7761,7 +8845,7 @@
         // Alleen echt uitloggen als de opzoekactie is gelukt én er écht geen account meer
         // bestaat — nooit bij een fout/tijdelijk verbindingsprobleem (zie catch hieronder).
         if (!S.player) { clearSession(); clearSyncedSession(); S.playerId = null; }
-        else { setSessionEmail(savedEmail); } // ook lokaal onthouden nu we hem toch kennen
+        else { setSessionEmail(savedEmail); saveSyncedSession(savedEmail); } // lokaal én aan je Claude-account onthouden
       } catch (e) {
         // Kon de opgeslagen sessie niet controleren (bijv. even geen verbinding, of de
         // Claude.ai-sessie voor de database moest ververst worden). Voorheen werd dit
