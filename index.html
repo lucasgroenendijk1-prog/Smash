@@ -8866,7 +8866,14 @@
     route();
   }
 
-  boot();
+  boot().catch(function (e) {
+    console.error('Opstarten mislukt:', e);
+    document.getElementById('app').innerHTML =
+      '<main style="max-width:560px;margin:3rem auto;padding:0 1rem;"><div class="card"><h1>Even geen verbinding met de database</h1>' +
+      '<p class="muted">Smash kan de database nu niet bereiken. Probeer het over een paar minuten opnieuw.</p>' +
+      '<p class="muted small">Foutmelding: ' + String((e && e.message) || e).replace(/[<>&]/g, '') + '</p>' +
+      '<button class="btn" type="button" onclick="location.reload()">Opnieuw proberen</button></div></main>';
+  });
 })();
 </script>
 

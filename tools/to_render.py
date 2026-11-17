@@ -40,5 +40,17 @@ once("if (!S.userCap || typeof S.userCap.id !== 'function') return null;",
 old = "'<p class=\"muted\">Deze weergave kan de gedeelde database niet bereiken. Open de gepubliceerde pagina rechtstreeks (niet in een voorbeeldvenster) en probeer opnieuw.</p></div></main>';"
 once(old, "(window.SMASH_STANDALONE ? '<p class=\"muted\">De database is nog niet ingesteld of niet bereikbaar. Probeer het over een paar minuten opnieuw.</p></div></main>' : " + old[:-1] + ");")
 
+# 5. Als opstarten mislukt (bv. database op pauze): melding i.p.v. eeuwig laden
+once("\n  boot();\n})();", """
+  boot().catch(function (e) {
+    console.error('Opstarten mislukt:', e);
+    document.getElementById('app').innerHTML =
+      '<main style="max-width:560px;margin:3rem auto;padding:0 1rem;"><div class="card"><h1>Even geen verbinding met de database</h1>' +
+      '<p class="muted">Smash kan de database nu niet bereiken. Probeer het over een paar minuten opnieuw.</p>' +
+      '<p class="muted small">Foutmelding: ' + String((e && e.message) || e).replace(/[<>&]/g, '') + '</p>' +
+      '<button class="btn" type="button" onclick="location.reload()">Opnieuw proberen</button></div></main>';
+  });
+})();""")
+
 open(dst, 'w', encoding='utf-8').write(s)
 print('OK', len(s))
