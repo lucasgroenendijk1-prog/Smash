@@ -232,8 +232,8 @@
   .search-bar { position: relative; }
   .search-bar input[type=search] { padding-left: 2.3rem; }
   .search-bar::before {
-    content: '🔍'; position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
-    font-size: 0.9rem; opacity: 0.6; pointer-events: none;
+    content: ''; position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%);
+    width: 16px; height: 16px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235c7a76' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='M16 16l4.5 4.5'/%3E%3C/svg%3E") no-repeat center / contain; pointer-events: none;
   }
   input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible {
     outline: 2px solid var(--court); outline-offset: 1px;
@@ -261,7 +261,7 @@
   .scorecard-club { text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.68rem; font-weight: 700; }
   .scorecard-row { display: flex; justify-content: space-between; font-weight: 600; padding: 0.15rem 0; }
   .scorecard-row.win { color: var(--court-strong); font-weight: 800; }
-  .scorecard-row.win::after { content: ' 🏆'; }
+  .scorecard-row.win::after { content: ''; display: inline-block; width: 1em; height: 1em; margin-left: 0.35em; vertical-align: -0.12em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a6b66' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 4h8v5a4 4 0 0 1-8 0V4z'/%3E%3Cpath d='M8 5.5H5.2a2.8 2.8 0 0 0 3 3.6'/%3E%3Cpath d='M16 5.5h2.8a2.8 2.8 0 0 1-3 3.6'/%3E%3Cpath d='M12 13v3.5'/%3E%3Cpath d='M8.5 20.5h7'/%3E%3Cpath d='M9.5 20.5v-2a1.5 1.5 0 0 1 1.5-1.5h2a1.5 1.5 0 0 1 1.5 1.5v2'/%3E%3C/svg%3E") no-repeat center / contain; }
   .scorecard-score {
     align-self: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
     font-size: 1.3rem; color: var(--ink);
@@ -1034,6 +1034,62 @@
   .ps-body .court-chip { background: var(--paper); color: var(--ink); border: 1px solid var(--court); }
   .ps-slot { margin: -0.5rem 0 0.85rem calc(0.95rem - 1px); padding: 0 0 0 1.6rem; border-left: 2px solid var(--line); }
   .ps-slot .pp-card { margin: 0; }
+  .sp-hint { font-size: 0.72rem; letter-spacing: 0; text-transform: none; color: var(--muted); font-weight: 700; float: right; }
+  .sp-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    margin: 0.9rem -16px 0; padding: 2px 16px 6px; scroll-padding-left: 16px; scrollbar-width: none; }
+  .sp-track::-webkit-scrollbar { display: none; }
+  .sp-page { flex: 0 0 84%; max-width: 360px; scroll-snap-align: start; display: flex; flex-direction: column; gap: 0.6rem;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 1.1rem 1rem 1rem; box-shadow: 0 6px 18px rgba(16, 60, 52, 0.08); }
+  .sp-page[hidden] { display: none; }
+  .sp-top { display: flex; justify-content: space-between; align-items: center; }
+  .sp-num { font-size: 0.75rem; font-weight: 800; background: var(--ball); color: var(--ball-ink); padding: 0.2rem 0.6rem; border-radius: 999px; }
+  .sp-num.sp-extra { background: var(--court-soft); color: var(--court-strong); }
+  .sp-count { font-size: 0.75rem; font-weight: 800; background: var(--court); color: #fff; padding: 0.2rem 0.6rem; border-radius: 999px; }
+  .sp-head { margin: 0; font-size: 1.25rem; line-height: 1.2; }
+  .sp-visual { position: relative; border-radius: 16px; background: linear-gradient(140deg, var(--court) 0%, var(--court-strong) 100%); padding: 0.9rem; min-height: 7.2rem; display: flex; align-items: center; gap: 0.8rem; overflow: hidden; }
+  .sp-icon { font-size: 2.6rem; flex: none; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2)); }
+  .sp-mock { flex: 1; display: flex; flex-direction: column; gap: 0.35rem; }
+  .sp-m-row, .sp-m-score { display: flex; justify-content: space-between; gap: 0.5rem; background: rgba(255,255,255,0.95); color: var(--ink); border-radius: 10px; padding: 0.35rem 0.55rem; font-size: 0.8rem; font-weight: 700; }
+  .sp-m-row b, .sp-m-score b { color: var(--court-strong); }
+  .sp-m-row.dim, .sp-m-score.dim { opacity: 0.7; }
+  .sp-m-pill { align-self: flex-start; background: var(--ball); color: var(--ball-ink); font-weight: 800; font-size: 0.85rem; border-radius: 999px; padding: 0.3rem 0.7rem; }
+  .sp-m-chips { display: flex; gap: 0.3rem; }
+  .sp-m-chips span { width: 2rem; height: 2rem; border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,0.9); color: var(--ink); font-weight: 800; }
+  .sp-m-chips span.on { background: var(--ball); color: var(--ball-ink); }
+  .sp-text { margin: 0; font-size: 0.92rem; }
+  .sp-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+  .sp-list li { font-size: 0.85rem; color: var(--muted); padding-left: 1.3rem; position: relative; }
+  .sp-list li::before { content: '✓'; position: absolute; left: 0; color: var(--court); font-weight: 800; }
+  .sp-btn { margin: auto 0 0 !important; width: 100%; justify-content: center; }
+  .sp-dots { display: flex; justify-content: center; gap: 0.35rem; margin-top: 0.5rem; }
+  .sp-dots span { width: 7px; height: 7px; border-radius: 99px; background: var(--line); transition: width 0.2s; }
+  .sp-dots span.on { width: 20px; background: var(--court); }
+  .sg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
+  .sg-bar { height: 6px; border-radius: 99px; background: var(--line); margin: 0.55rem 0 0.4rem; overflow: hidden; }
+  .sg-bar span { display: block; height: 100%; background: var(--court); border-radius: 99px; }
+  .sg-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.45rem 0.2rem; text-decoration: none; color: inherit; border-radius: 12px; }
+  .sg-row + .sg-row { border-top: 1px solid var(--line); }
+  .sg-dot { flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; display: grid; place-items: center; font-size: 0.78rem; font-weight: 800; border: 2px solid var(--line); color: var(--muted); }
+  .sg-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .sg-main strong { font-size: 0.92rem; }
+  .sg-done .sg-dot { background: var(--court); border-color: var(--court); color: #fff; }
+  .sg-done .sg-main strong { color: var(--muted); font-weight: 600; text-decoration: line-through; }
+  .sg-todo .sg-main strong { color: var(--muted); font-weight: 600; }
+  .sg-next { background: var(--court-soft); padding: 0.6rem 0.5rem; border-top-color: transparent !important; }
+  .sg-next + .sg-row { border-top-color: transparent; }
+  .sg-next .sg-dot { background: var(--ball); border-color: var(--ball); color: var(--ball-ink); }
+  .sg-go { margin: 0 !important; pointer-events: none; }
+  .nx-title { margin: 0 0 0.5rem; font-weight: 800; }
+  .nx-row { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.65rem; border-radius: 14px; text-decoration: none; color: inherit; border: 1px solid var(--line); background: var(--paper); }
+  .nx-row + .nx-row { margin-top: 0.4rem; }
+  .nx-first { background: var(--court); border-color: var(--court); color: #fff; }
+  .nx-first .nx-main .small { color: rgba(255,255,255,0.88); }
+  .nx-ic { font-size: 1.3rem; flex: none; }
+  .nx-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .nx-main .small { color: var(--muted); }
+  .nx-arrow { font-size: 1.4rem; font-weight: 800; opacity: 0.7; }
+  .quick-tile { position: relative; }
+  .quick-step { position: absolute; top: 0.45rem; left: 0.5rem; width: 1.3rem; height: 1.3rem; border-radius: 50%; display: grid; place-items: center; font-size: 0.72rem; font-weight: 800; background: var(--ball); color: var(--ball-ink); }
   .ps-sheet-courts .court-chip { background: var(--paper); color: var(--ink); border: 1px solid var(--court); }
   .ps-mini .court-chip { min-width: 2.1rem; height: 2.1rem; font-size: 1rem; }
   .linkbtn { border: none; background: none; padding: 0; font: inherit; font-size: 0.82rem; font-weight: 700; color: var(--court-strong); text-decoration: underline; cursor: pointer; }
@@ -1090,6 +1146,19 @@
   .pp-inline .pp-opt { padding: 0.45rem 0; }
   .pp-inline .pp-label { font-size: 0.86rem; }
   .ppi .plan-invite-btn { margin-top: 0.5rem; }
+  /* ---------- pictogrammen (i.p.v. emoji) ---------- */
+  .ic { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: -0.2em; flex: none; }
+  .quick-icon, .menu-icon, .nx-ic, .ct-icon, .tq-ic, .shop-emoji { color: var(--court-strong); }
+  .quick-icon .ic, .menu-icon .ic, .nx-ic .ic, .tq-ic .ic { width: 20px; height: 20px; vertical-align: middle; }
+  .ct-icon .ic { width: 26px; height: 26px; }
+  .shop-emoji .ic { width: 30px; height: 30px; }
+  .gx-btn span .ic { width: 19px; height: 19px; vertical-align: middle; color: var(--court-strong); }
+  .chatavatar .ic, .chatthread-avatar .ic { width: 20px; height: 20px; vertical-align: middle; }
+  .menu-item.danger .menu-icon { color: var(--danger); }
+  .btn .ic, .chip .ic { width: 1.05em; height: 1.05em; }
+  .brand .ic { width: 1.1em; height: 1.1em; vertical-align: -0.18em; }
+  h1 .ic, h2 .ic { width: 0.95em; height: 0.95em; vertical-align: -0.1em; }
+  .plan-best .ic, .chatbubble-row.mine .chatbubble .ic { color: inherit; }
 </style>
 
 <div id="app">
@@ -1112,6 +1181,68 @@
 
   function el(html) { var t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  // ---------- pictogrammen ----------
+  // Eigen lijn-pictogrammen in dezelfde stijl als de onderbalk (i.p.v. emoji), zodat koppen,
+  // tegels, menu's en knoppen er strak en overal hetzelfde uitzien. Gebruik: ic('calendar').
+  var ICONS = {
+    search: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+    trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 5.5H5.2a2.8 2.8 0 0 0 3 3.6"/><path d="M16 5.5h2.8a2.8 2.8 0 0 1-3 3.6"/><path d="M12 13v3.5"/><path d="M8.5 20.5h7"/><path d="M9.5 20.5v-2a1.5 1.5 0 0 1 1.5-1.5h2a1.5 1.5 0 0 1 1.5 1.5v2"/>',
+    fire: '<path d="M12 3c.8 3.2 5.5 5.3 5.5 10.2A5.5 5.5 0 0 1 6.5 13c0-2.6 1.4-4.2 2.6-5.2.2 1.9 1.1 3 2.3 3.2-.4-2.6-.2-5.4.6-8z"/>',
+    star: '<path d="M12 3.6l2.5 5.2 5.7.8-4.1 4 1 5.7L12 16.6l-5.1 2.7 1-5.7-4.1-4 5.7-.8z"/>',
+    chat: '<path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-4 3.5V16a2 2 0 0 1-2-2z"/>',
+    pin: '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+    calendar: '<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17"/><path d="M8 3v4"/><path d="M16 3v4"/>',
+    video: '<rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10l5-3v10l-5-3"/>',
+    users: '<circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c0-3.2 2.5-5.4 5.5-5.4s5.5 2.2 5.5 5.4"/><circle cx="16.6" cy="9.3" r="2.6"/><path d="M16 14.2c2.7 0 4.6 2 4.6 4.8"/>',
+    user: '<circle cx="12" cy="8" r="3.8"/><path d="M5 20c0-3.9 3.1-6.3 7-6.3s7 2.4 7 6.3"/>',
+    check: '<circle cx="12" cy="12" r="8.5"/><path d="M8.3 12.3l2.5 2.5 5-5.2"/>',
+    x: '<circle cx="12" cy="12" r="8.5"/><path d="M9.2 9.2l5.6 5.6"/><path d="M14.8 9.2l-5.6 5.6"/>',
+    clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+    hourglass: '<path d="M7 3.5h10"/><path d="M7 20.5h10"/><path d="M8 3.5c0 4.5 8 4.8 8 8.5s-8 4-8 8.5"/><path d="M16 3.5c0 4.5-8 4.8-8 8.5s8 4 8 8.5"/>',
+    pencil: '<path d="M4 20l1-4.5L15.5 5a2.1 2.1 0 0 1 3 3L8 18.5z"/><path d="M13.5 7l3 3"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M12 3l1.4 2.3 2.6-.7.7 2.6 2.6.7-.7 2.6L21 12l-2.4 1.5.7 2.6-2.6.7-.7 2.6-2.6-.7L12 21l-1.4-2.3-2.6.7-.7-2.6-2.6-.7.7-2.6L3 12l2.4-1.5-.7-2.6 2.6-.7.7-2.6 2.6.7z"/>',
+    link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+    party: '<path d="M4 20l4.4-11 6.6 6.6z"/><path d="M13 3.5v2.5"/><path d="M18.5 5.5l-1.8 1.8"/><path d="M20.5 11H18"/><path d="M15 8.5l1-1"/>',
+    padel: '<g fill="currentColor" stroke="none"><g transform="rotate(-45 12 12)"><ellipse cx="12" cy="5" rx="3.4" ry="4.3"/><rect x="11.15" y="8.8" width="1.7" height="11.5" rx="0.85"/></g><g transform="rotate(45 12 12)"><ellipse cx="12" cy="5" rx="3.4" ry="4.3"/><rect x="11.15" y="8.8" width="1.7" height="11.5" rx="0.85"/></g></g>',
+    racket: '<g transform="rotate(-45 12 12)"><ellipse cx="12" cy="7.2" rx="4" ry="4.9"/><path d="M12 12.1v8.6"/><path d="M10.5 5.5h3M10.5 8.5h3"/></g>',
+    ball: '<circle cx="12" cy="12" r="8.5"/><path d="M6 6c3 2.5 3 9.5 0 12"/><path d="M18 6c-3 2.5-3 9.5 0 12"/>',
+    chart: '<path d="M4 20.5h16"/><rect x="5.5" y="11" width="3" height="6.5" rx="1"/><rect x="10.5" y="6.5" width="3" height="11" rx="1"/><rect x="15.5" y="13" width="3" height="4.5" rx="1"/>',
+    ban: '<circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/>',
+    camera: '<path d="M4 8.5A1.5 1.5 0 0 1 5.5 7H8l1-2h6l1 2h2.5A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="13" r="3.3"/>',
+    trash: '<path d="M4.5 7h15"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 13h9l1-13"/><path d="M10 11v5.5"/><path d="M14 11v5.5"/>',
+    medal: '<circle cx="12" cy="15" r="5"/><path d="M8.5 3.5l2.3 6.6"/><path d="M15.5 3.5l-2.3 6.6"/><path d="M11 14l1-.8V17"/>',
+    bag: '<path d="M5 8h14l-1 12.5H6z"/><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"/>',
+    sparkle: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M18.5 15.5l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6-1.6-.6 1.6-.6z"/>',
+    info: '<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5"/><path d="M12 7.8v.2"/>',
+    arrow: '<path d="M5 12h13"/><path d="M13 6.5l5.5 5.5-5.5 5.5"/>',
+    arrowdown: '<path d="M12 5v13"/><path d="M6.5 13l5.5 5.5 5.5-5.5"/>',
+    doc: '<path d="M7 3.5h7l4.5 4.5v12.5H7z"/><path d="M14 3.5V8h4.5"/><path d="M9.5 12.5h6"/><path d="M9.5 16h6"/>',
+    hand: '<path d="M8 13V6.8a1.4 1.4 0 0 1 2.8 0V11"/><path d="M10.8 11V5.2a1.4 1.4 0 0 1 2.8 0V11"/><path d="M13.6 11V6.3a1.4 1.4 0 0 1 2.8 0v6.2"/><path d="M16.4 10.5a1.3 1.3 0 0 1 2.6 0v3.8c0 3.6-2.6 6.2-6.2 6.2-2.3 0-3.9-1-5.1-2.8l-2.5-3.7a1.4 1.4 0 0 1 2.3-1.6L8 13.6"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>',
+    cloudsun: '<circle cx="9" cy="8.5" r="3"/><path d="M9 2.8v1.2M3.3 8.5h1.2M5 4.5l.9.9M13 4.5l-.9.9"/><path d="M8.5 19.5h9a3.3 3.3 0 0 0 .2-6.6 4.8 4.8 0 0 0-9 1.3 2.7 2.7 0 0 0-.2 5.3z"/>',
+    sunset: '<path d="M3 17.5h18"/><path d="M7 17.5a5 5 0 0 1 10 0"/><path d="M12 5v3.5"/><path d="M5.2 10.3l1.6 1.4"/><path d="M18.8 10.3l-1.6 1.4"/><path d="M8 21h8"/>',
+    moon: '<path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/>',
+    backpack: '<path d="M7 9a5 5 0 0 1 10 0v11.5H7z"/><path d="M10 4h4"/><path d="M9.5 13.5h5v3.5h-5z"/>',
+    target: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+    shoe: '<path d="M3.5 18.5v-9l3 .6 2 2.6 3.6 1.5 5.8 1.1a2.6 2.6 0 0 1 2.1 2.5v.7z"/><path d="M3.5 16h17"/>',
+    shirt: '<path d="M8.5 4L4 6.5l2 4 2-1V20h8V9.5l2 1 2-4L15.5 4a3.5 3.5 0 0 1-7 0z"/>',
+    clipboard: '<rect x="5.5" y="4.5" width="13" height="16" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="M9 10h6"/><path d="M9 14h6"/>',
+    plus: '<path d="M12 5v14"/><path d="M5 12h14"/>',
+    key: '<circle cx="8" cy="15" r="3.5"/><path d="M10.5 12.5L19 4"/><path d="M16 7l2 2"/><path d="M13.8 9.2l1.5 1.5"/>',
+    book: '<path d="M5 18V5.5a2 2 0 0 1 2-2h11V18H7a2 2 0 0 0 0 4h11"/>',
+    map: '<path d="M3.5 6.5l5.5-2 6 2 5.5-2v13l-5.5 2-6-2-5.5 2z"/><path d="M9 4.5v13"/><path d="M15 6.5v13"/>',
+    list: '<path d="M5 7h14"/><path d="M5 12h14"/><path d="M5 17h14"/>',
+    repeat: '<path d="M4 11V9.5a3 3 0 0 1 3-3h12"/><path d="M16 3.5l3 3-3 3"/><path d="M20 13v1.5a3 3 0 0 1-3 3H5"/><path d="M8 20.5l-3-3 3-3"/>',
+    lock: '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>',
+    logout: '<path d="M13.5 4.5H6.5v15h7"/><path d="M10.5 12h10"/><path d="M17 8.5l3.5 3.5-3.5 3.5"/>'
+  };
+  function ic(name) {
+    var inner = ICONS[name];
+    if (!inner) return '';
+    return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + inner + '</svg>';
+  }
+  var PRODUCT_ICONS = { 'prod-racket': 'racket', 'prod-ballen': 'ball', 'prod-tas': 'backpack', 'prod-grip': 'target', 'prod-schoenen': 'shoe', 'prod-shirt': 'shirt' };
 
   // Eigen, simpele lijn-iconen voor de onderbalk (geen emoji) — currentColor zodat
   // ze meekleuren met de actieve/inactieve status ingesteld via CSS.
@@ -1515,9 +1646,9 @@
   }
 
   function tournamentBadge(wins) {
-    if (wins >= 5) return '🏆';
-    if (wins >= 3) return '🔥';
-    if (wins >= 1) return '⭐';
+    if (wins >= 5) return ic('trophy');
+    if (wins >= 3) return ic('fire');
+    if (wins >= 1) return ic('star');
     return '';
   }
 
@@ -1714,8 +1845,8 @@
       var leader = rows[0];
       var prevLeader = c.lastStatsLeader || null;
       var note = '';
-      if (changed && prevLeader && leader.playerId !== prevLeader && leader.wins > 0) note = '👑 ' + nameOf(leader.playerId) + ' staat nu bovenaan!';
-      else if (leader.wins > 0) note = '👑 ' + nameOf(leader.playerId) + ' gaat aan kop.';
+      if (changed && prevLeader && leader.playerId !== prevLeader && leader.wins > 0) note = '' + nameOf(leader.playerId) + ' staat nu bovenaan!';
+      else if (leader.wins > 0) note = '' + nameOf(leader.playerId) + ' gaat aan kop.';
       var week = Math.floor(Date.now() / (7 * 86400000));
       var docId = 'gs-' + chatId + '-' + simpleHash(sig) + (changed ? '' : '-w' + week);
       await postBotMessage(chatId, {
@@ -1734,7 +1865,7 @@
     await postBotMessage(chatId, {
       kind: 'stats', title: 'Tussenstand (gedeeld door ' + (S.player.name || '').split(' ')[0] + ')',
       stats: rows.slice(0, 10), friendGroupId: group.id,
-      note: leader && leader.wins > 0 ? '👑 ' + nameOf(leader.playerId) + ' gaat aan kop.' : 'Nog geen bevestigde partijen — tijd voor een potje! 🎾'
+      note: leader && leader.wins > 0 ? '' + nameOf(leader.playerId) + ' gaat aan kop.' : 'Nog geen bevestigde partijen — tijd voor een potje!'
     });
   }
 
@@ -1873,7 +2004,7 @@
 
   function rewardProgressHtml(balance) {
     var info = nextRewardInfo(balance);
-    if (!info) return '<p class="small muted" style="margin-top:0.9rem;">Je hebt alle beloningsniveaus bereikt — knap gedaan! 🏆</p>';
+    if (!info) return '<p class="small muted" style="margin-top:0.9rem;">Je hebt alle beloningsniveaus bereikt — knap gedaan!</p>';
     return '<div class="reward-progress">' +
       '<div class="reward-progress-track"><div class="reward-progress-fill" style="width:' + info.pct + '%;"></div></div>' +
       '<p class="small muted" style="margin-top:0.4rem;">Nog <strong class="tnum">' + info.remaining + '</strong> punten tot "' + esc(info.label) + '" (bij ' + info.points + ' punten).</p>' +
@@ -1993,7 +2124,7 @@
   function reviewItemHtml(r) {
     var exp = isExperience(r);
     return '<div class="review-item"><div style="display:flex; justify-content:space-between; align-items:baseline; gap:0.5rem; flex-wrap:wrap;">' +
-      '<span><strong>' + esc(nameOf(r.authorId)) + '</strong> <span class="kind-tag' + (exp ? ' exp' : '') + '">' + (exp ? '💬 Ervaring' : '⭐ Recensie') + '</span></span>' +
+      '<span><strong>' + esc(nameOf(r.authorId)) + '</strong> <span class="kind-tag' + (exp ? ' exp' : '') + '">' + (exp ? ic('chat') + ' Ervaring' : ic('star') + ' Recensie') + '</span></span>' +
       '<span class="muted small">' + timeAgo(r.createdAt) + '</span></div>' +
       (!exp && r.rating ? '<span class="stars">' + starsHtml(r.rating) + '</span>' : '') +
       (r.text ? '<p style="margin:0.3rem 0 0;">' + esc(r.text) + '</p>' : '') +
@@ -2004,7 +2135,7 @@
     return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(club.name + ', ' + (club.address || club.city || '') + ', Nederland');
   }
   function mapsLinkHtml(club) {
-    return '<a class="btn secondary small" href="' + esc(mapsUrl(club)) + '" target="_blank" rel="noopener">📍 Google Maps ↗</a>';
+    return '<a class="btn secondary small" href="' + esc(mapsUrl(club)) + '" target="_blank" rel="noopener">' + ic('pin') + ' Google Maps ↗</a>';
   }
   function sortedClubs() { return S.clubsList.slice().sort(function (a, b) { return a.name.localeCompare(b.name, 'nl'); }); }
 
@@ -2107,9 +2238,9 @@
       '<span class="muted small">' + timeAgo(p.createdAt) + '</span></div>' +
       (isMatch ? matchScoreCardHtml(p) : '') +
       (!isMatch && p.caption ? '<p style="margin-top:0.6rem;">' + esc(p.caption) + '</p>' : '') +
-      (p.planCode ? '<div class="ppi" data-plancode="' + esc(p.planCode) + '"><a class="btn small plan-invite-btn" href="#/plan/' + esc(p.planCode) + '" style="margin-top:0.4rem;">📅 Doe mee — vul in wanneer je kunt</a></div>' : '') +
+      (p.planCode ? '<div class="ppi" data-plancode="' + esc(p.planCode) + '"><a class="btn small plan-invite-btn" href="#/plan/' + esc(p.planCode) + '" style="margin-top:0.4rem;">' + ic('calendar') + ' Doe mee — vul in wanneer je kunt</a></div>' : '') +
       (!isMatch && p.imageDataUrl ? '<img src="' + p.imageDataUrl + '" style="max-width:100%; border-radius:10px; margin-top:0.6rem; display:block;" alt="">' : '') +
-      (!isMatch && p.videoUrl ? '<p class="small" style="margin-top:0.6rem;">🎬 <a href="' + esc(p.videoUrl) + '" target="_blank" rel="noopener">Video bekijken</a> <span class="muted">(testversie — externe link, nog geen video-upload)</span></p>' : '') +
+      (!isMatch && p.videoUrl ? '<p class="small" style="margin-top:0.6rem;">' + ic('video') + ' <a href="' + esc(p.videoUrl) + '" target="_blank" rel="noopener">Video bekijken</a> <span class="muted">(testversie — externe link, nog geen video-upload)</span></p>' : '') +
       reactionsHtml(p) +
       (S.player && !isMe && !isMatch ? '<button class="btn secondary small followBtn" data-author="' + esc(p.authorId) + '" style="margin-top:0.8rem;">' + (following ? 'Ontvolgen' : 'Volgen') + '</button>' : '') +
       (isMe ? '<button type="button" class="btn secondary small deletePostBtn" data-post="' + esc(p.id) + '" style="margin-top:0.8rem;">Verwijderen</button>' : '') +
@@ -2233,13 +2364,13 @@
   function availRequestActionsHtml(m, mine, availState) {
     var st = availState[m.availRequestId];
     if (mine) {
-      return '<div class="avreq-state">' + (st === 'gone' || !st ? '' : st === 'active' ? '✅ Iedereen doet mee — online' : st === 'declined' ? '✖ Niet iedereen doet mee' : '⏳ Wacht op antwoord') + '</div>';
+      return '<div class="avreq-state">' + (st === 'gone' || !st ? '' : st === 'active' ? ic('check') + ' Iedereen doet mee — online' : st === 'declined' ? ic('x') + ' Niet iedereen doet mee' : ic('hourglass') + ' Wacht op antwoord') + '</div>';
     }
     if (st === 'pending') {
-      return '<div class="avreq-btns"><button type="button" class="avreq-btn yes availRespBtn" data-owner="' + esc(m.availRequest) + '" data-req="' + esc(m.availRequestId || '') + '" data-ans="1">✅ Accepteren</button>' +
-        '<button type="button" class="avreq-btn no availRespBtn" data-owner="' + esc(m.availRequest) + '" data-req="' + esc(m.availRequestId || '') + '" data-ans="0">✖ Weigeren</button></div>';
+      return '<div class="avreq-btns"><button type="button" class="avreq-btn yes availRespBtn" data-owner="' + esc(m.availRequest) + '" data-req="' + esc(m.availRequestId || '') + '" data-ans="1">' + ic('check') + ' Accepteren</button>' +
+        '<button type="button" class="avreq-btn no availRespBtn" data-owner="' + esc(m.availRequest) + '" data-req="' + esc(m.availRequestId || '') + '" data-ans="0">' + ic('x') + ' Weigeren</button></div>';
     }
-    return '<div class="avreq-state">' + (st === 'accepted' ? '✅ Je hebt geaccepteerd' : st === 'declined' ? '✖ Je hebt geweigerd' : 'Dit verzoek is niet meer actief') + '</div>';
+    return '<div class="avreq-state">' + (st === 'accepted' ? ic('check') + ' Je hebt geaccepteerd' : st === 'declined' ? ic('x') + ' Je hebt geweigerd' : 'Dit verzoek is niet meer actief') + '</div>';
   }
 
   function messageBubbleHtml(m, opts) {
@@ -2249,7 +2380,7 @@
     var isBot = m.senderId === STATS_BOT_ID;
     var inner;
     if (!isTombstone && m.kind === 'stats') {
-      inner = '<div class="statmsg-head">📊 ' + esc(m.title || 'Tussenstand') + '</div>' +
+      inner = '<div class="statmsg-head">' + ic('chart') + ' ' + esc(m.title || 'Tussenstand') + '</div>' +
         '<ol class="statmsg-list">' + (m.stats || []).map(function (r, i) {
           var played = r.wins + r.losses;
           return '<li' + (r.playerId === S.playerId ? ' class="me"' : '') + '><span class="statmsg-rank">' + (i + 1) + '</span>' +
@@ -2264,7 +2395,7 @@
       opts2.forEach(function (o) { (o.votes || []).forEach(function (v) { voters[v] = true; }); });
       var nVoters = Object.keys(voters).length;
       inner = (opts.showSenderName && !mine ? '<div class="small" style="font-weight:800; margin-bottom:0.15rem;">' + esc(nameOf(m.senderId)) + '</div>' : '') +
-        '<div class="poll-q">📊 ' + esc(m.question) + '</div>' +
+        '<div class="poll-q">' + ic('chart') + ' ' + esc(m.question) + '</div>' +
         opts2.map(function (o, i) {
           var v = o.votes || [];
           var on = v.indexOf(S.playerId) !== -1;
@@ -2275,16 +2406,16 @@
         }).join('') +
         '<div class="small muted" style="margin-top:0.3rem;">' + (m.multi ? 'Meerdere keuzes mogelijk · ' : '') + nVoters + ' gestemd · tik om te stemmen</div>';
     } else if (isTombstone) {
-      inner = '<div class="chatbubble-deleted small">🚫 Dit bericht is verwijderd' + (mine ? ' door jou' : '') + '.</div>';
+      inner = '<div class="chatbubble-deleted small">' + ic('ban') + ' Dit bericht is verwijderd' + (mine ? ' door jou' : '') + '.</div>';
     } else {
       inner =
         (opts.showSenderName && !mine && !isBot ? '<div class="small" style="font-weight:800; margin-bottom:0.15rem;">' + esc(nameOf(m.senderId)) + '</div>' : '') +
         (m.imageDataUrl ? '<img src="' + m.imageDataUrl + '" alt="" style="max-width:100%; border-radius:10px; display:block;' + (m.text ? ' margin-bottom:0.4rem;' : '') + '">' : '') +
         (m.videoUrl ? (opts.videoAsLink
-          ? '<p style="margin:0 0 0.4rem;">🎬 <a href="' + esc(m.videoUrl) + '" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Video bekijken</a></p>'
-          : '<p style="margin:0 0 0.4rem;">🎬 Video</p>') : '') +
+          ? '<p style="margin:0 0 0.4rem;">' + ic('video') + ' <a href="' + esc(m.videoUrl) + '" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Video bekijken</a></p>'
+          : '<p style="margin:0 0 0.4rem;">' + ic('video') + ' Video</p>') : '') +
         (m.text ? '<div>' + esc(m.text) + '</div>' : '') +
-        (m.planCode ? '<div class="ppi" data-plancode="' + esc(m.planCode) + '"><a class="plan-invite-btn" href="#/plan/' + esc(m.planCode) + '">📅 Beschikbaarheid invullen</a></div>' : '') +
+        (m.planCode ? '<div class="ppi" data-plancode="' + esc(m.planCode) + '"><a class="plan-invite-btn" href="#/plan/' + esc(m.planCode) + '">' + ic('calendar') + ' Beschikbaarheid invullen</a></div>' : '') +
         (m.availRequest ? availRequestActionsHtml(m, mine, opts.availState || {}) : '');
     }
     // Ook een al "verwijderd voor iedereen"-bericht (tombstone) blijft ingedrukt-houdbaar: je
@@ -2299,7 +2430,7 @@
         '</div>'
       : '';
     return '<div class="chatbubble-row' + (mine ? ' mine' : '') + (isBot ? ' bot' : '') + (m.kind === 'poll' && !isTombstone ? ' pollrow' : '') + '" data-mid="' + esc(m.id) + '"><div class="chatbubble-col"><div class="chatbubble' + (m.kind === 'poll' && !isTombstone ? ' pollb' : '') + '">' +
-      (isBot ? '<div class="botmsg-from">🎾 Smash</div>' : '') +
+      (isBot ? '<div class="botmsg-from">' + ic('padel') + ' Smash</div>' : '') +
       inner +
       '<span class="chatbubble-time">' + timeAgo(m.createdAt) + (opts.statusLabel || '') + '</span>' +
       '</div>' + menu + '</div></div>';
@@ -2446,10 +2577,10 @@
   }
 
   function groupPreviewText(m) {
-    if (m.deletedForEveryone) return '🚫 Bericht verwijderd';
+    if (m.deletedForEveryone) return 'Bericht verwijderd';
     var who = m.senderId === STATS_BOT_ID ? '' : (m.senderId === S.playerId ? 'Jij: ' : (nameOf(m.senderId).split(' ')[0] + ': '));
-    var what = m.kind === 'stats' ? '📊 Nieuwe tussenstand' : m.kind === 'poll' ? '📊 Peiling: ' + (m.question || '')
-      : m.text ? m.text : m.imageDataUrl ? '📷 Foto' : m.videoUrl ? '🎬 Video' : '';
+    var what = m.kind === 'stats' ? 'Nieuwe tussenstand' : m.kind === 'poll' ? 'Peiling: ' + (m.question || '')
+      : m.text ? m.text : m.imageDataUrl ? 'Foto' : m.videoUrl ? 'Video' : '';
     what = String(what);
     return who + (what.length > 60 ? what.slice(0, 60) + '…' : what);
   }
@@ -2547,7 +2678,7 @@
         '<div style="display:flex; justify-content:space-between; align-items:baseline; gap:0.5rem; flex-wrap:wrap;">' +
         '<strong>' + esc(e.title) + '</strong><span class="muted small tnum">' + esc(e.date) + ' · ' + esc(e.time) + '</span></div>' +
         '<p class="small muted" style="margin:0.3rem 0 0;">' + esc(e.description) + '</p>' +
-        (goers.length ? '<p class="small muted" style="margin:0.3rem 0 0;">👥 <strong class="tnum">' + goers.length + '</strong> aanmelding' + (goers.length === 1 ? '' : 'en') +
+        (goers.length ? '<p class="small muted" style="margin:0.3rem 0 0;">' + ic('users') + ' <strong class="tnum">' + goers.length + '</strong> aanmelding' + (goers.length === 1 ? '' : 'en') +
           (namesPreview ? ' — ' + namesPreview + (goers.length > 4 ? ' e.a.' : '') : '') + '</p>' : '') +
         (allowRsvp ? '<button class="btn secondary small rsvpBtn" data-event="' + e.id + '" data-going="' + (going ? '1' : '') + '" style="margin-top:0.5rem;">' + (going ? 'Ik ga niet meer' : 'Ik ga!') + '</button>' : '') +
         '</div>';
@@ -2758,7 +2889,7 @@
   // Tikbare keuzerondjes (één keuze) — vervangt kleine selects/tekstvelden.
   function chipChoiceHtml(name, options, value) {
     return '<div class="chip-row" data-chips="' + esc(name) + '">' + options.map(function (o) {
-      return '<button type="button" class="chip' + (String(o.value) === String(value) ? ' on' : '') + '" data-val="' + esc(o.value) + '">' + esc(o.label) + '</button>';
+      return '<button type="button" class="chip' + (String(o.value) === String(value) ? ' on' : '') + '" data-val="' + esc(o.value) + '">' + (o.icon ? o.icon + ' ' : '') + esc(o.label) + '</button>';
     }).join('') + '</div>';
   }
   function wireChipChoice(root, name, onChange) {
@@ -2791,15 +2922,15 @@
   // "Recensie schrijven of ervaring delen": eerst kies je wat je wilt plaatsen, daarna schrijf je
   // je verhaal. Een recensie heeft sterren (één per speler per club, aan te passen); een
   // ervaring is een los verhaal zonder sterren. Bij elk bericht staat zichtbaar welk van de twee het is.
-  var REVIEW_BTN_LABEL = '✍️ Recensie schrijven of ervaring delen';
+  var REVIEW_BTN_LABEL = ic('pencil') + ' Recensie schrijven of ervaring delen';
 
   function openReviewSheet(club, myReview, onDone) {
     var sb = openSheet('Recensie of ervaring?',
       '<p class="muted small" style="margin-top:0;">Wat wil je delen over ' + esc(club.name) + '?</p>' +
       '<div class="choice-tiles">' +
-        '<button type="button" class="choice-tile" data-kind="review"><span class="ct-icon">⭐</span><strong>' + (myReview ? 'Recensie aanpassen' : 'Recensie') + '</strong>' +
+        '<button type="button" class="choice-tile" data-kind="review"><span class="ct-icon">' + ic('star') + '</span><strong>' + (myReview ? 'Recensie aanpassen' : 'Recensie') + '</strong>' +
           '<span class="muted small">Geef sterren en je oordeel over de club.</span></button>' +
-        '<button type="button" class="choice-tile" data-kind="experience"><span class="ct-icon">💬</span><strong>Ervaring delen</strong>' +
+        '<button type="button" class="choice-tile" data-kind="experience"><span class="ct-icon">' + ic('chat') + '</span><strong>Ervaring delen</strong>' +
           '<span class="muted small">Vertel wat je hebt meegemaakt — zonder sterren.</span></button>' +
       '</div>');
     sb.querySelectorAll('[data-kind]').forEach(function (b) {
@@ -2867,7 +2998,7 @@
     var top = el('<div class="topbar"><div class="topbar-inner"></div></div>');
     var inner = top.querySelector('.topbar-inner');
 
-    var brand = el('<a class="brand" href="#/">🎾 Smash</a>');
+    var brand = el('<a class="brand" href="#/">' + ic('padel') + ' Smash</a>');
     inner.appendChild(brand);
 
     if (S.player) {
@@ -3065,7 +3196,7 @@
       var has = availabilityList.some(function (a) { return a.playerId === id; });
       return '<div style="display:flex; justify-content:space-between; padding:0.3rem 0;">' +
         '<span>' + esc(nameOf(id)) + (id === S.playerId ? ' <span class="muted small">(jij)</span>' : '') + '</span>' +
-        '<span class="' + (has ? '' : 'muted small') + '">' + (has ? '✅ ingevuld' : 'nog niet ingevuld') + '</span></div>';
+        '<span class="' + (has ? '' : 'muted small') + '">' + (has ? ic('check') + ' ingevuld' : 'nog niet ingevuld') + '</span></div>';
     }).join('');
     var memberRows = memberIds.map(function (id) {
       return '<div style="display:flex; justify-content:space-between; align-items:center; padding:0.4rem 0; border-bottom:1px solid var(--line);">' +
@@ -3077,15 +3208,15 @@
     var body = el('<div class="stack"></div>');
     body.innerHTML =
       pageHeadHtml('<span class="eyebrow">Vriendengroep · ' + ledenLabel(memberIds.length) + '</span><h1>' + esc(group.name) +
-        (isOwner ? ' <button type="button" class="rename-btn" id="renameGroupBtn" aria-label="Naam wijzigen" title="Naam wijzigen">✏️</button>' : '') + '</h1>', 'groupMenuBtn') +
-      '<a class="card chat-link-card" href="#/groepschat/' + esc(friendChatId(groupId)) + '"><span class="chatavatar">💬</span>' +
+        (isOwner ? ' <button type="button" class="rename-btn" id="renameGroupBtn" aria-label="Naam wijzigen" title="Naam wijzigen">' + ic('pencil') + '</button>' : '') + '</h1>', 'groupMenuBtn') +
+      '<a class="card chat-link-card" href="#/groepschat/' + esc(friendChatId(groupId)) + '"><span class="chatavatar">' + ic('chat') + '</span>' +
         '<span style="flex:1; min-width:0;"><strong>Groepschat</strong><br><span class="muted small">Praat met de groep — met af en toe automatisch de tussenstand</span></span><span class="muted">›</span></a>' +
       '<div class="card" style="border:2px solid var(--court);"><div class="status-line"><div><h2>Samen een potje plannen</h2>' +
         '<p class="muted small" style="margin:0.2rem 0 0;">Iedereen uit de groep krijgt een uitnodiging in de app.</p></div>' +
         '<a class="btn small" href="#/plan/nieuw?groep=' + esc(groupId) + '" style="margin-top:0;">Plan met deze groep</a></div></div>' +
       groupPlanCardHtml(plan) +
       '<div class="card"><div class="status-line"><div><h2>Jouw beschikbaarheid</h2>' +
-        '<p class="muted small" style="margin:0.2rem 0 0;">' + (myAvail ? '✅ Doorgegeven' : 'Nog niet doorgegeven') + ' · ' + submittedCount + ' van ' + memberIds.length + ' ingevuld</p></div>' +
+        '<p class="muted small" style="margin:0.2rem 0 0;">' + (myAvail ? ic('check') + ' Doorgegeven' : 'Nog niet doorgegeven') + ' · ' + submittedCount + ' van ' + memberIds.length + ' ingevuld</p></div>' +
         '<button type="button" class="btn small" id="availOpenBtn" style="margin-top:0;">' + (myAvail ? 'Aanpassen' : 'Doorgeven') + '</button></div></div>' +
       '<div class="card"><h2>Ranglijst</h2>' + rankTable(standings, null, { podium: true }) + '</div>';
     renderShell('algemeen', body, 'ranglijst');
@@ -3294,16 +3425,16 @@
     if (renameBtn) renameBtn.addEventListener('click', openRenameSheet);
     document.getElementById('groupMenuBtn').addEventListener('click', function () {
       var items = [
-        { icon: '💬', label: 'Groepschat', sub: 'Met automatische tussenstanden', href: '#/groepschat/' + friendChatId(groupId) },
-        { icon: '📅', label: 'Potje plannen met deze groep', sub: 'Iedereen krijgt een uitnodiging', href: '#/plan/nieuw?groep=' + groupId },
-        { icon: '🗓️', label: myAvail ? 'Beschikbaarheid aanpassen' : 'Beschikbaarheid doorgeven', onClick: openAvailSheet },
-        { icon: '📋', label: 'Wie heeft ingevuld?', sub: submittedCount + ' van ' + memberIds.length + ' ingevuld', onClick: function () { openSheet('Wie heeft ingevuld?', statusRows); } },
-        { icon: '👥', label: 'Leden', sub: ledenLabel(memberIds.length), onClick: openMembersSheet }
+        { icon: ic('chat'), label: 'Groepschat', sub: 'Met automatische tussenstanden', href: '#/groepschat/' + friendChatId(groupId) },
+        { icon: ic('calendar'), label: 'Potje plannen met deze groep', sub: 'Iedereen krijgt een uitnodiging', href: '#/plan/nieuw?groep=' + groupId },
+        { icon: ic('calendar'), label: myAvail ? 'Beschikbaarheid aanpassen' : 'Beschikbaarheid doorgeven', onClick: openAvailSheet },
+        { icon: ic('clipboard'), label: 'Wie heeft ingevuld?', sub: submittedCount + ' van ' + memberIds.length + ' ingevuld', onClick: function () { openSheet('Wie heeft ingevuld?', statusRows); } },
+        { icon: ic('users'), label: 'Leden', sub: ledenLabel(memberIds.length), onClick: openMembersSheet }
       ];
       if (isOwner) {
-        items.push({ icon: '✏️', label: 'Naam wijzigen', sub: 'Nu: ' + group.name, onClick: openRenameSheet });
-        items.push({ icon: '➕', label: 'Vriend toevoegen', onClick: openAddMemberSheet });
-        items.push({ icon: '🗑️', label: 'Groep verwijderen', danger: true, onClick: function () {
+        items.push({ icon: ic('pencil'), label: 'Naam wijzigen', sub: 'Nu: ' + group.name, onClick: openRenameSheet });
+        items.push({ icon: ic('plus'), label: 'Vriend toevoegen', onClick: openAddMemberSheet });
+        items.push({ icon: ic('trash'), label: 'Groep verwijderen', danger: true, onClick: function () {
           confirmSheet('Groep verwijderen', 'Weet je zeker dat je "' + group.name + '" wilt verwijderen? Dit kan niet ongedaan worden gemaakt.', 'Groep verwijderen', async function () {
             await deleteFriendGroup(groupId);
             location.hash = '#/ranglijst?tab=vrienden';
@@ -3334,10 +3465,10 @@
       pageHeadHtml('<h1>Spelen</h1>', 'spelenMenuBtn') +
       pendingBanner(pending) +
       '<div class="quick-grid quick-row">' +
-        tile('📅', 'Potje plannen', '#/plan/nieuw', true) +
-        tile('🔎', 'Tegenstander zoeken', '#/zoeken') +
-        tile('✍️', 'Partij loggen', '#/partij/nieuw') +
-        tile('🎾', 'Baan huren', '#/baan-huren') +
+        tile(ic('calendar'), '1 · Plannen', '#/plan/nieuw', true) +
+        tile(ic('padel'), '2 · Baan huren', '#/baan-huren') +
+        tile(ic('pencil'), '3 · Uitslag', '#/partij/nieuw') +
+        tile(ic('search'), 'Tegenstander zoeken', '#/zoeken') +
       '</div>' +
       tabsetHtml('spelen', [
         { key: 'uitnodigingen', label: 'Uitnodigingen' + countBadge(openInv),
@@ -3357,14 +3488,14 @@
 
     document.getElementById('spelenMenuBtn').addEventListener('click', function () {
       openMenu('Spelen', [
-        { icon: '🔑', label: 'Code invoeren', sub: 'Uitnodigingscode van iemand anders', onClick: function () {
+        { icon: ic('key'), label: 'Code invoeren', sub: 'Uitnodigingscode van iemand anders', onClick: function () {
           var sb = openSheet('Code invoeren', '<p class="muted small" style="margin-top:0;">Vul de 6-tekens-code uit het bericht in.</p>' + planCodeFormHtml('planCodeSheet'));
           wirePlanCodeForm('planCodeSheet');
           var f = sb.querySelector('#planCodeSheet');
           if (f) f.addEventListener('submit', function () { setTimeout(function () { closeSheet(true); }, 0); });
         } },
-        { icon: '✅', label: 'Te bevestigen', sub: pending ? pending + ' partij(en) wachten op jou' : 'Niets te bevestigen', href: '#/te-bevestigen' },
-        { icon: '🏆', label: 'Ranglijst', href: '#/ranglijst' }
+        { icon: ic('check'), label: 'Te bevestigen', sub: pending ? pending + ' partij(en) wachten op jou' : 'Niets te bevestigen', href: '#/te-bevestigen' },
+        { icon: ic('trophy'), label: 'Ranglijst', href: '#/ranglijst' }
       ]);
     });
   }
@@ -3418,7 +3549,7 @@
         'Tik op Home of bij Spelen op "Tegenstander zoeken".',
         'Bovenaan bij "Nu beschikbaar" zie je wie er kan spelen, met niveau, club en tijd.',
         'Tik op "Uitnodigen" (of "Aansluiten" bij een duo of trio): er gaat meteen een berichtje naar die speler(s).',
-        'Tik op "⚙️ Filters" om te filteren op geslacht, leeftijd, woonplaats, club of niveau en tik op "Toon spelers".',
+        'Tik op "Filters" om te filteren op geslacht, leeftijd, woonplaats, club of niveau en tik op "Toon spelers".',
         'Onder "Alle spelers" staat iedereen die vindbaar is; tik op "Uitnodigen" om te chatten.',
         'Wil je zelf gevonden worden? Zet jezelf beschikbaar (zie "Beschikbaar zetten").'
       ] },
@@ -3468,7 +3599,7 @@
         'Tik een club en het aantal spelers aan, en kies wie je uitnodigt (ook een hele vriendengroep). Typen hoeft niet.',
         'Tik op "Peiling versturen": de peiling staat meteen in hun chat, of deel hem via WhatsApp.',
         'Iedereen tikt los aan welke dagen en welke tijden hij of zij kan — ook direct in de chat.',
-        'Kies je meerdere clubs, dan stemt iedereen ook mee over de club. Smash rekent het beste moment én de best passende club uit (🏆); de organisator tikt op "Vastzetten".',
+        'Kies je meerdere clubs, dan stemt iedereen ook mee over de club. Smash rekent het beste moment én de best passende club uit (); de organisator tikt op "Vastzetten".',
         'Daarna: boek de baan via "Baan boeken" (het systeem van de club) en tik welke baan je kreeg — dan ziet iedereen het.'
       ] },
     { key: 'groep', title: 'Vriendengroep en groepschat', href: '#/ranglijst?tab=vrienden',
@@ -3476,7 +3607,7 @@
       steps: [
         'Ga naar Ranglijst → "Vriendengroepen" en tik op "+ Nieuwe groep".',
         'Geef de groep een naam: er wordt automatisch een groepschat gemaakt.',
-        'Via ⋯ → "Vriend toevoegen" tik je spelers aan; met ✏️ wijzig je de naam.',
+        'Via ⋯ → "Vriend toevoegen" tik je spelers aan; met wijzig je de naam.',
         'In de groepschat stuur je tekst, foto\'s en video-links, net als in een gewone chat.',
         'Tik op ＋ in de chat voor een peiling, "Wie kan er deze week?", potje plannen of de tussenstand.',
         'Smash zet zelf af en toe de tussenstand van jullie ranglijst in de chat.'
@@ -3503,7 +3634,7 @@
       keys: 'club clubs kaart recensie recensies ervaring delen google maps route locatie thuisclub adres',
       steps: [
         'Tik op Clubs; kies de kaart of de lijst.',
-        'Tik een club aan voor de website, "Baan reserveren" en "📍 Google Maps" (opent de locatie).',
+        'Tik een club aan voor de website, "Baan reserveren" en "Google Maps" (opent de locatie).',
         'Tik op "Recensie schrijven of ervaring delen", kies wat je wilt en schrijf je verhaal.',
         'Met "Voeg toe als thuisclub" wordt het jouw club.'
       ] },
@@ -3557,7 +3688,7 @@
   }
 
   function helpTopicHtml(t, open) {
-    return '<details class="acc card-acc"' + (open ? ' open' : '') + '><summary>📘 Zo werkt het: ' + esc(t.title) + '</summary><div class="acc-body">' +
+    return '<details class="acc card-acc"' + (open ? ' open' : '') + '><summary>' + ic('book') + ' Zo werkt het: ' + esc(t.title) + '</summary><div class="acc-body">' +
       '<ol class="help-steps">' + t.steps.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>' +
       '<a class="btn small" href="' + esc(t.href) + '">Ga naar ' + esc(t.title.split(' (')[0]) + ' →</a></div></details>';
   }
@@ -3636,43 +3767,44 @@
     var noClubHref = '#/clubkaart';
 
     var tiles = [
-      { group: 'spelen', icon: '🔎', title: 'Tegenstander zoeken', sub: 'Spelers in de buurt op jouw niveau', href: '#/zoeken', primary: true,
-        keys: 'tegenstander zoeken spelers maatje partner buurt niveau vinden beschikbaar' },
-      { group: 'spelen', icon: '🎾', title: 'Baan huren', sub: 'Bij je eigen club of elke andere club', href: '#/baan-huren', primary: true,
-        keys: 'baan huren boeken reserveren reservering court club' },
-      { group: 'spelen', icon: '📅', title: 'Potje plannen', sub: openPlanInvites.length ? openPlanInvites.length + ' uitnodiging(en) voor jou' : 'Nodig vrienden uit in de app of via WhatsApp',
-        href: openPlanInvites.length === 1 ? '#/plan/' + openPlanInvites[0].code : (openPlanInvites.length ? '#/spelen' : '#/plan/nieuw'), count: openPlanInvites.length, primary: !!openPlanInvites.length,
+      { group: 'spelen', primary: true, step: 1, icon: ic('calendar'), title: 'Potje plannen', sub: openPlanInvites.length ? openPlanInvites.length + ' uitnodiging(en) voor jou' : 'Nodig vrienden uit in de app of via WhatsApp',
+        href: openPlanInvites.length === 1 ? '#/plan/' + openPlanInvites[0].code : (openPlanInvites.length ? '#/spelen' : '#/plan/nieuw'), count: openPlanInvites.length,
         keys: 'plannen planning afspreken datum tijd groep whatsapp link code uitnodigen uitnodiging vrienden' },
-      { group: 'spelen', icon: '✍️', title: 'Partij loggen', sub: 'Uitslag doorgeven', href: '#/partij/nieuw',
+      { group: 'spelen', step: 2, icon: ic('padel'), title: 'Baan huren', sub: 'Bij je eigen club of elke andere club', href: '#/baan-huren',
+        keys: 'baan huren boeken reserveren reservering court club' },
+      { group: 'spelen', step: 3, icon: ic('pencil'), title: 'Partij loggen', sub: 'Uitslag doorgeven', href: '#/partij/nieuw',
         keys: 'partij loggen uitslag score doorgeven wedstrijd gewonnen verloren resultaat' },
-      { group: 'spelen', icon: '✅', title: 'Te bevestigen', sub: pending ? pending + ' partij(en) wachten op jou' : 'Niets te bevestigen', href: '#/te-bevestigen', count: pending,
+      { group: 'spelen', step: 4, icon: ic('check'), title: 'Te bevestigen', sub: pending ? pending + ' partij(en) wachten op jou' : 'Niets te bevestigen', href: '#/te-bevestigen', count: pending,
         keys: 'bevestigen bevestiging uitslag score openstaand wachten' },
-      { group: 'spelen', icon: '🏆', title: 'Ranglijst', sub: 'Landelijk en per club', href: '#/ranglijst',
+      { group: 'spelen', icon: ic('search'), title: 'Tegenstander zoeken', sub: 'Nog niemand om mee te spelen? Zoek spelers op jouw niveau', href: '#/zoeken',
+        keys: 'tegenstander zoeken spelers maatje partner buurt niveau vinden beschikbaar' },
+      { group: 'spelen', icon: ic('trophy'), title: 'Ranglijst', sub: 'Landelijk en per club', href: '#/ranglijst',
         keys: 'ranglijst ranking stand positie landelijk top klassement' },
-      { group: 'spelen', icon: '👤👤', title: 'Vriendengroepen', sub: 'Eigen ranglijst met vrienden', href: '#/ranglijst?tab=vrienden',
+      { group: 'spelen', icon: ic('users'), title: 'Vriendengroepen', sub: 'Eigen ranglijst met vrienden', href: '#/ranglijst?tab=vrienden',
         keys: 'vrienden vriendengroep groep eigen ranglijst vriendschappelijk' },
-      { group: 'club', icon: '🎉', title: 'Evenementen', sub: hasClub ? 'Aanmelden bij je club' : 'Kies eerst een thuisclub', href: hasClub ? clubGoalHref('evenementen') : noClubHref,
+      { group: 'club', icon: ic('party'), title: 'Evenementen', sub: hasClub ? 'Aanmelden bij je club' : 'Kies eerst een thuisclub', href: hasClub ? clubGoalHref('evenementen') : noClubHref,
         keys: 'evenementen events activiteit aanmelden toernooi clinic agenda' },
-      { group: 'club', icon: '⭐', title: 'Punten & beloningen', sub: hasClub ? 'Saldo en volgende beloning' : 'Kies eerst een thuisclub', href: hasClub ? clubGoalHref('punten') : noClubHref,
+      { group: 'club', icon: ic('star'), title: 'Punten & beloningen', sub: hasClub ? 'Saldo en volgende beloning' : 'Kies eerst een thuisclub', href: hasClub ? clubGoalHref('punten') : noClubHref,
         keys: 'punten beloningen sparen saldo rewards korting' },
-      { group: 'club', icon: '🥇', title: 'Toernooien', sub: hasClub ? 'Seizoensreeksen bij je club' : 'Kies eerst een thuisclub', href: hasClub ? clubGoalHref('toernooien') : noClubHref,
+      { group: 'club', icon: ic('medal'), title: 'Toernooien', sub: hasClub ? 'Seizoensreeksen bij je club' : 'Kies eerst een thuisclub', href: hasClub ? clubGoalHref('toernooien') : noClubHref,
         keys: 'toernooi toernooien reeks competitie seizoen badges' },
-      { group: 'club', icon: '📍', title: 'Clubs & kaart', sub: 'Alle clubs, recensies, thuisclub kiezen', href: '#/clubkaart',
+      { group: 'club', icon: ic('pin'), title: 'Clubs & kaart', sub: 'Alle clubs, recensies, thuisclub kiezen', href: '#/clubkaart',
         keys: 'clubs kaart club zoeken recensie beoordeling thuisclub toevoegen locatie' },
-      { group: 'community', icon: '📸', title: 'Feed', sub: 'Foto’s, video’s en posts', href: '#/feed',
+      { group: 'community', icon: ic('camera'), title: 'Feed', sub: 'Foto’s, video’s en posts', href: '#/feed',
         keys: 'feed posts foto video plaatsen delen ontdekken volgen' },
-      { group: 'community', icon: '💬', title: 'Chat', sub: 'Berichten en groepschats', href: '#/chat',
+      { group: 'community', icon: ic('chat'), title: 'Chat', sub: 'Berichten en groepschats', href: '#/chat',
         keys: 'chat berichten bericht sturen praten groepschat' },
-      { group: 'community', icon: '🛍️', title: 'Padelshop', sub: 'Rackets, ballen en meer', href: '#/shop',
+      { group: 'community', icon: ic('bag'), title: 'Padelshop', sub: 'Rackets, ballen en meer', href: '#/shop',
         keys: 'shop winkel kopen bestellen racket ballen grip spullen webshop' },
-      { group: 'community', icon: '⚙️', title: 'Profiel & instellingen', sub: 'Niveau, clubs, vindbaarheid', href: '#/profiel',
+      { group: 'community', icon: ic('gear'), title: 'Profiel & instellingen', sub: 'Niveau, clubs, vindbaarheid', href: '#/profiel',
         keys: 'profiel instellingen account niveau naam vindbaar privacy uitloggen gegevens' }
     ];
-    var groupTitles = { spelen: 'Spelen', club: 'Bij je club', community: 'Community & meer' };
+    var groupTitles = { spelen: 'Meer spelen', club: 'Bij je club', community: 'Community & meer' };
 
     function tileHtml(t) {
       return '<a class="quick-tile' + (t.primary ? ' primary' : '') + '" href="' + esc(t.href) + '"' + (t.external ? ' target="_blank" rel="noopener"' : '') + ' data-keys="' + esc((t.title + ' ' + t.sub + ' ' + t.keys).toLowerCase()) + '">' +
         (t.count ? '<span class="quick-count tnum">' + t.count + '</span>' : '') +
+        (t.step ? '<span class="quick-step">' + t.step + '</span>' : '') +
         '<span class="quick-icon" aria-hidden="true">' + t.icon + '</span>' +
         '<span class="quick-title">' + esc(t.title) + '</span>' +
         '<span class="quick-sub">' + esc(t.sub) + '</span></a>';
@@ -3696,20 +3828,9 @@
 
     var body = el('<div class="stack"></div>');
     body.innerHTML =
-      '<div class="home-hello"><div><span class="eyebrow">Smash</span><h1>Hoi ' + esc((S.player.name || '').split(' ')[0] || S.player.username || '') + ' 👋</h1></div></div>' +
-      pendingBanner(pending) +
+      '<div class="home-hello"><div><span class="eyebrow">Smash</span><h1>Hoi ' + esc((S.player.name || '').split(' ')[0] || S.player.username || '') + '</h1></div></div>' +
       consentBannerHtml() +
-      '<div id="homeLogPrompt"></div>' +
-      (openPlanInvites.length === 1
-        ? '<div class="banner warn">📅 <strong>' + esc(openPlanInvites[0].organizerName) + '</strong> nodigt je uit voor "' + esc(openPlanInvites[0].title) + '". <a href="#/plan/' + esc(openPlanInvites[0].code) + '">Vul in wanneer je kunt →</a></div>'
-        : openPlanInvites.length > 1
-          ? '<div class="banner warn">📅 Je hebt <strong>' + openPlanInvites.length + '</strong> uitnodigingen om samen te padellen. <a href="#/spelen">Bekijk ze →</a></div>'
-          : '') +
-      myRequests.map(function (r) {
-        var others = availPartners(r).filter(function (id) { return id !== S.playerId; });
-        return '<div class="banner warn">🎾 <strong>' + esc(nameOf(r.playerId)) + '</strong> wil samen met jou' + (others.length ? ' en ' + esc(namesList(others)) : '') +
-          ' beschikbaar staan (' + esc(availWhenLabel(r).toLowerCase()) + '). <a href="#/zoeken">Accepteren of weigeren →</a></div>';
-      }).join('') +
+      '<div id="homeGuide"></div><div id="homeNext"></div>' +
       '<label class="home-search" for="homeSearch"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
         '<input type="search" id="homeSearch" placeholder="Wat wil je doen? Of stel een vraag…" autocomplete="off" enterkeyhint="search" aria-label="Zoek een onderdeel of stel een vraag"></label>' +
       '<div class="chip-row ask-suggest" id="askSuggest">' +
@@ -3718,15 +3839,17 @@
         }).join('') + '</div>' +
       '<div id="homeAsk" class="stack" hidden style="gap:0.6rem;"></div>' +
       '<p class="empty" id="homeNoResults" hidden>Niets gevonden. Probeer een ander woord, bijvoorbeeld "baan", "uitslag" of "chat".</p>' +
-      ['spelen', 'club', 'community'].map(function (g) {
+      stepPagesHtml(tiles.filter(function (t) { return t.step; }), 'stappen') +
+      stepPagesHtml(tiles.filter(function (t) { return t.group === 'spelen' && !t.step; }), 'meer') +
+      ['club', 'community'].map(function (g) {
         return '<div class="home-group" data-group="' + g + '"><p class="home-section-title">' + groupTitles[g] + '</p>' +
-          '<div class="quick-grid" style="margin-top:0.9rem;">' + tiles.filter(function (t) { return t.group === g; }).map(tileHtml).join('') + '</div></div>';
+          '<div class="quick-grid" style="margin-top:0.9rem;">' + tiles.filter(function (t) { return t.group === g && !t.step; }).map(tileHtml).join('') + '</div></div>';
       }).join('') +
       '<div id="homeClubs" class="stack"><p class="home-section-title">' + (homeIds.length > 1 ? 'Mijn clubs' : 'Mijn club') + '</p>' + clubsHtml + '</div>';
 
     renderShell('algemeen', body, 'home');
     wireConsentBanner(body);
-    fillHomeLogPrompt(body);
+    fillHomeGuide(body).then(function () { return fillHomeNext(body, { pending: pending, invites: openPlanInvites, requests: myRequests }); }).catch(function () {});
 
     var input = document.getElementById('homeSearch');
     var askBox = document.getElementById('homeAsk');
@@ -3736,10 +3859,10 @@
       askShownFor = q;
       var matches = helpMatches(q).slice(0, 2);
       askBox.innerHTML =
-        '<div class="card ask-card"><div class="ask-head">✨ Smash-assistent</div>' +
+        '<div class="card ask-card"><div class="ask-head">' + ic('sparkle') + ' Smash-assistent</div>' +
         '<p class="ask-q">“' + esc(q) + '”</p>' +
         '<div id="askAnswer">' + (matches.length ? '<p class="muted small" style="margin:0;">Hieronder staat de uitleg stap voor stap. Nog vragen? Vraag het de assistent.</p>' : '<p class="muted small" style="margin:0;">Tik op de knop, dan beantwoordt de assistent je vraag.</p>') + '</div>' +
-        (S.aiOff ? '' : '<div class="row-actions"><button type="button" class="btn small" id="askBtn">✨ Vraag het de assistent</button></div>') +
+        (S.aiOff ? '' : '<div class="row-actions"><button type="button" class="btn small" id="askBtn">' + ic('sparkle') + ' Vraag het de assistent</button></div>') +
         '<p class="muted small" style="margin:0.6rem 0 0; font-size:0.74rem;">De assistent is een AI (Claude) en kent alleen de uitleg van deze app.</p></div>' +
         matches.map(function (t, i) { return helpTopicHtml(t, i === 0); }).join('');
       var b = askBox.querySelector('#askBtn');
@@ -3761,7 +3884,7 @@
       var anyVisible = false;
       body.querySelectorAll('.home-group').forEach(function (group) {
         var shown = 0;
-        group.querySelectorAll('.quick-tile').forEach(function (tile) {
+        group.querySelectorAll('.quick-tile, .sp-page').forEach(function (tile) {
           var hay = tile.getAttribute('data-keys');
           var match = words.every(function (w) { return hay.indexOf(w) !== -1; });
           tile.hidden = !match;
@@ -3777,6 +3900,7 @@
       askBox.hidden = !showAsk;
       if (showAsk) renderAskArea(raw); else askShownFor = null;
     });
+    wireStepPages(body);
     input.addEventListener('keydown', function (ev) {
       if (ev.key !== 'Enter') return;
       if (!askBox.hidden) { ev.preventDefault(); askNow(); return; }
@@ -3820,7 +3944,7 @@
     var top = await nationalRanking();
     var body = el('<div class="stack"></div>');
     body.innerHTML =
-      '<div><span class="eyebrow">Gastweergave</span><h1>Welkom bij Smash 🎾</h1></div>' +
+      '<div><span class="eyebrow">Gastweergave</span><h1>Welkom bij Smash</h1></div>' +
       '<div class="banner warn">Je kijkt rond als gast: je kunt clubs, spelers en de feed bekijken, maar niet posten, banen huren of ergens voor inschrijven. ' +
       '<a href="#/registreren">Maak een account</a> of <a href="#/inloggen">log in</a> om mee te doen.</div>' +
       '<div class="card"><h2>Uitgenodigd voor een potje?</h2><p class="muted small">Vul de code uit het bericht in om aan te geven wanneer en waar je kunt.</p>' + planCodeFormHtml('planCodeGuest') + '</div>' +
@@ -3857,13 +3981,13 @@
     renderShell(clubId, body, 'ranglijst');
     document.getElementById('rankMenuBtn').addEventListener('click', function () {
       openMenu('Clubranglijst', [
-        { icon: 'ℹ️', label: 'Hoe werkt deze ranglijst?', onClick: function () {
+        { icon: ic('info'), label: 'Hoe werkt deze ranglijst?', onClick: function () {
           openSheet('Hoe werkt de clubranglijst?',
             '<p style="margin-top:0;">Alleen bevestigde partijen tellen mee. De ranglijst begint elke 1e van de maand opnieuw.</p>' +
             '<p>De top 3 van de maand krijgt bonuspunten bij ' + esc(club.name) + ': 100, 75 en 50 punten.</p>' +
             '<p class="muted small">Spelers die zich hebben uitgeschreven van de ranglijst worden niet getoond, maar sparen wel gewoon punten.</p>');
         } },
-        { icon: '🏅', label: 'Bonuspunten toekennen', sub: 'Top 3 van ' + previousPeriod(), onClick: function () {
+        { icon: ic('medal'), label: 'Bonuspunten toekennen', sub: 'Top 3 van ' + previousPeriod(), onClick: function () {
           confirmSheet('Bonuspunten toekennen', 'De top 3 van ' + previousPeriod() + ' krijgt 100, 75 en 50 punten bij ' + club.name + '.', 'Toekennen', async function () {
             var awarded = await closeMonth(clubId, previousPeriod());
             var msg = awarded.length
@@ -3938,21 +4062,21 @@
 
     document.getElementById('clubSpelenMenuBtn').addEventListener('click', function () {
       openMenu(club.name, [
-        { icon: '✍️', label: 'Partij loggen', sub: 'Uitslag doorgeven bij deze club', href: '#/partij/nieuw?club=' + clubId },
-        { icon: '🥇', label: 'Nieuw toernooi starten', onClick: openTournamentSheet },
-        { icon: '⭐', label: 'Hoe verdien ik punten?', onClick: function () {
+        { icon: ic('pencil'), label: 'Partij loggen', sub: 'Uitslag doorgeven bij deze club', href: '#/partij/nieuw?club=' + clubId },
+        { icon: ic('medal'), label: 'Nieuw toernooi starten', onClick: openTournamentSheet },
+        { icon: ic('star'), label: 'Hoe verdien ik punten?', onClick: function () {
           openSheet('Punten bij ' + club.name,
             '<p style="margin-top:0;">Je punten zijn alleen te besteden bij ' + esc(club.name) + '.</p>' +
             '<p>Je verdient ze via de maandelijkse top-3 bonus op de clubranglijst (100 / 75 / 50).</p>' +
             '<p class="muted small">Punten voor het huren van een baan komen terug zodra Smash gekoppeld is aan het reserveringssysteem van de club — dan kunnen we zien dat een boeking echt gemaakt is.</p>' +
             rewardProgressHtml(balance));
         } },
-        { icon: 'ℹ️', label: 'Over deze club', onClick: function () {
+        { icon: ic('info'), label: 'Over deze club', onClick: function () {
           openSheet(club.name, '<p style="margin-top:0;">' + esc(club.courtsInfo || 'Nog geen informatie toegevoegd.') + '</p>' +
-            (club.website ? '<a class="website-link" href="' + esc(club.website) + '" target="_blank" rel="noopener">🔗 ' + esc(club.website.replace(/^https?:\/\//, '')) + '</a>' : '') +
+            (club.website ? '<a class="website-link" href="' + esc(club.website) + '" target="_blank" rel="noopener">' + ic('link') + ' ' + esc(club.website.replace(/^https?:\/\//, '')) + '</a>' : '') +
             '<div class="row-actions">' + mapsLinkHtml(club) + '</div>');
         } },
-        { icon: '📍', label: 'Clubpagina & recensies', href: '#/clubs/' + clubId }
+        { icon: ic('pin'), label: 'Clubpagina & recensies', href: '#/clubs/' + clubId }
       ]);
     });
     body.querySelectorAll('.rsvpBtn').forEach(function (btn) {
@@ -4140,7 +4264,7 @@
     var bodyEl = overlay.querySelector('.club-modal-body');
     bodyEl.innerHTML =
       '<div><span class="eyebrow" style="color:' + clubAccent(clubId).bg + ';">' + esc(club.city) + '</span><h2 style="margin:0.1rem 0 0;">' + esc(club.name) + '</h2>' +
-      (club.website ? '<a class="website-link" href="' + esc(club.website) + '" target="_blank" rel="noopener">🔗 ' + esc(club.website.replace(/^https?:\/\//, '')) + '</a>' : '') +
+      (club.website ? '<a class="website-link" href="' + esc(club.website) + '" target="_blank" rel="noopener">' + ic('link') + ' ' + esc(club.website.replace(/^https?:\/\//, '')) + '</a>' : '') +
       (avg ? '<p style="margin:0.3rem 0 0;"><span class="stars">' + starsHtml(avg) + '</span> <span class="muted small">' + avg.toFixed(1) + '/5 · ' + reviewCountLabel(reviews) + '</span></p>' : (reviews.length ? '<p class="muted small" style="margin-top:0.3rem;">' + esc(reviewCountLabel(reviews)) + '</p>' : '<p class="muted small" style="margin-top:0.3rem;">Nog geen recensies of ervaringen.</p>')) +
       '</div>' +
       (isHome
@@ -4209,10 +4333,10 @@
       pageHeadHtml('<span class="eyebrow">Ontdekken</span><h1>Padelclubs</h1><p class="muted small" style="margin:0.2rem 0 0;">' + realClubs.length + ' echte clubs in Nederland — tik voor recensies, foto\'s en website.</p>') +
       '<div class="search-bar"><input type="search" id="clubSearchInput" placeholder="Zoek een club op naam of plaats…" aria-label="Zoek een club"></div>' +
       tabsetHtml('clubkaart', [
-        { key: 'kaart', label: '🗺️ Kaart', html: '<div class="card" style="display:flex; justify-content:center;"><div class="nlmap-wrap">' +
+        { key: 'kaart', icon: ic('map'), label: 'Kaart', html: '<div class="card" style="display:flex; justify-content:center;"><div class="nlmap-wrap">' +
             '<svg class="nlmap-svg" viewBox="0 0 ' + NLMAP_VIEWBOX_W + ' ' + NLMAP_VIEWBOX_H + '" aria-hidden="true"><path d="' + NLMAP_MAIN_PATH + '"></path>' + islandPaths + '</svg>' +
             pins + '</div></div>' },
-        { key: 'lijst', label: '☰ Lijst', html: '<div class="card club-list">' + rows + '<p class="empty" id="clubSearchEmpty" hidden>Geen clubs gevonden voor deze zoekopdracht.</p></div>' }
+        { key: 'lijst', icon: ic('list'), label: 'Lijst', html: '<div class="card club-list">' + rows + '<p class="empty" id="clubSearchEmpty" hidden>Geen clubs gevonden voor deze zoekopdracht.</p></div>' }
       ], 'kaart');
     body.addEventListener('click', function (ev) {
       var trigger = ev.target.closest('[data-club-id]');
@@ -4259,7 +4383,7 @@
     var body = el('<div class="stack"></div>');
     body.innerHTML =
       '<div><span class="eyebrow" style="color:' + clubAccent(clubId).bg + ';">' + esc(club.city) + '</span><h1>' + esc(club.name) + (club.featured ? ' <span class="badge">Partnerclub</span>' : '') + '</h1>' +
-      (club.website ? '<a class="website-link" href="' + esc(club.website) + '" target="_blank" rel="noopener">🔗 Website van ' + esc(club.name) + '</a>' : '') +
+      (club.website ? '<a class="website-link" href="' + esc(club.website) + '" target="_blank" rel="noopener">' + ic('link') + ' Website van ' + esc(club.name) + '</a>' : '') +
       '<div class="row-actions" style="margin-top:0.6rem; flex-wrap:wrap;">' + bookingLinkHtml(club, '', 'Baan reserveren') + mapsLinkHtml(club) + '</div>' +
       (avg ? '<p style="margin:0.3rem 0 0;"><span class="stars">' + starsHtml(avg) + '</span> <span class="muted small">' + avg.toFixed(1) + '/5 · ' + reviewCountLabel(reviews) + '</span></p>' : '') +
       '</div>' +
@@ -4269,7 +4393,7 @@
           ? '<p class="small muted"><a href="#/registreren">Maak een account</a> of <a href="#/inloggen">log in</a> om deze club toe te voegen en mee te doen.</p>'
           : '<div><button class="btn secondary small" id="joinBtn">Voeg toe als thuisclub</button><p class="small muted" style="margin-top:0.5rem;">Clubpagina\'s zijn altijd vrij te bekijken, ook zonder ze toe te voegen.</p></div>') +
       '<div class="card"><h2>Over deze club</h2><p>' + esc(club.courtsInfo || 'Nog geen informatie toegevoegd.') + '</p>' +
-        (club.website ? '<p class="small"><a class="website-link" href="' + esc(club.website) + '" target="_blank" rel="noopener">🔗 ' + esc(club.website.replace(/^https?:\/\//, '')) + '</a></p>' : '') +
+        (club.website ? '<p class="small"><a class="website-link" href="' + esc(club.website) + '" target="_blank" rel="noopener">' + ic('link') + ' ' + esc(club.website.replace(/^https?:\/\//, '')) + '</a></p>' : '') +
         '<hr class="court-rule"><h3 style="font-size:1.05rem;">Aankomende evenementen</h3>' + eventsListHtml(events, {}, false, eventAttendees) +
         (isHome ? '' : '<p class="small muted" style="margin-top:0.6rem;">Voeg deze club toe als thuisclub om je aan te melden voor evenementen.</p>') + '</div>' +
       '<div class="card"><h2>Foto\'s</h2>' +
@@ -4351,8 +4475,8 @@
         '<span class="player-card-level tnum">' + fmtLevel(p.level) + '</span>' +
         '<div class="player-card-name">' + esc(p.name) + '</div>' +
         '<div class="muted small">@' + esc(p.username) + (tag ? ' · ' + esc(tag) : '') + '</div>' +
-        '<div class="small">📍 ' + esc(p.city || '—') + '</div>' +
-        (clubs ? '<div class="small muted">🎾 ' + esc(clubs) + '</div>' : '') +
+        '<div class="small">' + ic('pin') + ' ' + esc(p.city || '—') + '</div>' +
+        (clubs ? '<div class="small muted">' + ic('padel') + ' ' + esc(clubs) + '</div>' : '') +
         (S.player ? '<a class="btn small" href="#/chat/' + p.id + '" style="margin-top:0.7rem;">Uitnodigen</a>' : '') +
         '</div>';
     }).join('');
@@ -4390,7 +4514,7 @@
         '<td>' + (S.player ? '<button type="button" class="btn small inviteAvailBtn" data-id="' + esc(a.playerId) + '" data-city="' + esc(where) + '" data-time="' + esc(when.charAt(0).toLowerCase() + when.slice(1)) + '" data-partner-ids="' + esc(mates.map(function (x) { return x.id; }).join(',')) + '">' + (mates.length ? 'Aansluiten' : 'Uitnodigen') + '</button>' : '') + '</td></tr>';
     }).join('') || '<tr><td colspan="6" class="empty">Niemand is op dit moment beschikbaar' + (gender || ag ? ' met deze filters' : '') + '.</td></tr>';
 
-    var requestsCard = myRequests.length ? '<div class="card" id="availRequests" style="border:2px solid var(--ball);"><h2>Doe je mee? 🎾</h2>' +
+    var requestsCard = myRequests.length ? '<div class="card" id="availRequests" style="border:2px solid var(--ball);"><h2>Doe je mee?</h2>' +
       '<p class="muted small" style="margin:0.2rem 0 0.4rem;">Deze spelers willen samen met jou online beschikbaar staan. Pas als iedereen accepteert, komt het online.</p>' +
       myRequests.map(function (r) {
         var others = availPartners(r).filter(function (id) { return id !== S.playerId; });
@@ -4405,7 +4529,7 @@
     var myPs = (myAvailability && myAvailability.partnerStatus) || {};
     var mateChips = myMates.length ? '<div class="chip-row" style="margin-top:0.4rem;">' + myMates.map(function (id) {
       var st = myPs[id] || 'accepted';
-      return '<span class="mate-chip ' + st + '">' + (st === 'accepted' ? '✅ ' : st === 'declined' ? '✖ ' : '⏳ ') + esc(nameOf(id)) + '</span>';
+      return '<span class="mate-chip ' + st + '">' + (st === 'accepted' ? ic('check') + ' ' : st === 'declined' ? ic('x') + ' ' : ic('hourglass') + ' ') + esc(nameOf(id)) + '</span>';
     }).join('') + '</div>' : '';
     var myLine = myAvailability ? esc(availWhenLabel(myAvailability)) + ' · ' + esc(availWhereLabel(myAvailability)) : '';
     var availabilityCard = !S.player ? '' :
@@ -4413,9 +4537,9 @@
         (S.player.discoverable === false ? '<p class="small banner warn">Je staat op "niet vindbaar" — anderen zien je beschikbaarheid niet. <a href="#/profiel">Aanpassen</a></p>' : '') +
         (myAvailability
           ? '<div class="status-line"><div style="flex:1; min-width:12rem;">' +
-              (myStatus === 'active' ? '<h2>Je staat beschikbaar ✅</h2>'
-                : myStatus === 'pending' ? '<h2>⏳ Wacht op je medespelers</h2>'
-                : '<h2>✖ Niet online</h2>') +
+              (myStatus === 'active' ? '<h2>Je staat beschikbaar ' + ic('check') + '</h2>'
+                : myStatus === 'pending' ? '<h2>' + ic('hourglass') + ' Wacht op je medespelers</h2>'
+                : '<h2>' + ic('x') + ' Niet online</h2>') +
               '<p class="muted small" style="margin:0.2rem 0 0;">' + myLine +
               (myMates.length && myStatus === 'active' ? ' · samen ' + (myMates.length + 1) + ' spelers, jullie ' + availSeekLabel(myMates.length + 1).replace('zoekt', 'zoeken') : '') + '</p>' +
               mateChips +
@@ -4430,8 +4554,8 @@
 
     var clubFilterName = clubFilter && S.clubsById[clubFilter] ? S.clubsById[clubFilter].name : '';
     var activeFilters = [];
-    if (city) activeFilters.push('📍 ' + city);
-    if (clubFilterName) activeFilters.push('🎾 ' + clubFilterName);
+    if (city) activeFilters.push('' + city);
+    if (clubFilterName) activeFilters.push('' + clubFilterName);
     if (minL || maxL) activeFilters.push('Niveau ' + (minL || '1') + '–' + (maxL || '10'));
     if (gender) activeFilters.push(genderLabel(gender).charAt(0).toUpperCase() + genderLabel(gender).slice(1));
     if (ag) activeFilters.push(ag.label + ' jaar');
@@ -4442,11 +4566,11 @@
       requestsCard +
       availabilityCard +
       '<div class="card"><div class="card-head"><h2>Nu beschikbaar</h2>' +
-        '<button type="button" class="btn secondary small" id="filterOpenBtn2" style="margin-top:0;">⚙️ Filters' + (activeFilters.length ? ' (' + activeFilters.length + ')' : '') + '</button></div>' +
+        '<button type="button" class="btn secondary small" id="filterOpenBtn2" style="margin-top:0;">' + ic('gear') + ' Filters' + (activeFilters.length ? ' (' + activeFilters.length + ')' : '') + '</button></div>' +
         '<div id="availInviteError"></div>' +
         '<div style="overflow-x:auto;"><table><thead><tr><th>Naam</th><th>Niveau</th><th>Waar</th><th>Wanneer</th><th>Geplaatst</th><th></th></tr></thead><tbody>' + availRows + '</tbody></table></div></div>' +
       '<div><div class="card-head"><h2>Alle spelers</h2>' +
-        '<button type="button" class="btn secondary small" id="filterOpenBtn" style="margin-top:0;">⚙️ Filters' + (activeFilters.length ? ' (' + activeFilters.length + ')' : '') + '</button></div>' +
+        '<button type="button" class="btn secondary small" id="filterOpenBtn" style="margin-top:0;">' + ic('gear') + ' Filters' + (activeFilters.length ? ' (' + activeFilters.length + ')' : '') + '</button></div>' +
         (activeFilters.length ? '<div class="filter-chips">' + activeFilters.map(function (t) { return '<span class="filter-chip">' + esc(t) + '</span>'; }).join('') +
           '<a href="#/zoeken" class="small" style="align-self:center;">Wissen</a></div>' : '') +
       '</div>' +
@@ -4509,13 +4633,13 @@
       // Verder vooruit (de rest van het jaar) kan via "Andere datum".
       var yearEnd = new Date().getFullYear() + '-12-31';
       var inWeek = dayOpts.some(function (o) { return o.value === stA.date; });
-      dayOpts.push({ value: 'other', label: '📅 Andere datum…' });
+      dayOpts.push({ value: 'other', icon: ic('calendar'), label: 'Andere datum…' });
       var weekdayOpts = [1, 2, 3, 4, 5, 6, 0].map(function (w) { return { value: w, label: WEEKDAY_NAMES[w].slice(0, 2) }; });
       var partners = Object.values(S.playersById).filter(function (p) { return p.onboardingComplete && p.id !== S.playerId; })
         .sort(function (x, y) { return (x.name || '').localeCompare(y.name || '', 'nl'); });
       var sb = openSheet(myAvailability ? 'Beschikbaarheid aanpassen' : 'Beschikbaar zetten',
         '<p class="muted small" style="margin-top:0;">Anderen zien je niveau (' + fmtLevel(S.player.level) + '), club en tijd.</p>' +
-        '<span class="field-label">Hoe vaak?</span>' + chipChoiceHtml('repeat', [{ value: 'once', label: 'Eenmalig' }, { value: 'weekly', label: '🔁 Elke week herhalen' }], stA.repeat) +
+        '<span class="field-label">Hoe vaak?</span>' + chipChoiceHtml('repeat', [{ value: 'once', label: 'Eenmalig' }, { value: 'weekly', icon: ic('repeat'), label: 'Elke week herhalen' }], stA.repeat) +
         '<div id="av_once"' + (stA.repeat === 'weekly' ? ' hidden' : '') + '><span class="field-label">Welke dag?</span>' + chipChoiceHtml('date', dayOpts, inWeek ? stA.date : 'other') +
           '<div class="date-more" id="av_dateMore"' + (inWeek ? ' hidden' : '') + '><input type="date" id="av_date" min="' + today + '" max="' + yearEnd + '" value="' + (inWeek ? '' : esc(stA.date)) + '" aria-label="Kies een datum">' +
           '<p class="hint" style="margin:0.3rem 0 0; color:var(--muted); font-size:0.8rem;">Elke dag tot en met 31 december kan.</p></div></div>' +
@@ -4695,7 +4819,7 @@
     renderShell(preselect && S.clubsById[preselect] && homeIds.indexOf(preselect) !== -1 ? preselect : 'algemeen', body, 'spelen');
     var card = body.querySelector('#mlCard');
     if (fromPlan) {
-      card.insertAdjacentHTML('beforebegin', '<div class="banner warn" style="margin:0;">📅 Uit de planning <strong>' + esc(fromPlan.title) + '</strong>: ' +
+      card.insertAdjacentHTML('beforebegin', '<div class="banner warn" style="margin:0;">' + ic('calendar') + ' Uit de planning <strong>' + esc(fromPlan.title) + '</strong>: ' +
         esc(fmtPlanDay(fromPlan.chosen.date, true) + ' · ' + fromPlan.chosen.time + (st.clubId ? ' · ' + S.clubsById[st.clubId].name : '') + (fromPlan.chosen.court ? ' · ' + fromPlan.chosen.court : '')) +
         '. Club en spelers staan al klaar — tik alleen nog de teams en de score aan.' + (fromPlan.matchId ? '<br><strong>Let op:</strong> voor deze afspraak is al een uitslag doorgegeven.' : '') + '</div>');
     }
@@ -4750,7 +4874,7 @@
         }).join('') + '</div>' : '') +
         '<span class="field-label">' + (homeIds.length ? 'Ergens anders?' : 'Kies de club') + '</span><div class="chip-row">' +
         (cur && !curIsHome ? '<button type="button" class="chip on" data-act="pickclub">' + esc(cur.name) + ' (' + esc(cur.city) + ')</button>' : '') +
-        '<button type="button" class="chip add" data-act="pickclub">🔍 ' + (cur && !curIsHome ? 'Andere club kiezen' : 'Kies uit alle clubs (A–Z)') + '</button></div>' +
+        '<button type="button" class="chip add" data-act="pickclub">' + ic('search') + ' ' + (cur && !curIsHome ? 'Andere club kiezen' : 'Kies uit alle clubs (A–Z)') + '</button></div>' +
         navHtml('Volgende', 'next');
     }
 
@@ -4768,7 +4892,7 @@
           return '<button type="button" class="chip' + (on ? ' on' : ' ghost') + '" data-act="toggle" data-id="' + esc(id) + '">' + (on ? '✓ ' : '+ ') + esc(nameOf(id)) + '</button>';
         }).join('') + '</div>' : '') +
         '<span class="field-label">Niet in de lijst?</span><div class="chip-row">' +
-        '<button type="button" class="chip add" data-act="search">🔍 Zoek een speler</button>' +
+        '<button type="button" class="chip add" data-act="search">' + ic('search') + ' Zoek een speler</button>' +
         '<button type="button" class="chip add" data-act="guest">+ Onbekende speler (heeft de app niet)</button></div>' +
         '<p class="hint" style="margin:0.5rem 0 0; color:var(--muted); font-size:0.82rem;">Speelde er iemand mee zonder Smash? Voeg een onbekende speler toe — dan kun je de partij gewoon loggen. Die speler telt niet mee op de ranglijst.</p>' +
         navHtml('Volgende', 'next');
@@ -4811,13 +4935,16 @@
 
     function renderDone() {
       var d = st.done;
-      return '<h2>✅ Uitslag doorgegeven</h2>' +
+      return '<h2>' + ic('check') + ' Uitslag doorgegeven</h2>' +
         (d.waiting.length
           ? '<p class="muted" style="margin:0.4rem 0 0;">Nog even wachten op de bevestiging van ' + esc(d.waiting.map(nameOf).join(', ')) + '. Daarna telt hij mee voor de ranglijst.</p>'
           : '<p class="muted" style="margin:0.4rem 0 0;">Telt meteen mee voor de ranglijst en staat in de feed.</p>') +
         '<div style="margin-top:0.8rem;">' + matchSetsHtml(d.match) + '</div>' +
-        '<div class="row-actions" style="flex-wrap:wrap;"><button type="button" class="btn small" data-act="again">Nog een partij loggen</button>' +
-        '<a class="btn secondary small" href="#/spelen">Naar Spelen</a></div>';
+        '<div class="nx" style="margin-top:0.9rem;"><p class="nx-title">' + ic('arrow') + ' Volgende stap</p>' +
+          '<a class="nx-row nx-first" href="#/feed"><span class="nx-ic">' + ic('camera') + '</span><span class="nx-main"><strong>Deel een foto of filmpje</strong><span class="small">Laat de club zien hoe het ging</span></span><span class="nx-arrow">›</span></a>' +
+          '<a class="nx-row" href="#/plan/nieuw"><span class="nx-ic">' + ic('calendar') + '</span><span class="nx-main"><strong>Plan het volgende potje</strong><span class="small">Revanche of weer met dezelfde groep</span></span><span class="nx-arrow">›</span></a></div>' +
+        '<div class="row-actions" style="flex-wrap:wrap;"><button type="button" class="btn secondary small" data-act="again">Nog een partij loggen</button>' +
+        '<a class="btn secondary small" href="#/">Naar Home</a></div>';
     }
 
     function render() {
@@ -5026,7 +5153,7 @@
           '<div><span class="eyebrow">Record</span><div class="points-figure tnum" style="font-size:1.7rem;">' + stats.wins + '–' + stats.losses + '</div><p class="muted small" style="margin:0.2rem 0 0;">gewonnen–verloren</p></div>' +
           '<div><span class="eyebrow">Langste reeks</span><div class="points-figure tnum" style="font-size:1.7rem;">' + stats.longestStreak + '</div><p class="muted small" style="margin:0.2rem 0 0;">overwinningen op rij</p></div>' +
           '</div>' +
-          (stats.bestWinLabel ? '<p class="small" style="margin-top:0.9rem;">🏆 Beste overwinning: tegen <strong>' + esc(stats.bestWinLabel) + '</strong> (niveau ' + stats.bestWinLevel.toFixed(1) + ')</p>' : '') +
+          (stats.bestWinLabel ? '<p class="small" style="margin-top:0.9rem;">' + ic('trophy') + ' Beste overwinning: tegen <strong>' + esc(stats.bestWinLabel) + '</strong> (niveau ' + stats.bestWinLevel.toFixed(1) + ')</p>' : '') +
           '</div>'
         : '') +
       '<div class="card"><h2>Mijn foto\'s</h2>' +
@@ -5039,13 +5166,13 @@
       '</div>' +
       '<div><p class="home-section-title" style="margin:0 0 0.5rem;">Instellingen</p>' +
       '<div class="card settings-card"><div class="menu-list">' +
-        settingsRow('gegevens', '👤', 'Mijn gegevens', 'Naam, gebruikersnaam, niveau, woonplaats') +
-        settingsRow('clubs', '🎾', 'Mijn clubs', homeCount ? homeCount + (homeCount === 1 ? ' thuisclub' : ' thuisclubs') + ' · voorkeurstijden' : 'Nog geen thuisclub') +
-        settingsRow('privacy', '🔒', 'Privacy', (S.player.discoverable === false ? 'Niet vindbaar' : 'Vindbaar') + ' · ' + (S.player.rankingOptOut ? 'niet op ranglijst' : 'op ranglijst') + ' · ' + (S.player.recommendable === false ? 'niet aanbevolen' : 'aanbevolen')) +
-        settingsRow('mijndata', '📄', 'Mijn gegevens downloaden of verwijderen', 'Inzien, downloaden, account verwijderen') +
-        (amOwner ? settingsRow('eigenaar', '📊', 'Eigenaar-dashboard', 'Alleen voor jou: statistieken en clubrapporten') : '') +
-        settingsRow('shop', '🛍️', 'Padelshop', 'Bestellingen en korting') +
-        settingsRow('logout', '🚪', 'Uitloggen', '', true) +
+        settingsRow('gegevens', ic('user'), 'Mijn gegevens', 'Naam, gebruikersnaam, niveau, woonplaats') +
+        settingsRow('clubs', ic('padel'), 'Mijn clubs', homeCount ? homeCount + (homeCount === 1 ? ' thuisclub' : ' thuisclubs') + ' · voorkeurstijden' : 'Nog geen thuisclub') +
+        settingsRow('privacy', ic('lock'), 'Privacy', (S.player.discoverable === false ? 'Niet vindbaar' : 'Vindbaar') + ' · ' + (S.player.rankingOptOut ? 'niet op ranglijst' : 'op ranglijst') + ' · ' + (S.player.recommendable === false ? 'niet aanbevolen' : 'aanbevolen')) +
+        settingsRow('mijndata', ic('doc'), 'Mijn gegevens downloaden of verwijderen', 'Inzien, downloaden, account verwijderen') +
+        (amOwner ? settingsRow('eigenaar', ic('chart'), 'Eigenaar-dashboard', 'Alleen voor jou: statistieken en clubrapporten') : '') +
+        settingsRow('shop', ic('bag'), 'Padelshop', 'Bestellingen en korting') +
+        settingsRow('logout', ic('logout'), 'Uitloggen', '', true) +
       '</div></div></div>';
     renderShell(null, body, 'profiel');
 
@@ -5387,7 +5514,7 @@
       '<div class="card" style="border:2px solid var(--court);">' +
         '<h2>Reserveer bij ' + esc(club.name) + '</h2>' +
         '<p class="muted small">Je reserveert in het eigen systeem van de club. Daar zie je precies welke banen en tijden nog vrij zijn, dus je boekt nooit iets dat al bezet is.</p>' +
-        '<button class="btn" type="button" id="bkOpen" style="margin-top:0.4rem; font-size:1rem; padding:0.7rem 1.3rem;">🎾 Baan huren</button>' +
+        '<button class="btn" type="button" id="bkOpen" style="margin-top:0.4rem; font-size:1rem; padding:0.7rem 1.3rem;">' + ic('padel') + ' Baan huren</button>' +
         (host ? '<p class="small muted" style="margin:0.7rem 0 0;">Reserveren gaat via ' + esc(host) + ' — al geboekt? Tik dan meteen op Geboekt.</p>' : '') +
         '<p class="small" style="margin:0.7rem 0 0;"><a href="#/baan-huren">Bij een andere club huren →</a></p>' +
       '</div>' +
@@ -5410,7 +5537,7 @@
     var discountPct = Math.min(20, Math.floor(totalPoints / 100) * 5);
     var cards = products.map(function (p) {
       var discounted = discountPct ? p.price * (1 - discountPct / 100) : null;
-      return '<div class="shop-card"><div class="shop-emoji">' + p.emoji + '</div>' +
+      return '<div class="shop-card"><div class="shop-emoji">' + ic(PRODUCT_ICONS[p.id] || 'bag') + '</div>' +
         '<div class="shop-name">' + esc(p.name) + '</div>' +
         '<div class="shop-desc">' + esc(p.description) + '</div>' +
         '<div class="shop-price tnum">€' + (discounted ? discounted.toFixed(2) + ' <s>€' + Number(p.price).toFixed(2) + '</s>' : Number(p.price).toFixed(2)) + '</div>' +
@@ -5473,8 +5600,8 @@
       var mine = m.senderId === S.playerId;
       var unread = !mine && (!readMap[cid] || readMap[cid] < m.createdAt);
       var name = nameOf(pid), username = usernameOf(pid);
-      var previewText = m.deletedForEveryone ? '🚫 Dit bericht is verwijderd'
-        : (m.text ? (esc(m.text.slice(0, 60)) + (m.text.length > 60 ? '…' : '')) : (m.imageDataUrl ? '📷 Foto' : (m.videoUrl ? '🎬 Video' : '')));
+      var previewText = m.deletedForEveryone ? 'Dit bericht is verwijderd'
+        : (m.text ? (esc(m.text.slice(0, 60)) + (m.text.length > 60 ? '…' : '')) : (m.imageDataUrl ? 'Foto' : (m.videoUrl ? 'Video' : '')));
       var preview = m.deletedForEveryone ? previewText : (mine ? 'Jij: ' : '') + previewText;
       previewData[pid] = { name: name, initials: initialsOf(name) };
       return { at: m.createdAt || '', html: '<div class="chatrow-wrap" data-pid="' + esc(pid) + '" data-search="' + esc((name + ' ' + username).toLowerCase()) + '">' +
@@ -5498,7 +5625,7 @@
       var at = last ? last.createdAt : (g.createdAt || '');
       return { at: at || '', html: '<div class="chatrow-gwrap" data-search="' + esc(((g.title || '') + ' ' + memberNames).toLowerCase()) + '">' +
         '<a href="#/groepschat/' + esc(g.id) + '" class="chatrow' + (unread ? ' unread' : '') + '" style="text-decoration:none; color:inherit;">' +
-        (isFriend ? '<span class="chatavatar duo" aria-hidden="true">👤👤</span>' : '<span class="chatavatar" style="background:var(--ball); color:var(--ball-ink);">🎾</span>') +
+        (isFriend ? '<span class="chatavatar duo" aria-hidden="true">' + ic('users') + '</span>' : '<span class="chatavatar" style="background:var(--ball); color:var(--ball-ink);">' + ic('padel') + '</span>') +
         '<span class="chatrow-main"><span class="chatrow-top"><span class="chatrow-name">' + esc(g.title || 'Partijchat') + '</span><span class="grp-tag">groep</span>' +
         '<span class="chatrow-time">' + (at ? timeAgo(at) : '') + '</span></span>' +
         '<span class="chatrow-preview"><span>' + esc(last ? groupPreviewText(last) : memberNames) + '</span>' + (unread ? '<span class="chatrow-dot"></span>' : '') + '</span></span></a></div>' };
@@ -5720,7 +5847,7 @@
           '<button type="button" class="btn secondary small chatattach-remove" id="removeChatAttach">Verwijderen</button>';
       } else if (pendingVideo) {
         previewBox.hidden = false;
-        previewBox.innerHTML = '<span class="small">🎬 Videolink toegevoegd</span>' +
+        previewBox.innerHTML = '<span class="small">' + ic('video') + ' Videolink toegevoegd</span>' +
           '<button type="button" class="btn secondary small chatattach-remove" id="removeChatAttach">Verwijderen</button>';
       } else {
         previewBox.hidden = true; previewBox.innerHTML = '';
@@ -5809,9 +5936,9 @@
     body.innerHTML =
       '<div class="chatthread-head">' +
       '<a href="#/chat" class="chatthread-back" aria-label="Terug naar berichten"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>' +
-      (isFriendChat ? '<span class="chatthread-avatar duo">👤👤</span>' : '<span class="chatthread-avatar" style="background:var(--ball); color:var(--ball-ink);">🎾</span>') +
+      (isFriendChat ? '<span class="chatthread-avatar duo">' + ic('users') + '</span>' : '<span class="chatthread-avatar" style="background:var(--ball); color:var(--ball-ink);">' + ic('padel') + '</span>') +
       '<span style="flex:1; min-width:0;"><span class="chatthread-name">' + esc(group.title || 'Partijchat') + '</span><span class="chatthread-sub">' + esc(memberNames) + '</span></span>' +
-      (isFriendChat ? '<a class="btn secondary small" href="#/vriendengroep/' + esc(group.sourceId) + '" style="flex:none;">🏆 Stand</a>' : '') +
+      (isFriendChat ? '<a class="btn secondary small" href="#/vriendengroep/' + esc(group.sourceId) + '" style="flex:none;">' + ic('trophy') + ' Stand</a>' : '') +
       '</div>' +
       '<div class="chatthread-messages">' + bubbles + '</div>' +
       '<div id="chatMsgError"></div>' +
@@ -5821,11 +5948,11 @@
       '<p class="hint" style="margin:0.4rem 0 0;">Testversie: nog geen echte video-upload in de app — plak in plaats daarvan een link.</p>' +
       '</div>' +
       '<div class="group-extras" id="groupExtras" hidden>' +
-        '<button type="button" class="gx-btn" data-gx="poll"><span>📊</span>Peiling</button>' +
-        '<button type="button" class="gx-btn" data-gx="who"><span>🙋</span>Wie kan er deze week?</button>' +
-        '<a class="gx-btn" href="' + planHref + '"><span>📅</span>Potje plannen</a>' +
-        (isFriendChat ? '<button type="button" class="gx-btn" data-gx="stand"><span>🏆</span>Tussenstand delen</button>' : '') +
-        '<a class="gx-btn" href="#/baan-huren"><span>🎾</span>Baan huren</a>' +
+        '<button type="button" class="gx-btn" data-gx="poll"><span>' + ic('chart') + '</span>Peiling</button>' +
+        '<button type="button" class="gx-btn" data-gx="who"><span>' + ic('hand') + '</span>Wie kan er deze week?</button>' +
+        '<a class="gx-btn" href="' + planHref + '"><span>' + ic('calendar') + '</span>Potje plannen</a>' +
+        (isFriendChat ? '<button type="button" class="gx-btn" data-gx="stand"><span>' + ic('trophy') + '</span>Tussenstand delen</button>' : '') +
+        '<a class="gx-btn" href="#/baan-huren"><span>' + ic('padel') + '</span>Baan huren</a>' +
       '</div>' +
       '<form id="msgForm" class="chatinput-bar">' +
       '<button type="button" class="chatinput-icon gx-toggle" id="groupExtrasBtn" title="Meer voor de groep" aria-label="Meer voor de groep">＋</button>' +
@@ -5862,7 +5989,7 @@
           '<button type="button" class="btn secondary small chatattach-remove" id="removeChatAttach">Verwijderen</button>';
       } else if (pendingVideo) {
         previewBox.hidden = false;
-        previewBox.innerHTML = '<span class="small">🎬 Videolink toegevoegd</span>' +
+        previewBox.innerHTML = '<span class="small">' + ic('video') + ' Videolink toegevoegd</span>' +
           '<button type="button" class="btn secondary small chatattach-remove" id="removeChatAttach">Verwijderen</button>';
       } else { previewBox.hidden = true; previewBox.innerHTML = ''; return; }
       document.getElementById('removeChatAttach').addEventListener('click', function () {
@@ -5941,7 +6068,7 @@
     }
     var TEMPLATES = {
       week: { q: 'Wie kan er deze week padellen?', options: days, multi: true },
-      mee: { q: 'Doe je mee?', options: ['Ja 🎾', 'Nee', 'Misschien'], multi: false },
+      mee: { q: 'Doe je mee?', options: ['Ja', 'Nee', 'Misschien'], multi: false },
       tijd: { q: 'Hoe laat spelen we?', options: ['18:00', '19:30', '21:00'], multi: true },
       club: { q: 'Bij welke club spelen we?', options: ((S.player.homeClubIds || []).map(function (id) { return S.clubsById[id] ? S.clubsById[id].name : null; }).filter(Boolean).concat(['Maakt niet uit'])), multi: true },
       eigen: { q: '', options: ['', ''], multi: false }
@@ -5949,7 +6076,7 @@
     var st = JSON.parse(JSON.stringify(TEMPLATES[preset] || TEMPLATES.mee));
     var sb = openSheet('Peiling maken',
       '<span class="field-label" style="margin-top:0;">Kies een vraag</span>' +
-      chipChoiceHtml('tpl', [{ value: 'week', label: '🙋 Wie kan er?' }, { value: 'mee', label: 'Doe je mee?' }, { value: 'tijd', label: '⏰ Hoe laat?' }, { value: 'club', label: '📍 Welke club?' }, { value: 'eigen', label: '✏️ Eigen vraag' }], preset || 'mee') +
+      chipChoiceHtml('tpl', [{ value: 'week', icon: ic('hand'), label: 'Wie kan er?' }, { value: 'mee', label: 'Doe je mee?' }, { value: 'tijd', icon: ic('clock'), label: 'Hoe laat?' }, { value: 'club', icon: ic('pin'), label: 'Welke club?' }, { value: 'eigen', icon: ic('pencil'), label: 'Eigen vraag' }], preset || 'mee') +
       '<div id="pollForm"></div>' +
       '<div id="pollErr"></div><button type="button" class="btn" id="pollSend" style="width:100%; justify-content:center;">Peiling plaatsen</button>');
     function render() {
@@ -5991,7 +6118,7 @@
     var app = document.getElementById('app');
     app.innerHTML = '';
     var wrap = el('<div style="max-width:560px; margin:2.5rem auto;"><div class="card">' +
-      '<span class="eyebrow">Welkom</span><h1>Welkom bij Smash 🎾</h1>' +
+      '<span class="eyebrow">Welkom</span><h1>Welkom bij Smash</h1>' +
       '<p class="muted">Voor we beginnen, een paar korte vragen zodat we de app op jou kunnen afstemmen.</p>' +
       '<div id="obError"></div>' +
       '<form id="obForm">' +
@@ -6057,7 +6184,7 @@
     app.innerHTML = '';
     var isRegister = mode === 'register';
     var wrap = el('<div style="max-width:420px; margin:3rem auto;"><div class="card">' +
-      '<span class="eyebrow">Smash</span><h1>🎾 ' + (isRegister ? 'Account maken' : 'Inloggen') + '</h1>' +
+      '<span class="eyebrow">Smash</span><h1>' + ic('padel') + ' ' + (isRegister ? 'Account maken' : 'Inloggen') + '</h1>' +
       (isRegister ? '<p class="muted">Na het aanmaken van je account krijg je een korte vragenlijst.</p>' : '') +
       '<div id="authError"></div>' +
       '<form id="authForm">' +
@@ -6431,7 +6558,7 @@
     if (groupsEl) {
       groupsEl.innerHTML = groups.map(function (g) {
         var n = (g.memberIds || []).filter(function (id) { return exclude.indexOf(id) === -1; }).length;
-        return n ? '<button type="button" class="plan-pick" data-group="' + esc(g.id) + '">👥 ' + esc(g.name) + ' <span class="muted">(' + n + ')</span></button>' : '';
+        return n ? '<button type="button" class="plan-pick" data-group="' + esc(g.id) + '">' + ic('users') + ' ' + esc(g.name) + ' <span class="muted">(' + n + ')</span></button>' : '';
       }).join('');
       groupsEl.addEventListener('click', function (ev) {
         var b = ev.target.closest('[data-group]'); if (!b) return;
@@ -6572,10 +6699,10 @@
   // Tijd kiezen zonder gedoe: vier grote tegels met de meest gekozen tijden, en voor iets anders
   // een simpele −/+ teller (stappen van een half uur) — geen lange lijsten met tijden.
   var POLL_QUICK_TIMES = [
-    { t: '10:00', icon: '☀️', label: 'Ochtend' },
-    { t: '14:00', icon: '🌤️', label: 'Middag' },
-    { t: '18:30', icon: '🌆', label: 'Na het werk' },
-    { t: '20:00', icon: '🌙', label: 'Avond' }
+    { t: '10:00', icon: ic('sun'), label: 'Ochtend' },
+    { t: '14:00', icon: ic('cloudsun'), label: 'Middag' },
+    { t: '18:30', icon: ic('sunset'), label: 'Na het werk' },
+    { t: '20:00', icon: ic('moon'), label: 'Avond' }
   ];
   function shiftTime(t, mins) { return minToTime((timeToMin(t) + mins + 1440) % 1440); }
   function pollTimeHtml(selected, custom, addLabel) {
@@ -6637,7 +6764,7 @@
   function timeIcon(t) {
     var q = POLL_QUICK_TIMES.filter(function (x) { return x.t === t; })[0]; if (q) return q.icon;
     var h = Number(String(t).slice(0, 2));
-    return h < 12 ? '☀️' : h < 17 ? '🌤️' : h < 19 ? '🌆' : '🌙';
+    return h < 12 ? ic('sun') : h < 17 ? ic('cloudsun') : h < 19 ? ic('sunset') : ic('moon');
   }
   // Twee korte vragen: welke dagen + hoe laat. Tikken = stemmen.
   function pollSplitHtml(plan, list, myId, compact) {
@@ -6645,25 +6772,25 @@
     var T = pollTally(plan, list);
     var bestDay = T.best ? T.best.date : null, bestTime = T.best ? T.best.time : null, bestClub = T.best ? T.best.clubId : null;
     function cnt(field, v) { return list.filter(function (x) { return (x[field] || []).indexOf(v) !== -1; }).length; }
-    return '<div class="pp-sec">📅 Welke dagen kun je?</div><div class="pd-grid' + (compact ? ' sm' : '') + '">' +
+    return '<div class="pp-sec">' + ic('calendar') + ' Welke dagen kun je?</div><div class="pd-grid' + (compact ? ' sm' : '') + '">' +
       plan.dayOpts.slice().sort().map(function (d) {
         var dd = parseLocalDate(d), on = (mine.days || []).indexOf(d) !== -1, n = cnt('days', d);
         return '<button type="button" class="pd' + (on ? ' on' : '') + (d === bestDay ? ' best' : '') + '" data-pday="' + d + '">' +
           '<span class="pd-w">' + DAY_SHORT[dd.getDay()] + '</span><span class="pd-n">' + dd.getDate() + '</span><span class="pd-m">' + MONTHS[dd.getMonth()] + '</span>' +
           (n ? '<span class="pd-c tnum">' + n + '</span>' : '') + '</button>';
       }).join('') + '</div>' +
-      '<div class="pp-sec">⏰ Hoe laat kun je?</div><div class="tq-grid">' +
+      '<div class="pp-sec">' + ic('clock') + ' Hoe laat kun je?</div><div class="tq-grid">' +
       plan.timeOpts.slice().sort().map(function (t) {
         var on = (mine.times || []).indexOf(t) !== -1, n = cnt('times', t);
         return '<button type="button" class="tq' + (on ? ' on' : '') + '" data-ptime="' + t + '"><span class="tq-ic" aria-hidden="true">' + timeIcon(t) + '</span>' +
-          '<span><span class="tq-t">' + t + '</span><span class="tq-l">' + (n ? n + (n === 1 ? ' kan' : ' kunnen') : 'nog niemand') + (t === bestTime ? ' · 🏆' : '') + '</span></span>' +
+          '<span><span class="tq-t">' + t + '</span><span class="tq-l">' + (n ? n + (n === 1 ? ' kan' : ' kunnen') : 'nog niemand') + (t === bestTime ? ' · ' + ic('trophy') : '') + '</span></span>' +
           '<span class="tq-check" aria-hidden="true">✓</span></button>';
       }).join('') + '</div>' +
-      (pollClubQ(plan) ? '<div class="pp-sec">📍 Waar wil je spelen? <span class="muted small" style="font-weight:500;">(niks aantikken = maakt niet uit)</span></div><div class="pc-list">' +
+      (pollClubQ(plan) ? '<div class="pp-sec">' + ic('pin') + ' Waar wil je spelen? <span class="muted small" style="font-weight:500;">(niks aantikken = maakt niet uit)</span></div><div class="pc-list">' +
         plan.clubOpts.map(function (cid) {
           var on = (mine.clubs || []).indexOf(cid) !== -1, n = cnt('clubs', cid), c = S.clubsById[cid] || {};
           return '<button type="button" class="pc' + (on ? ' on' : '') + '" data-pclub="' + esc(cid) + '"><span class="pc-main"><strong>' + esc(c.name || 'Club') + '</strong>' +
-            '<span class="pc-sub">' + esc(c.city || '') + (n ? ' · ' + n + (n === 1 ? ' wil hier' : ' willen hier') : '') + (cid === bestClub ? ' · 🏆' : '') + '</span></span>' +
+            '<span class="pc-sub">' + esc(c.city || '') + (n ? ' · ' + n + (n === 1 ? ' wil hier' : ' willen hier') : '') + (cid === bestClub ? ' · ' + ic('trophy') : '') + '</span></span>' +
             '<span class="pp-check" aria-hidden="true">' + (on ? '✓' : '') + '</span></button>';
         }).join('') + '</div>' : '');
   }
@@ -6739,9 +6866,9 @@
         '<p class="small muted" style="margin:0 0 0.2rem;">Tik 1 club, of meerdere: dan stemmen je vrienden mee en kiest Smash de best passende.</p>' +
         '<div class="chip-row" id="pnClubs"></div>' +
         '<div class="chip-row" id="pnNeeded" style="margin-top:0.5rem;"></div>' +
-        '<details class="acc" style="margin-top:0.9rem;" id="pn_inviteAcc"><summary>👥 Wie nodig je uit? <span class="acc-meta" id="pn_invMeta">niemand</span></summary><div class="acc-body">' +
+        '<details class="acc" style="margin-top:0.9rem;" id="pn_inviteAcc"><summary>' + ic('users') + ' Wie nodig je uit? <span class="acc-meta" id="pn_invMeta">niemand</span></summary><div class="acc-body">' +
           '<div id="pn_invite"><p class="muted small">Laden…</p></div><div id="pnGroupChat"></div></div></details>' +
-        '<details class="acc" style="margin-top:0.6rem;"><summary>✏️ Naam <span class="acc-meta" id="pnTitleMeta"></span></summary><div class="acc-body">' +
+        '<details class="acc" style="margin-top:0.6rem;"><summary>' + ic('pencil') + ' Naam <span class="acc-meta" id="pnTitleMeta"></span></summary><div class="acc-body">' +
           '<input type="text" id="pn_title" maxlength="60" placeholder="Wordt automatisch ingevuld"></div></details>' +
         '<div id="pn_err"></div>' +
         '<button class="btn" type="button" id="pnSend" style="width:100%;justify-content:center;margin-top:1rem;">Peiling versturen</button>' +
@@ -6755,7 +6882,7 @@
       if (ds.length === 1) return 'Padellen ' + pollDayLabel(ds[0]).toLowerCase().replace(/^(vandaag|morgen)$/, '$1');
       var weekEnd = new Date(); weekEnd.setDate(weekEnd.getDate() + (7 - weekEnd.getDay()) % 7);
       if (ds.length && ds[ds.length - 1] <= localDateStr(weekEnd)) return 'Padellen deze week';
-      return 'Padellen 🎾';
+      return 'Padellen';
     }
     function titleNow() { var v = body.querySelector('#pn_title').value.trim(); return (v || autoTitle()).slice(0, 60); }
 
@@ -6779,7 +6906,7 @@
       if (!nDays || !nTimes) {
         box.innerHTML = '<p class="small muted" style="margin:0;">' + (!nDays && !nTimes ? 'Tik minstens één dag en één tijd aan.' : !nDays ? 'Tik nog een dag aan.' : 'Tik nog een tijd aan.') + '</p>';
       } else {
-        box.innerHTML = '<p class="small" style="margin:0;"><strong>📅 ' + nDays + ' dag' + (nDays === 1 ? '' : 'en') + ' · ⏰ ' + nTimes + ' tijd' + (nTimes === 1 ? '' : 'en') + '</strong></p>' +
+        box.innerHTML = '<p class="small" style="margin:0;"><strong>' + ic('calendar') + ' ' + nDays + ' dag' + (nDays === 1 ? '' : 'en') + ' · ' + ic('clock') + ' ' + nTimes + ' tijd' + (nTimes === 1 ? '' : 'en') + '</strong></p>' +
           (over ? '<p class="pn-warn" style="margin:0.2rem 0 0;">Kies maximaal ' + POLL_MAX_TIMES + ' tijden.</p>'
             : '<p class="small muted" style="margin:0.2rem 0 0;">Je vrienden tikken aan welke dagen en tijden ze kunnen. Smash rekent zelf het beste moment uit.</p>');
       }
@@ -6806,7 +6933,7 @@
       var n = st.inviteIds.length + 1;
       body.querySelector('#pnClubs').innerHTML = sg.ids.map(function (cid) {
         var c = sg.count[cid] || 0;
-        return '<button type="button" class="chip' + (st.clubs.indexOf(cid) !== -1 ? ' on' : '') + '" data-club="' + esc(cid) + '">📍 ' + esc(S.clubsById[cid].name) +
+        return '<button type="button" class="chip' + (st.clubs.indexOf(cid) !== -1 ? ' on' : '') + '" data-club="' + esc(cid) + '">' + ic('pin') + ' ' + esc(S.clubsById[cid].name) +
           (st.inviteIds.length && c ? ' <span style="opacity:0.75;font-weight:500;">· thuisclub van ' + c + '/' + n + '</span>' : '') + '</button>';
       }).join('') +
         '<button type="button" class="chip' + (!st.clubs.length ? ' on' : '') + '" data-club="">Maakt niet uit</button>' +
@@ -6937,7 +7064,7 @@
       return '<button type="button" class="pp-opt' + (on ? ' on' : '') + (isChosen ? ' chosen' : '') + '" data-pkey="' + esc(r.key) + '" data-pcode="' + esc(plan.code) + '">' +
         '<span class="pp-check" aria-hidden="true">' + (on ? '✓' : '') + '</span>' +
         '<span class="pp-main"><span class="pp-top"><span class="pp-label">' + esc(pollOptLabel(r)) +
-          (isChosen ? ' <span class="pp-tag ok">✓ gekozen</span>' : isBest ? ' <span class="pp-tag">🏆</span>' : '') +
+          (isChosen ? ' <span class="pp-tag ok">✓ gekozen</span>' : isBest ? ' <span class="pp-tag">' + ic('trophy') + '</span>' : '') +
           (full && !isChosen ? ' <span class="pp-tag ok">vol</span>' : '') + '</span>' +
           '<span class="pp-n tnum">' + n + '</span></span>' +
           '<span class="pp-bar"><span style="width:' + Math.round(n / max * 100) + '%"></span></span>' +
@@ -6960,20 +7087,20 @@
     var body = el('<div class="stack"></div>');
     body.innerHTML =
       pageHeadHtml('<span class="eyebrow">Peiling van ' + esc(plan.organizerName) + '</span><h1>' + esc(plan.title) + '</h1>' +
-        '<p class="muted small" style="margin:0.2rem 0 0;">' + (plan.clubId ? '📍 ' + esc(clubLabel(plan.clubId)) + ' · ' : pollClubQ(plan) ? '📍 ' + plan.clubOpts.length + ' clubs · ' : '') + (plan.needed || 4) + ' spelers · code <strong>' + esc(code) + '</strong></p>') +
+        '<p class="muted small" style="margin:0.2rem 0 0;">' + (plan.clubId ? ic('pin') + ' ' + esc(clubLabel(plan.clubId)) + ' · ' : pollClubQ(plan) ? ic('pin') + ' ' + plan.clubOpts.length + ' clubs · ' : '') + (plan.needed || 4) + ' spelers · code <strong>' + esc(code) + '</strong></p>') +
       (justCreated ? '<div class="banner warn" style="margin:0;">Peiling verstuurd!' + ((plan.invitedIds || []).length ? ' ' + plan.invitedIds.length + ' speler(s) kregen hem in hun chat.' : '') + ' Tik zelf ook je opties aan.</div>' : '') +
       '<div class="ps"><div class="ps-head"><strong>Zo gaat het</strong><span class="ps-count" id="psCount"></span></div>' +
       '<div id="ppChosen"></div>' +
       '<div class="ps-slot" id="ppSlot"><div id="ppGuest"></div>' +
       '<div class="card pp-card">' + (split ? '' : '<div class="pp-head"><strong>Wanneer kun je?</strong><span class="muted small">Tik er één of meer aan</span></div>') +
         '<div id="ppRows"></div>' +
-        '<div class="pp-foot"><button type="button" class="chip ghost" id="ppNone">🙅 Kan geen van deze</button>' +
+        '<div class="pp-foot"><button type="button" class="chip ghost" id="ppNone">' + ic('x') + ' Kan geen van deze</button>' +
           (isOrganizer ? '<button type="button" class="chip add" id="ppAdd">' + (split ? '+ Dag of tijd' : '+ Optie') + '</button>' : '') + '</div>' +
         '<p class="small muted" id="ppStatus" style="margin:0.5rem 0 0;"></p>' +
       '</div></div>' +
       '<div id="ppResult"></div></div>' +
       '<div class="plan-topactions">' +
-        (S.player ? '<button type="button" class="btn secondary small" id="ppInvite">👥 Uitnodigen</button>' : '') +
+        (S.player ? '<button type="button" class="btn secondary small" id="ppInvite">' + ic('users') + ' Uitnodigen</button>' : '') +
         '<a class="btn whatsapp small" href="' + esc(waHref(pollInviteText(plan))) + '" target="_blank" rel="noopener">Deel in WhatsApp</a>' +
       '</div>' +
       (!S.player ? '<p class="small muted" style="margin:0;">Zelf ook Smash gebruiken? <a href="#/registreren">Maak een account</a> of <a href="#/inloggen">log in</a>.</p>' : '');
@@ -7083,7 +7210,7 @@
       var iVoted = T.voters.some(function (r) { return r.id === myId; });
       if (ch) add('done', 'Iedereen tikt aan wanneer hij kan', T.voters.length + ' gestemd', '');
       else add('active', 'Iedereen tikt aan wanneer hij kan', T.voters.length + ' gestemd',
-        '<p class="small" style="margin:0;font-weight:700;">' + (iVoted || myNone ? '✓ Jij hebt gestemd — aanpassen kan hieronder.' : '👇 Tik hieronder aan wanneer jij kunt.') + '</p>');
+        '<p class="small" style="margin:0;font-weight:700;">' + (iVoted || myNone ? '✓ Jij hebt gestemd — aanpassen kan hieronder.' : ic('arrowdown') + ' Tik hieronder aan wanneer jij kunt.') + '</p>');
       // 3 · vastzetten
       if (ch) {
         add('done', 'Moment vastgezet', whenTxt + (clubId ? ' · ' + esc(clubLabel(clubId)) : ''),
@@ -7091,8 +7218,8 @@
       } else if (T.best) {
         var b = T.best;
         add('active', 'Moment vastzetten', '',
-          '<div class="ps-best"><span class="small muted">🏆 Beste moment tot nu toe</span><strong>' + esc(fmtPlanDay(b.date, true) + ' · ' + b.time) + '</strong>' +
-          (b.clubId ? '<span class="small" style="font-weight:700;">📍 ' + esc(clubLabel(b.clubId)) + '</span>' : '') +
+          '<div class="ps-best"><span class="small muted">' + ic('trophy') + ' Beste moment tot nu toe</span><strong>' + esc(fmtPlanDay(b.date, true) + ' · ' + b.time) + '</strong>' +
+          (b.clubId ? '<span class="small" style="font-weight:700;">' + ic('pin') + ' ' + esc(clubLabel(b.clubId)) + '</span>' : '') +
           '<span class="small muted">' + b.ok.length + ' van ' + (plan.needed || 4) + ' kunnen: ' + esc(b.ok.map(function (x) { return x.id === myId ? 'jij' : x.name; }).join(', ')) + '</span></div>' +
           (isOrganizer ? '<div class="ps-actions"><button class="btn small" type="button" data-act="choose" data-key="' + esc(b.key) + '">Vastzetten</button>' +
             (T.rows.filter(function (r) { return r.ok.length; }).length > 1 ? '<button class="btn secondary small" type="button" data-act="pick">Ander moment</button>' : '') + '</div>'
@@ -7101,13 +7228,13 @@
       // 4 · baan
       if (!ch) add('todo', 'Baan boeken', '', '');
       else if (!club) add('skip', 'Baan boeken', 'geen club gekozen', '');
-      else if (ch.court || ch.booked) add('done', 'Baan geboekt', ch.court ? '🎾 ' + esc(ch.court) : 'baannummer volgt bij de club', isOrganizer && !plan.matchId ? (!ch.court && !over ? '<div class="court-row ps-mini" style="margin:0.35rem 0;">' + courtsForClub(club).map(function (c) { return '<button type="button" class="court-chip" data-court="' + esc(c) + '">' + esc(c.replace('Baan ', '')) + '</button>'; }).join('') + '</div>' : '') +
+      else if (ch.court || ch.booked) add('done', 'Baan geboekt', ch.court ? ic('padel') + ' ' + esc(ch.court) : 'baannummer volgt bij de club', isOrganizer && !plan.matchId ? (!ch.court && !over ? '<div class="court-row ps-mini" style="margin:0.35rem 0;">' + courtsForClub(club).map(function (c) { return '<button type="button" class="court-chip" data-court="' + esc(c) + '">' + esc(c.replace('Baan ', '')) + '</button>'; }).join('') + '</div>' : '') +
           '<button class="linkbtn" type="button" data-act="nocourt">' + (ch.court ? 'Andere baan' : 'Toch niet geboekt') + '</button>' : '');
       else if (over) add('skip', 'Baan boeken', 'geen baan ingevuld', '');
       else if (isOrganizer) {
         var courts = courtsForClub(club);
         add('active', 'Baan boeken', esc(club.name),
-          '<div class="ps-actions" style="margin:0 0 0.7rem;"><button class="btn small" type="button" data-act="bookopen">🎾 Baan huren</button>' +
+          '<div class="ps-actions" style="margin:0 0 0.7rem;"><button class="btn small" type="button" data-act="bookopen">' + ic('padel') + ' Baan huren</button>' +
             '<button class="btn secondary small" type="button" data-act="booked">✓ Al geboekt</button></div>' +
           '<p class="small" style="margin:0 0 0.45rem;font-weight:700;">Welke baan kreeg je? <span class="muted" style="font-weight:600;">(mag ook later)</span></p>' +
           '<div class="court-row">' + courts.map(function (c) { return '<button type="button" class="court-chip" data-court="' + esc(c) + '">' + esc(c.replace('Baan ', '')) + '</button>'; }).join('') + '</div>');
@@ -7119,7 +7246,7 @@
         var shareTxt = resultText(plan, row) + (ch.court ? '\n🎾 ' + ch.court : '');
         add('active', 'Spelen', '',
           '<strong style="display:block;font-size:1.05rem;">' + whenTxt + '</strong>' +
-          (clubId ? '<span class="small">📍 ' + esc(clubLabel(clubId)) + (ch.court ? ' · 🎾 ' + esc(ch.court) : '') + '</span>' : '') +
+          (clubId ? '<span class="small">' + ic('pin') + ' ' + esc(clubLabel(clubId)) + (ch.court ? ' · ' + ic('padel') + ' ' + esc(ch.court) : '') + '</span>' : '') +
           (row.ok.length ? '<p class="small muted" style="margin:0.3rem 0 0;">Met ' + esc(row.ok.map(function (x) { return x.id === myId ? 'jij' : x.name; }).join(', ')) + '</p>' : '') +
           '<div class="ps-actions"><a class="btn whatsapp small" href="' + esc(waHref(shareTxt)) + '" target="_blank" rel="noopener">Deel in WhatsApp</a></div>' +
           '<p class="small muted" style="margin:0.45rem 0 0;">Na afloop vul je hier met één tik de uitslag in.</p>');
@@ -7128,17 +7255,17 @@
       if (plan.matchId && !disputed) add('done', 'Uitslag ingevuld', plan.matchScore ? esc(plan.matchScore) : '', '');
       else if (over) add('active', 'Uitslag invullen', '',
         (disputed ? '<p class="small" style="margin:0 0 0.45rem;font-weight:700;">De uitslag werd afgewezen — vul hem opnieuw in.</p>' : '') +
-        (S.player ? '<a class="btn small" href="' + planResultHref(plan) + '" style="margin:0;">🎾 Hoe ging het? Uitslag invullen</a>'
+        (S.player ? '<a class="btn small" href="' + planResultHref(plan) + '" style="margin:0;">' + ic('padel') + ' Hoe ging het? Uitslag invullen</a>'
           : '<p class="small" style="margin:0;">Iemand met een Smash-account vult de uitslag in.</p>'));
       else add('todo', 'Uitslag invullen', 'na afloop', '');
       // 7 · bevestigen
-      if (confirmed) add('done', 'Bevestigd', 'telt mee voor de ranglijst 🏆', '');
+      if (confirmed) add('done', 'Bevestigd', 'telt mee voor de ranglijst ' + ic('trophy'), '');
       else if (plan.matchId && !disputed) {
         var parts = (m && m.participants) || [];
         var meOpen = parts.some(function (p) { return p.playerId === S.playerId && !p.confirmed; });
         var openN = parts.filter(function (p) { return !p.confirmed; }).map(function (p) { return nameOf(p.playerId).split(' ')[0]; });
         add('active', 'Medespelers bevestigen', '',
-          meOpen ? '<a class="btn small" href="#/te-bevestigen" style="margin:0;">✅ Bevestig de uitslag</a>'
+          meOpen ? '<a class="btn small" href="#/te-bevestigen" style="margin:0;">' + ic('check') + ' Bevestig de uitslag</a>'
             : '<p class="small" style="margin:0;">Wachten op ' + esc(openN.length ? openN.join(', ') : 'de medespelers') + '. Daarna telt hij mee voor de ranglijst.</p>');
       } else add('todo', 'Medespelers bevestigen', '', '');
 
@@ -7153,7 +7280,7 @@
       var pk = box.querySelector('[data-act=pick]');
       if (pk) pk.addEventListener('click', function () {
         openMenu('Welk moment vastzetten?', T.rows.filter(function (r) { return r.ok.length; }).sort(function (a, b) { return b.ok.length - a.ok.length || (a.key < b.key ? -1 : 1); }).slice(0, 8).map(function (r) {
-          return { icon: '📅', label: pollOptLabel(r), sub: r.ok.length + ' kunnen: ' + r.ok.map(function (x) { return x.name; }).join(', '), onClick: function () { closeSheet(); choose(r.key); } };
+          return { icon: ic('calendar'), label: pollOptLabel(r), sub: r.ok.length + ' kunnen: ' + r.ok.map(function (x) { return x.name; }).join(', '), onClick: function () { closeSheet(); choose(r.key); } };
         }));
       });
       box.querySelectorAll('[data-court]').forEach(function (cb) {
@@ -7172,7 +7299,7 @@
       if (bo) bo.addEventListener('click', function () {
         var ch2 = plan.chosen, cl = S.clubsById[ch2.clubId || plan.clubId];
         var sb = openSheet('Baan huren',
-          '<p style="margin:0 0 0.8rem;"><strong>' + esc(fmtPlanDay(ch2.date, true) + ' · ' + ch2.time + '–' + planEndTime(ch2.time)) + '</strong><br><span class="small muted">📍 ' + esc(cl ? cl.name : '') + ' · ' + (plan.needed || 4) + ' spelers</span></p>' +
+          '<p style="margin:0 0 0.8rem;"><strong>' + esc(fmtPlanDay(ch2.date, true) + ' · ' + ch2.time + '–' + planEndTime(ch2.time)) + '</strong><br><span class="small muted">' + ic('pin') + ' ' + esc(cl ? cl.name : '') + ' · ' + (plan.needed || 4) + ' spelers</span></p>' +
           '<button class="btn" type="button" id="bsBooked" style="width:100%;justify-content:center;">✓ Geboekt — door naar de volgende stap</button>' +
           '<span class="field-label">Welke baan? <span class="muted" style="font-weight:600;">(mag ook later)</span></span>' +
           '<div class="court-row ps-sheet-courts">' + courtsForClub(cl).map(function (c) { return '<button type="button" class="court-chip" data-bcourt="' + esc(c) + '">' + esc(c.replace('Baan ', '')) + '</button>'; }).join('') + '</div>' +
@@ -7372,13 +7499,13 @@
     var T = pollTally(plan, responses);
     var myId = S.player ? getPlanRespId(plan.code) : null;
     node._plan = plan; node._responses = responses;
-    node.innerHTML = '<div class="poll-q" style="margin-top:0.4rem;">📅 ' + esc(plan.title) + '</div>' +
-      (plan.clubId ? '<div class="small muted">📍 ' + esc(S.clubsById[plan.clubId] ? S.clubsById[plan.clubId].name : '') + '</div>' : '') +
+    node.innerHTML = '<div class="poll-q" style="margin-top:0.4rem;">' + ic('calendar') + ' ' + esc(plan.title) + '</div>' +
+      (plan.clubId ? '<div class="small muted">' + ic('pin') + ' ' + esc(S.clubsById[plan.clubId] ? S.clubsById[plan.clubId].name : '') + '</div>' : '') +
       (plan.chosen ? '<div class="pp-tag ok" style="display:inline-block;margin-top:0.3rem;">✓ Afgesproken: ' + esc(fmtPlanDay(plan.chosen.date) + ' · ' + plan.chosen.time + (plan.chosen.clubId ? ' · ' + clubShort(plan.chosen.clubId) : '') + (plan.chosen.court ? ' · ' + plan.chosen.court : '')) + '</div>' : '') +
       (plan.chosen ? planInlineResultHtml(node, plan)
         : expired ? '<div class="small muted" style="margin-top:0.3rem;">Deze peiling is afgelopen.</div>'
         : '<div class="pp-inline">' + (pollIsSplit(plan) ? pollSplitHtml(plan, responses, myId, true) : pollRowsHtml(plan, T, myId, { limit: 6 })) + '</div>' +
-          (pollIsSplit(plan) && T.best && !plan.chosen ? '<div class="small" style="margin-top:0.4rem;font-weight:700;">🏆 Beste: ' + esc(fmtPlanDay(T.best.date) + ' · ' + T.best.time + (T.best.clubId ? ' · ' + clubShort(T.best.clubId) : '')) + ' (' + T.best.ok.length + ' kunnen)</div>' : '') +
+          (pollIsSplit(plan) && T.best && !plan.chosen ? '<div class="small" style="margin-top:0.4rem;font-weight:700;">' + ic('trophy') + ' Beste: ' + esc(fmtPlanDay(T.best.date) + ' · ' + T.best.time + (T.best.clubId ? ' · ' + clubShort(T.best.clubId) : '')) + ' (' + T.best.ok.length + ' kunnen)</div>' : '') +
           '<div class="small muted" style="margin-top:0.3rem;">' + T.voters.length + ' gestemd · tik om te stemmen · <a href="#/plan/' + esc(plan.code) + '">openen</a></div>');
   }
   function planInlineResultHtml(node, plan) {
@@ -7390,13 +7517,13 @@
           if (!ms.exists) return;
           var m = ms.data(); var meP = (m.participants || []).filter(function (p) { return p.playerId === S.playerId; })[0];
           var slot = node.querySelector('.ppr-confirm');
-          if (slot && meP && !meP.confirmed && m.status === 'pending') slot.innerHTML = '<a class="plan-invite-btn" href="#/te-bevestigen">✅ Bevestigen</a>';
+          if (slot && meP && !meP.confirmed && m.status === 'pending') slot.innerHTML = '<a class="plan-invite-btn" href="#/te-bevestigen">' + ic('check') + ' Bevestigen</a>';
           else if (slot && m.status === 'confirmed') slot.innerHTML = '<div class="small muted" style="margin-top:0.3rem;">Bevestigd door iedereen · telt mee voor de ranglijst</div>';
         }).catch(function () {});
       }
-      return '<div class="small" style="margin-top:0.4rem;font-weight:700;">🎾 Uitslag: ' + esc(plan.matchScore || '') + '</div><div class="ppr-confirm"></div>';
+      return '<div class="small" style="margin-top:0.4rem;font-weight:700;">' + ic('padel') + ' Uitslag: ' + esc(plan.matchScore || '') + '</div><div class="ppr-confirm"></div>';
     }
-    if (planNeedsResult(plan)) return '<a class="plan-invite-btn" href="' + planResultHref(plan) + '">🎾 Hoe ging het? Uitslag invullen</a>';
+    if (planNeedsResult(plan)) return '<a class="plan-invite-btn" href="' + planResultHref(plan) + '">' + ic('padel') + ' Hoe ging het? Uitslag invullen</a>';
     return '<div class="small muted" style="margin-top:0.3rem;"><a href="#/plan/' + esc(plan.code) + '">Bekijk de afspraak</a></div>';
   }
   document.addEventListener('click', async function (ev) {
@@ -7437,8 +7564,8 @@
   function planResultHref(plan) { return '#/partij/nieuw?plan=' + encodeURIComponent(plan.code); }
   function planResultBlockHtml(plan, dark) {
     if (!plan.chosen || !S.player) return '';
-    if (plan.matchId) return '<p class="small" style="margin:0.7rem 0 0;font-weight:700;">✅ Uitslag doorgegeven' + (plan.matchScore ? ': ' + esc(plan.matchScore) : '') + '</p>';
-    if (planNeedsResult(plan)) return '<div style="margin-top:0.8rem;"><a class="btn' + (dark ? '' : ' small') + '" href="' + planResultHref(plan) + '" style="margin:0;">🎾 Hoe ging het? Uitslag invullen</a></div>';
+    if (plan.matchId) return '<p class="small" style="margin:0.7rem 0 0;font-weight:700;">' + ic('check') + ' Uitslag doorgegeven' + (plan.matchScore ? ': ' + esc(plan.matchScore) : '') + '</p>';
+    if (planNeedsResult(plan)) return '<div style="margin-top:0.8rem;"><a class="btn' + (dark ? '' : ' small') + '" href="' + planResultHref(plan) + '" style="margin:0;">' + ic('padel') + ' Hoe ging het? Uitslag invullen</a></div>';
     return '<p class="small" style="margin:0.7rem 0 0;opacity:0.85;">Na afloop kun je hier met één tik de uitslag invullen.</p>';
   }
   // Baan huren (ook buiten een planning): eerst in de app "Geboekt" kunnen tikken, de site van de club is optioneel.
@@ -7482,13 +7609,168 @@
       } else {
         nx.innerHTML = '<p style="margin:0 0 0.3rem;font-size:1.1rem;font-weight:800;">✓ Baan geboekt bij ' + esc(club.name) + '</p>' +
           '<p class="small muted" style="margin:0 0 0.8rem;">Volgende stap: laat je medespelers weten wanneer jullie spelen.</p>' +
-          '<a class="btn" href="#/plan/nieuw" id="bkPlan" style="width:100%;justify-content:center;margin:0;">📅 Medespelers uitnodigen</a>' +
+          '<a class="btn" href="#/plan/nieuw" id="bkPlan" style="width:100%;justify-content:center;margin:0;">' + ic('calendar') + ' Medespelers uitnodigen</a>' +
           '<button class="btn secondary" type="button" id="bkClose" style="width:100%;justify-content:center;margin-top:0.5rem;">Klaar</button>';
         nx.querySelector('#bkPlan').addEventListener('click', function () { closeSheet(); });
         nx.querySelector('#bkClose').addEventListener('click', function () { closeSheet(); });
       }
     });
   }
+  // ---------- Aan de slag (eenmalig) + "Nu te doen" op Home ----------
+  // De checklist staat alleen op Home, nooit als pop-up. Hij verdwijnt voorgoed zodra alles
+  // gedaan is of zodra je op "Verbergen" tikt (opgeslagen in je account, dus ook op een andere telefoon).
+  function startSteps() {
+    return [
+      { k: 'club', icon: ic('pin'), t: 'Kies je thuisclub', sub: 'Voor banen, punten en evenementen', href: '#/clubkaart' },
+      { k: 'vrienden', icon: ic('users'), t: 'Maak een vriendengroep', sub: 'Je vaste padelmaatjes bij elkaar', href: '#/ranglijst?tab=vrienden' },
+      { k: 'plannen', icon: ic('calendar'), t: 'Plan je eerste potje', sub: 'Iedereen tikt aan wanneer hij kan', href: '#/plan/nieuw' },
+      { k: 'loggen', icon: ic('pencil'), t: 'Vul een uitslag in', sub: 'Zo kom je op de ranglijst', href: '#/partij/nieuw' },
+      { k: 'feed', icon: ic('camera'), t: 'Plaats een foto of video', sub: 'Laat zien hoe het ging', href: '#/feed' },
+      { k: 'punten', icon: ic('star'), t: 'Bekijk je punten', sub: 'Spaar voor beloningen door vaak te komen', href: (S.player && (S.player.homeClubIds || []).length) ? clubGoalHref('punten') : '#/clubkaart' }
+    ];
+  }
+  function markStartVisit(path, params) {
+    if (!S.player || S.player.startGuideHidden) return;
+    var k = null;
+    if (/^\/club\/[^/]+\/spelen$/.test(path) && params.get('sectie') === 'punten') k = 'punten';
+    if (!k || (S.player.startSteps || {})[k]) return;
+    var ss = Object.assign({}, S.player.startSteps || {}); ss[k] = true;
+    updatePlayer({ startSteps: ss }).catch(function () {});
+  }
+  async function startGuideDone() {
+    var done = Object.assign({}, S.player.startSteps || {});
+    var before = JSON.stringify(done);
+    if ((S.player.homeClubIds || []).length) done.club = true;
+    var me = S.playerId, jobs = [];
+    if (!done.vrienden) jobs.push(S.db.collection('friendGroups').where('memberIds', 'array-contains', me).get().then(function (s) { if (s.docs.length) done.vrienden = true; }));
+    if (!done.plannen) jobs.push(S.db.collection('plannen').where('organizerId', '==', me).get().then(function (s) { if (s.docs.length) done.plannen = true; }));
+    if (!done.loggen) jobs.push(S.db.collection('matches').get().then(function (s) {
+      if (s.docs.some(function (d) { return (d.data().participants || []).some(function (p) { return p.playerId === me; }); })) done.loggen = true;
+    }));
+    if (!done.feed) jobs.push(S.db.collection('posts').where('authorId', '==', me).get().then(function (s) { if (s.docs.length) done.feed = true; }));
+    await Promise.all(jobs.map(function (j) { return j.catch(function () {}); }));
+    if (JSON.stringify(done) !== before) updatePlayer({ startSteps: done }).catch(function () {});
+    return done;
+  }
+  async function fillHomeGuide(body) {
+    var box = body.querySelector('#homeGuide'); if (!box || !S.player || S.player.startGuideHidden) return;
+    var done = await startGuideDone();
+    var steps = startSteps(), n = steps.filter(function (s) { return done[s.k]; }).length;
+    var next = steps.filter(function (s) { return !done[s.k]; })[0];
+    if (!next) {
+      box.innerHTML = '<div class="card sg"><div class="sg-head"><strong>' + ic('party') + ' Je kent de app!</strong><button class="linkbtn" type="button" data-sg="hide">Sluiten</button></div>' +
+        '<p class="small muted" style="margin:0.3rem 0 0;">Alle 6 stappen gedaan. Hieronder zie je voortaan steeds wat je nu kunt doen.</p></div>';
+    } else {
+      box.innerHTML = '<div class="card sg"><div class="sg-head"><strong>Aan de slag</strong><span class="ps-count">' + n + ' van ' + steps.length + '</span></div>' +
+        '<div class="sg-bar"><span style="width:' + Math.round(n / steps.length * 100) + '%"></span></div>' +
+        steps.map(function (s, i) {
+          var st = done[s.k] ? 'done' : s === next ? 'next' : 'todo';
+          return '<a class="sg-row sg-' + st + '" href="' + esc(s.href) + '"><span class="sg-dot">' + (st === 'done' ? '✓' : i + 1) + '</span>' +
+            '<span class="sg-main"><strong>' + s.icon + ' ' + esc(s.t) + '</strong>' + (st === 'next' ? '<span class="small">' + esc(s.sub) + '</span>' : '') + '</span>' +
+            (st === 'next' ? '<span class="btn small sg-go">Doe nu</span>' : '') + '</a>';
+        }).join('') +
+        '<div style="text-align:right;margin-top:0.5rem;"><button class="linkbtn" type="button" data-sg="hide">Verbergen — ik ken de app al</button></div></div>';
+    }
+    var hb = box.querySelectorAll('[data-sg=hide]');
+    hb.forEach(function (b) { b.addEventListener('click', function () { box.innerHTML = ''; updatePlayer({ startGuideHidden: true }).catch(function () {}); fillHomeNext(body, null, true); }); });
+  }
+
+  // "Nu te doen": één kaart met wat er nú op jou wacht, in de volgorde van het proces.
+  async function fillHomeNext(body, ctx, refresh) {
+    var box = body.querySelector('#homeNext'); if (!box) return;
+    if (ctx) box._ctx = ctx; ctx = box._ctx || {};
+    var items = [], me = S.playerId, plans = {};
+    try { (await S.db.collection('plannen').where('organizerId', '==', me).get()).docs.forEach(function (d) { plans[d.id] = d.data(); }); } catch (e) {}
+    try { (await S.db.collection('plannen').where('invitedIds', 'array-contains', me).get()).docs.forEach(function (d) { plans[d.id] = d.data(); }); } catch (e) {}
+    var list = Object.keys(plans).map(function (k) { return plans[k]; }).filter(function (p) { return p.mode === 'poll'; });
+    if (ctx.pending) items.push({ icon: ic('check'), t: 'Bevestig de uitslag', sub: ctx.pending + ' partij(en) wachten op jou — daarna telt hij voor de ranglijst', href: '#/te-bevestigen' });
+    var weekAgo = Date.now() - 7 * 86400000;
+    list.filter(function (p) { return planNeedsResult(p) && planMatchStart(p).getTime() > weekAgo; }).slice(0, 2).forEach(function (p) {
+      items.push({ icon: ic('padel'), t: 'Hoe ging het? Vul de uitslag in', sub: p.title + ' · ' + fmtPlanDay(p.chosen.date), href: planResultHref(p) });
+    });
+    (ctx.invites || []).forEach(function (p) {
+      items.push({ icon: ic('calendar'), t: 'Tik aan wanneer je kunt', sub: (p.organizerName || '').split(' ')[0] + ' nodigt je uit: ' + p.title, href: '#/plan/' + p.code });
+    });
+    (ctx.requests || []).forEach(function (r) {
+      items.push({ icon: ic('users'), t: 'Samen beschikbaar staan?', sub: nameOf(r.playerId) + ' vraagt het je', href: '#/zoeken' });
+    });
+    var mine = list.filter(function (p) { return p.organizerId === me; });
+    mine.filter(function (p) { return p.chosen && !p.chosen.court && !p.chosen.booked && (p.chosen.clubId || p.clubId) && !planMatchOver(p); }).forEach(function (p) {
+      items.push({ icon: ic('padel'), t: 'Huur de baan', sub: p.title + ' · ' + fmtPlanDay(p.chosen.date, true) + ' ' + p.chosen.time, href: '#/plan/' + p.code });
+    });
+    var openPolls = mine.filter(function (p) { return !p.chosen && !planExpired(p); });
+    for (var i = 0; i < openPolls.length && i < 3; i++) {
+      var n = 0; try { n = (await S.db.collection('plannen/' + openPolls[i].code + '/reacties').get()).docs.length; } catch (e) {}
+      if (n >= 2) items.push({ icon: ic('pin'), t: 'Zet het moment vast', sub: openPolls[i].title + ' · ' + n + ' stemmen binnen', href: '#/plan/' + openPolls[i].code });
+    }
+    list.filter(function (p) { return p.chosen && !planMatchOver(p) && (p.chosen.court || p.chosen.booked || !(p.chosen.clubId || p.clubId)); })
+      .sort(function (a, b) { return planMatchStart(a) - planMatchStart(b); }).slice(0, 1).forEach(function (p) {
+        items.push({ icon: ic('calendar'), t: 'Binnenkort spelen', sub: p.title + ' · ' + fmtPlanDay(p.chosen.date, true) + ' ' + p.chosen.time + (p.chosen.court ? ' · ' + p.chosen.court : ''), href: '#/plan/' + p.code, soft: true });
+      });
+    var guideOn = !S.player.startGuideHidden && body.querySelector('#homeGuide') && body.querySelector('#homeGuide').innerHTML;
+    if (!items.length && guideOn) { box.innerHTML = ''; return; }
+    if (!items.length) {
+      items.push({ icon: ic('calendar'), t: 'Plan je volgende potje', sub: 'Nodig vrienden uit — iedereen tikt aan wanneer hij kan', href: '#/plan/nieuw' });
+      items.push({ icon: ic('search'), t: 'Of zoek een tegenstander', sub: 'Spelers op jouw niveau in de buurt', href: '#/zoeken', soft: true });
+    }
+    box.innerHTML = '<div class="card nx"><p class="nx-title">' + ic('arrow') + ' Nu te doen</p>' + items.slice(0, 4).map(function (it, i) {
+      return '<a class="nx-row' + (i === 0 && !it.soft ? ' nx-first' : '') + '" href="' + esc(it.href) + '"><span class="nx-ic">' + it.icon + '</span>' +
+        '<span class="nx-main"><strong>' + esc(it.t) + '</strong><span class="small">' + esc(it.sub) + '</span></span><span class="nx-arrow">›</span></a>';
+    }).join('') + (items.length > 4 ? '<p class="small muted" style="margin:0.4rem 0 0;">+ ' + (items.length - 4) + ' meer onder Spelen</p>' : '') + '</div>';
+  }
+
+  // ---------- Home: de 4 genummerde stappen als swipe-pagina's ----------
+  var STEP_PAGE_INFO = {
+    1: { head: 'Plan een potje met je vrienden', text: 'Stuur één uitnodiging. Iedereen tikt aan welke dagen en tijden hij kan — Smash kiest het beste moment en de beste club.',
+         bullets: ['Dagen en tijden aantikken, geen getyp', 'Delen via WhatsApp of in de app', 'Moment vastzetten met één tik'], btn: 'Potje plannen',
+         mock: '<div class="sp-m-row"><span>Za · 10:00</span><b>✓✓✓✓</b></div><div class="sp-m-row"><span>Zo · 14:00</span><b>✓✓</b></div><div class="sp-m-row dim"><span>Di · 20:00</span><b>✓</b></div>' },
+    2: { head: 'Huur een baan bij je club', text: 'Boek de baan voor jullie afspraak. Al geregeld? Tik op Geboekt en je gaat meteen door naar de volgende stap.',
+         bullets: ['Direct naar de reservering van de club', '“✓ Geboekt” zonder website', 'Baannummer delen met je medespelers'], btn: 'Baan huren',
+         mock: '<div class="sp-m-pill">✓ Geboekt</div><div class="sp-m-chips"><span>1</span><span>2</span><span class="on">3</span><span>4</span></div>' },
+    3: { head: 'Vul de uitslag in', text: 'Na het spelen staat alles al klaar: club, datum en spelers. Tik alleen de teams en de score aan.',
+         bullets: ['Score per set aantikken', 'Telt mee voor de ranglijst', 'Komt automatisch in de feed'], btn: 'Partij loggen',
+         mock: '<div class="sp-m-score"><span>Jij &amp; Tim</span><b>6 · 6</b></div><div class="sp-m-score dim"><span>Sam &amp; Joep</span><b>4 · 3</b></div>' },
+    'Tegenstander zoeken': { head: 'Zoek een tegenstander', text: 'Nog niemand om mee te spelen? Vind spelers op jouw niveau bij jou in de buurt en zet je samen beschikbaar.',
+         bullets: ['Filter op niveau en club', 'Zie wie wanneer kan', 'Stuur meteen een uitnodiging'], btn: 'Tegenstander zoeken',
+         mock: '<div class="sp-m-row"><span>' + ic('user') + ' Sam · niveau 3.5</span><b>Vrij za</b></div><div class="sp-m-row"><span>' + ic('user') + ' Joep · niveau 3.0</span><b>Vrij zo</b></div>' },
+    'Ranglijst': { head: 'Bekijk de ranglijst', text: 'Zie waar je staat, landelijk en bij je eigen club. Elke bevestigde partij telt mee.',
+         bullets: ['Landelijk en per club', 'Zie je stijging na elke partij', 'Vergelijk je met anderen'], btn: 'Naar de ranglijst',
+         mock: '<div class="sp-m-row"><span>1 · Sanne</span><b>1840</b></div><div class="sp-m-row"><span>2 · Jij</span><b>1795 ▲</b></div><div class="sp-m-row dim"><span>3 · Tim</span><b>1760</b></div>' },
+    'Vriendengroepen': { head: 'Speel met je vriendengroep', text: 'Maak een groep met je vaste padelmaatjes: met een eigen ranglijst en groepschat.',
+         bullets: ['Eigen ranglijst met vrienden', 'Groepschat erbij', 'Snel samen een potje plannen'], btn: 'Vriendengroepen',
+         mock: '<div class="sp-m-pill">' + ic('users') + ' De Dinsdagploeg</div><div class="sp-m-row"><span>Jij · Tim · Sam · Joep</span><b>4</b></div>' },
+    4: { head: 'Bevestig de uitslag', text: 'Je medespelers bevestigen de score met één tik. Pas dan telt de partij mee — zo blijft de ranglijst eerlijk.',
+         bullets: ['Eén tik: klopt of klopt niet', 'Melding als er iets te bevestigen is', 'Daarna stijg je op de ranglijst ' + ic('trophy')], btn: 'Te bevestigen',
+         mock: '<div class="sp-m-pill">' + ic('check') + ' Bevestigd</div><div class="sp-m-row"><span>Ranglijst</span><b>▲ 3 plekken</b></div>' }
+  };
+  function stepPagesHtml(stepTiles, kind) {
+    if (!stepTiles.length) return '';
+    var nSteps = stepTiles.filter(function (t) { return t.step; }).length;
+    var title = kind === 'meer' ? 'Meer spelen' : 'Spelen in ' + nSteps + ' stappen';
+    return '<div class="home-group sp-group" data-group="' + kind + '"><p class="home-section-title">' + title + ' <span class="sp-hint">← swipe</span></p>' +
+      '<div class="sp-track"' + (kind === 'stappen' ? ' id="spTrack"' : '') + '>' + stepTiles.map(function (t) {
+        var I = STEP_PAGE_INFO[t.step || t.title] || { head: t.title, text: t.sub, bullets: [], btn: t.title, mock: '' };
+        return '<section class="sp-page" data-keys="' + esc((t.title + ' ' + t.sub + ' ' + (t.keys || '') + ' ' + I.head).toLowerCase()) + '">' +
+          '<div class="sp-top"><span class="sp-num' + (t.step ? '' : ' sp-extra') + '">' + (t.step ? 'Stap ' + t.step + ' van ' + nSteps : 'Meer spelen') + '</span>' + (t.count ? '<span class="sp-count">' + t.count + ' nieuw</span>' : '') + '</div>' +
+          '<h3 class="sp-head">' + esc(I.head) + '</h3>' +
+          '<div class="sp-visual"><span class="sp-icon" aria-hidden="true">' + t.icon + '</span><div class="sp-mock">' + I.mock + '</div></div>' +
+          '<p class="sp-text">' + esc(I.text) + '</p>' +
+          '<ul class="sp-list">' + I.bullets.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>' +
+          '<a class="btn sp-btn" href="' + esc(t.href) + '">' + esc(I.btn) + ' →</a></section>';
+      }).join('') + '</div>' +
+      '<div class="sp-dots" aria-hidden="true">' + stepTiles.map(function (t, i) { return '<span' + (i ? '' : ' class="on"') + '></span>'; }).join('') + '</div></div>';
+  }
+  function wireStepPages(body) {
+    body.querySelectorAll('.sp-group').forEach(function (grp) {
+      var tr = grp.querySelector('.sp-track'), dots = grp.querySelectorAll('.sp-dots span');
+      tr.addEventListener('scroll', function () {
+        var pages = tr.querySelectorAll('.sp-page:not([hidden])'); if (!pages.length) return;
+        var w = pages[0].offsetWidth + 12, i = Math.round(tr.scrollLeft / w);
+        dots.forEach(function (d, j) { d.classList.toggle('on', j === i); });
+      }, { passive: true });
+    });
+  }
+
   async function loadPlansToLog() {
     if (!S.playerId) return [];
     var all = {};
@@ -7504,7 +7786,7 @@
     var list = await loadPlansToLog();
     if (!list.length) return;
     box.innerHTML = list.slice(0, 2).map(function (p) {
-      return '<div class="banner warn" style="margin:0 0 0.6rem;">🎾 Hoe ging <strong>' + esc(p.title) + '</strong> (' + esc(fmtPlanDay(p.chosen.date)) + ')? ' +
+      return '<div class="banner warn" style="margin:0 0 0.6rem;">' + ic('padel') + ' Hoe ging <strong>' + esc(p.title) + '</strong> (' + esc(fmtPlanDay(p.chosen.date)) + ')? ' +
         '<a href="' + planResultHref(p) + '" style="font-weight:800;">Uitslag invullen →</a></div>';
     }).join('');
   }
@@ -7593,7 +7875,7 @@
         ' · ' + plan.needed + ' spelers · code <strong>' + esc(code) + '</strong> (geldig t/m ' + esc(fmtPlanDay(dates[dates.length - 1])) + ')</p>') +
       (justCreated ? '<div class="banner warn" style="margin:0;">Planning gemaakt!' + ((plan.invitedIds || []).length ? ' ' + plan.invitedIds.length + ' speler(s) hebben een uitnodiging in hun Smash-chat gekregen.' : '') + ' Vul nu zelf in wanneer je kunt.</div>' : '') +
       '<div class="plan-topactions">' +
-        '<button type="button" class="btn small" id="planInviteBtn">👥 Uitnodigen</button>' +
+        '<button type="button" class="btn small" id="planInviteBtn">' + ic('users') + ' Uitnodigen</button>' +
         '<a class="btn whatsapp small" href="' + esc(waHref(inviteText(plan))) + '" target="_blank" rel="noopener">WhatsApp</a>' +
       '</div>' +
       tabsetHtml(tabName, [
@@ -7671,9 +7953,9 @@
       responses.forEach(function (r) { if (r.playerId) answered[r.playerId] = true; });
       var waiting = ids.filter(function (id) { return !answered[id]; });
       box.innerHTML = '<div class="card"><div class="status-line"><h2>Uitgenodigd</h2><span class="muted small">' +
-        (ids.length - waiting.length) + '/' + ids.length + ' ingevuld' + (waiting.length ? '' : ' 🎉') + '</span></div>' +
+        (ids.length - waiting.length) + '/' + ids.length + ' ingevuld' + (waiting.length ? '' : '') + '</span></div>' +
         '<div class="plan-chips">' + ids.map(function (id) {
-          return '<span class="plan-chip' + (answered[id] ? '' : ' wait') + '">' + (answered[id] ? '✓ ' : '⏳ ') + esc(nameOf(id)) + '</span>';
+          return '<span class="plan-chip' + (answered[id] ? '' : ' wait') + '">' + (answered[id] ? '✓ ' : ic('hourglass') + ' ') + esc(nameOf(id)) + '</span>';
         }).join('') + '</div></div>';
     }
 
@@ -7714,7 +7996,7 @@
           }) +
           '<p class="hint" style="margin:0.4rem 0 0;">Tik op een dag of tijd om die hele kolom/rij (binnen dit dagdeel) aan of uit te zetten.</p>' +
           '<details class="acc" style="margin-top:0.9rem;"' + (chosenClubCount || form.anyClub ? '' : ' open') + '>' +
-            '<summary>📍 Waar kun je spelen? <span class="acc-meta">' + (form.anyClub ? 'maakt niet uit' : chosenClubCount ? chosenClubCount + ' gekozen' : 'kies minstens één') + '</span></summary>' +
+            '<summary>' + ic('pin') + ' Waar kun je spelen? <span class="acc-meta">' + (form.anyClub ? 'maakt niet uit' : chosenClubCount ? chosenClubCount + ' gekozen' : 'kies minstens één') + '</span></summary>' +
             '<div class="acc-body"><div class="check-grid">' +
               '<label><input type="checkbox" id="pr_any"' + (form.anyClub ? ' checked' : '') + '> <strong>Maakt mij niet uit</strong></label>' +
               clubIds.map(function (cid) {
@@ -7832,7 +8114,7 @@
         var chOpt = options.filter(function (o) { return o.key === ch.date + '|' + ch.time; })[0];
         html += '<div class="card plan-best plan-chosen"><span class="eyebrow">✓ Afgesproken door ' + esc(plan.organizerName) + '</span>' +
           '<h2>' + esc(fmtPlanDay(ch.date, true)) + ' · ' + esc(ch.time + '–' + planEndTime(ch.time)) + '</h2>' +
-          (ch.clubId ? '<p class="muted" style="margin:0.2rem 0 0;">📍 ' + esc(clubLabel(ch.clubId)) + '</p>' : '') +
+          (ch.clubId ? '<p class="muted" style="margin:0.2rem 0 0;">' + ic('pin') + ' ' + esc(clubLabel(ch.clubId)) + '</p>' : '') +
           (chOpt ? '<div class="plan-chips">' + chOpt.ok.map(function (r) { return '<span class="plan-chip">' + esc(r.name) + '</span>'; }).join('') + '</div>' : '') +
           '<div class="plan-share-actions">' + bookHtml(ch.clubId) +
             (chOpt ? '<a class="btn whatsapp small" href="' + esc(waHref(resultText(plan, chOpt))) + '" target="_blank" rel="noopener">Deel in WhatsApp</a>' : '') +
@@ -7850,9 +8132,9 @@
         var cnt = best.ok.length;
         var full = cnt >= plan.needed;
         var missing = responses.filter(function (r) { return best.ok.indexOf(r) === -1; });
-        html += '<div class="card plan-best"><span class="eyebrow">' + (full ? '🎉 Het beste moment — iedereen past' : 'Beste moment tot nu toe') + '</span>' +
+        html += '<div class="card plan-best"><span class="eyebrow">' + (full ? ic('party') + ' Het beste moment — iedereen past' : 'Beste moment tot nu toe') + '</span>' +
           '<h2>' + esc(optionLabel(best, true)) + '</h2>' +
-          (best.clubId ? '<p class="muted" style="margin:0.2rem 0 0;">📍 ' + esc(clubLabel(best.clubId)) + '</p>' : '<p class="muted" style="margin:0.2rem 0 0;">📍 Locatie maakt niemand uit — kies zelf een club</p>') +
+          (best.clubId ? '<p class="muted" style="margin:0.2rem 0 0;">' + ic('pin') + ' ' + esc(clubLabel(best.clubId)) + '</p>' : '<p class="muted" style="margin:0.2rem 0 0;">' + ic('pin') + ' Locatie maakt niemand uit — kies zelf een club</p>') +
           '<div class="plan-meter" aria-hidden="true"><span style="width:' + Math.min(100, Math.round(cnt / plan.needed * 100)) + '%"></span></div>' +
           '<p class="small" style="margin:0.4rem 0 0;font-weight:700;">' + cnt + ' van de ' + plan.needed + ' spelers kunnen' +
             (full ? '' : ' — nog ' + (plan.needed - cnt) + ' nodig') + '</p>' +
@@ -8174,7 +8456,7 @@
     var p = S.player;
     if (!p || p.analyticsConsent === true || p.analyticsConsent === false || isMinor(p)) return '';
     return '<div class="card consent-card" id="consentCard"><div class="status-line" style="align-items:flex-start;"><div style="flex:1; min-width:12rem;">' +
-      '<strong>📊 Help Smash en je club beter te worden</strong>' +
+      '<strong>' + ic('chart') + ' Help Smash en je club beter te worden</strong>' +
       '<p class="muted small" style="margin:0.25rem 0 0;">Mag Smash bijhouden welke onderdelen je gebruikt en hoe vaak? Clubs zien daarvan alleen anonieme totalen; ' +
       'de eigenaar van Smash gebruikt het om de app te verbeteren. <a href="#" data-privacy-info>Meer info</a></p></div></div>' +
       '<div class="row-actions" style="margin-top:0.6rem;"><button type="button" class="btn small" data-consent="1">Ja, prima</button>' +
@@ -8338,8 +8620,8 @@
       '<p class="muted small" style="margin-top:0;">Je hebt het recht om te zien welke gegevens Smash over je heeft, en om ze te laten verwijderen.</p>' +
       '<div class="menu-list">' +
         '<button type="button" class="menu-item" id="mdDownload"><span class="menu-icon">⬇️</span><span class="menu-text"><span class="menu-label">Mijn gegevens downloaden</span><span class="menu-sub">Alles in één bestand (JSON)</span></span><span class="menu-chev">›</span></button>' +
-        '<a class="menu-item" href="#/privacy"><span class="menu-icon">📄</span><span class="menu-text"><span class="menu-label">Privacyverklaring</span><span class="menu-sub">Wat we bewaren en waarom</span></span><span class="menu-chev">›</span></a>' +
-        '<button type="button" class="menu-item danger" id="mdDelete"><span class="menu-icon">🗑️</span><span class="menu-text"><span class="menu-label">Account verwijderen</span><span class="menu-sub">Profiel, posts, berichten en statistieken</span></span><span class="menu-chev">›</span></button>' +
+        '<a class="menu-item" href="#/privacy"><span class="menu-icon">' + ic('doc') + '</span><span class="menu-text"><span class="menu-label">Privacyverklaring</span><span class="menu-sub">Wat we bewaren en waarom</span></span><span class="menu-chev">›</span></a>' +
+        '<button type="button" class="menu-item danger" id="mdDelete"><span class="menu-icon">' + ic('trash') + '</span><span class="menu-text"><span class="menu-label">Account verwijderen</span><span class="menu-sub">Profiel, posts, berichten en statistieken</span></span><span class="menu-chev">›</span></button>' +
       '</div><div id="mdMsg"></div>');
     sb.querySelector('#mdDownload').addEventListener('click', async function (ev) {
       var btn = ev.currentTarget; btn.disabled = true;
@@ -8631,7 +8913,7 @@
         { key: 'clubs', label: 'Clubs', html: '<div class="stack">' + clubsTab + '</div>' },
         { key: 'spelers', label: 'Spelers' + countBadge(L.length), html: '<div class="stack">' + spelersTab + '</div>' },
         { key: 'functies', label: 'Functies', html: functiesTab },
-        { key: 'instellingen', label: '⚙️', html: '<div class="stack">' + instTab + '</div>' }
+        { key: 'instellingen', label: ic('gear'), html: '<div class="stack">' + instTab + '</div>' }
       ], 'overzicht');
 
     // spelerslijst: zoeken + sorteren
@@ -8747,6 +9029,7 @@
     var params = new URLSearchParams(qIndex === -1 ? '' : hash.slice(qIndex + 1));
 
     stopPlanSubscriptions();
+    try { markStartVisit(path, params); } catch (e) {}
 
     // Planning-links (#/plan/CODE) werken voor iedereen: ingelogd, gast of zonder account.
     if (path.indexOf('/plan/') === 0 && path !== '/plan/nieuw') {
